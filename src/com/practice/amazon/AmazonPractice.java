@@ -15,7 +15,7 @@ public class AmazonPractice {
 
         for (Map.Entry<Double, PairInt> entry: treeMap.entrySet()) {
             if (result.size() < truckCapacity) {
-                result.add(entry.getValue());
+                result.add(entry.getValue());                   // probably O(logn)
             }
         }
 
