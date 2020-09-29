@@ -18,6 +18,9 @@ public class Main {
         int n = udemyPractice.fibonacciRecursive(6);
         System.out.println("result: " + n);
 
+        String str = udemyPractice.reverseStringRecursion("yoyo mastery");
+        System.out.println("yoyo mastery --> " + str);
+
     }
 
 

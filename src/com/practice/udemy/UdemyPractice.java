@@ -1,5 +1,6 @@
 package com.practice.udemy;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -29,6 +30,14 @@ public class UdemyPractice {
             return num;
         }
         return fibonacciRecursive(num - 1) + fibonacciRecursive(num - 2);
+    }
+
+    public String reverseStringRecursion(String str) {
+        if (str.length() == 1) {
+            return str;
+        }
+
+        return str.substring(str.length()-1) + reverseStringRecursion(str.substring(0, str.length()-1));
     }
 
     public void reverseLinkedList() {
@@ -72,6 +81,7 @@ public class UdemyPractice {
                 hashMap.put(arr[i], i);
             }
         }
+
         System.out.println("--> " + foundInt);
     }
 
