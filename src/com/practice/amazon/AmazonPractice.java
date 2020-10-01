@@ -6,14 +6,12 @@ public class AmazonPractice {
 
 
     public void callLengthEachScene() {
-        ArrayList<Character> inputList;
-        inputList = new ArrayList(Arrays.asList('a', 'b', 'a', 'b','c','b','a','c','a' ,'d','e','f','e','g','d','e','h','i','j','h','k','l','i','j'));
-        List<Integer> result = lengthEachScene(inputList);
-        result = lengthEachScene(Arrays.asList('a','b','c','d','a','e','f','g','h','i','j','e'));
-        result = lengthEachScene(Arrays.asList('z','z','c','b','z','c','h','f','i','h','i'));
+        lengthEachScene(Arrays.asList('a', 'b', 'a', 'b','c','b','a','c','a' ,'d','e','f','e','g','d','e','h','i','j','h','k','l','i','j'));
+        lengthEachScene(Arrays.asList('a','b','c','d','a','e','f','g','h','i','j','e'));
+        lengthEachScene(Arrays.asList('z','z','c','b','z','c','h','f','i','h','i'));
     }
 
-    List<Integer> lengthEachScene(List<Character> inputList) {
+    public void lengthEachScene(List<Character> inputList) {
         List<Integer> resultList = new ArrayList<>();
         List<Character> temp = new ArrayList<>(); // ArrayList preserves insertion order
 
@@ -44,7 +42,40 @@ public class AmazonPractice {
 
         }
         System.out.println("resultList: " + resultList);
-        return resultList;
+    }
+
+    public void callGeneralizedGCD() {
+        int n;
+        n = generalizedGCD(5, new int[]{2,3,4,5,6});
+        System.out.println("answer: " + n);
+        n = generalizedGCD(5, new int[]{2,4,6,8,10}); // should return 2
+        System.out.println("answer: " + n);
+    }
+
+    // the greatest common divisor (GCD) is also called highest common factor of N numbers is
+    // the largest positive integer that divides all number without giving a remainder
+    // write an algorithm to determine the GCD of N positive integers
+    public int generalizedGCD(int num, int[] arr) {
+        if (arr == null) {
+            return 1;
+        }
+
+        int dividend = 1;
+        int[] tempArr = new int[num];
+
+        while (true) {
+            for (int i = 0; i < num; i++) {
+                System.out.println(arr[i] + " > " + arr[i] % dividend);
+                tempArr[i] = arr[i] % dividend;
+            }
+            for (int i = 0; i < num; i++){
+                if (tempArr[i] != 0) {
+                    dividend--;
+                    return dividend;
+                }
+            }
+            dividend++;
+        }
     }
 
 

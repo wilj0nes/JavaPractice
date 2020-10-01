@@ -19,8 +19,8 @@ public class Main {
 //        String str = udemyPractice.reverseStringRecursion("yoyo mastery");
 //        System.out.println("yoyo mastery --> " + str);*/
 
-        amazonPractice.callLengthEachScene();
-
+//        amazonPractice.callLengthEachScene();
+        amazonPractice.callGeneralizedGCD();
     }
 
 
