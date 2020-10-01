@@ -14,10 +14,8 @@ public class AmazonPractice {
     }
 
     List<Integer> lengthEachScene(List<Character> inputList) {
-        List<Integer> resultlist = new ArrayList();
-
+        List<Integer> resultList = new ArrayList<>();
         List<Character> temp = new ArrayList<>(); // ArrayList preserves insertion order
-
 
         for (int i = 0; i < inputList.size(); i++) {
             List<Character> subList = inputList.subList(i+1, inputList.size());
@@ -29,7 +27,7 @@ public class AmazonPractice {
             }
             else if (temp.contains(inputList.get(i))) {
                 boolean found = false;
-                for (Character c: temp) {
+                for (Character c: temp) {            // nested for loop -->  O(n^2)
                     if (subList.contains(c)) {
                         found = true;
                         break;
@@ -38,15 +36,15 @@ public class AmazonPractice {
 
                 temp.add(inputList.get(i));
                 if (!found) {
-                    resultlist.add(temp.size());
+                    resultList.add(temp.size());
                     System.out.println(inputList.get(i) + " : " + i + " ==> Adding " + temp.size() + " to resultList");
                     temp.clear();
                 }
             }
 
         }
-        System.out.println("result: " + resultlist);
-        return resultlist;
+        System.out.println("resultList: " + resultList);
+        return resultList;
     }
 
 

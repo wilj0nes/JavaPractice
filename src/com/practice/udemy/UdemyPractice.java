@@ -62,16 +62,15 @@ public class UdemyPractice {
         HashMap<Integer, Integer> hashMap = new HashMap<>();
 
 //              \/ original solution
-//        for (int i = 0; i < arr.length; i++) {
-//            if (hashMap.containsValue(arr[i])) {
-//                foundInt = arr[i];
-//                break;
-//            }
-//            hashMap.put(i, arr[i]);
-//        }
+        for (int i = 0; i < arr.length; i++) {
+            if (hashMap.containsValue(arr[i])) {
+                foundInt = arr[i];
+                break;
+            }
+            hashMap.put(i, arr[i]);
+        }
 
-//              \/ better solution, because .containsValue() has O(n) run-time
-
+//              \/ better solution, because .containsValue() has O(n) run-time, so it's O(n^2)
         for (int i = 0; i < arr.length; i++) {
             if (hashMap.get(arr[i]) != null) {
                 foundInt = arr[i];
