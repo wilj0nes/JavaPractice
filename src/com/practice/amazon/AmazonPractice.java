@@ -3,6 +3,53 @@ package com.practice.amazon;
 import java.util.*;
 
 public class AmazonPractice {
+
+
+    public void callLengthEachScene() {
+        ArrayList<Character> inputList;
+        inputList = new ArrayList(Arrays.asList('a', 'b', 'a', 'b','c','b','a','c','a' ,'d','e','f','e','g','d','e','h','i','j','h','k','l','i','j'));
+        List<Integer> result = lengthEachScene(inputList);
+        result = lengthEachScene(Arrays.asList('a','b','c','d','a','e','f','g','h','i','j','e'));
+        result = lengthEachScene(Arrays.asList('z','z','c','b','z','c','h','f','i','h','i'));
+    }
+
+    List<Integer> lengthEachScene(List<Character> inputList) {
+        List<Integer> resultlist = new ArrayList();
+
+        List<Character> temp = new ArrayList<>(); // ArrayList preserves insertion order
+
+
+        for (int i = 0; i < inputList.size(); i++) {
+            List<Character> subList = inputList.subList(i+1, inputList.size());
+            System.out.println(subList);
+            System.out.println("temp: " + temp + " ==> " + inputList.get(i) + " : " + i);
+
+            if (!temp.contains(inputList.get(i))) {
+                temp.add(inputList.get(i));
+            }
+            else if (temp.contains(inputList.get(i))) {
+                boolean found = false;
+                for (Character c: temp) {
+                    if (subList.contains(c)) {
+                        found = true;
+                        break;
+                    }
+                }
+
+                temp.add(inputList.get(i));
+                if (!found) {
+                    resultlist.add(temp.size());
+                    System.out.println(inputList.get(i) + " : " + i + " ==> Adding " + temp.size() + " to resultList");
+                    temp.clear();
+                }
+            }
+
+        }
+        System.out.println("result: " + resultlist);
+        return resultlist;
+    }
+
+
     List<PairInt> closestLocations(int totalCrates, List<PairInt> allLocations, int truckCapacity) {
 
         List<PairInt> result = new ArrayList<>();
