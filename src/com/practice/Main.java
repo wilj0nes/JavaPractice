@@ -32,6 +32,7 @@ public class Main {
 //        challenges.callLetterCombinations();
 //        challenges.callReverseInteger();
         challenges.callIsValid();
+        challenges.callLengthOfLastWord();
 
     }
 

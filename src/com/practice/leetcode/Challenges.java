@@ -5,6 +5,26 @@ import java.util.*;
 
 public class Challenges {
 
+    public void callLengthOfLastWord() {
+        int answer;
+        answer = lengthOfLastWord("Hello world");
+        System.out.println("length of last word: " + answer);
+        answer = lengthOfLastWord("     ");
+        System.out.println("length of last word: " + answer);
+    }
+
+    public int lengthOfLastWord(String s) {
+        String[] arr = s.split(" ");
+        if (s.length() == 1) {
+            return 0;
+        }
+        else if (arr.length == 0 || arr.length == 1) {
+            return s.length();
+        }
+
+        return arr[arr.length-1].length();
+    }
+
     public void callIsValid() {
         System.out.println("() --> " + isValid("()")); // true
         System.out.println(")) --> " + isValid("))")); // false
