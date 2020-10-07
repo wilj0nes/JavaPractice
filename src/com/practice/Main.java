@@ -31,8 +31,11 @@ public class Main {
 
 //        challenges.callLetterCombinations();
 //        challenges.callReverseInteger();
-        challenges.callIsValid();
-        challenges.callLengthOfLastWord();
+//        challenges.callIsValid();
+//        challenges.callLengthOfLastWord();
+
+        challenges.callMergeTwoLists();
+        other.callTwoSum();
 
     }
 

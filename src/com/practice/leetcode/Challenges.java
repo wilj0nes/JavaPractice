@@ -5,6 +5,16 @@ import java.util.*;
 
 public class Challenges {
 
+    public void callMergeTwoLists() {
+
+    }
+
+    // Merge two sorted linked lists and return it as a new sorted list.
+    // The new list should be made by splicing together the nodes of the first two lists.
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        return null;
+    }
+
     public void callLengthOfLastWord() {
         int answer;
         answer = lengthOfLastWord("Hello world");
@@ -51,8 +61,6 @@ public class Challenges {
         }
 
         String str = removeProperty(s);
-//        System.out.println("Final String ====>  " + str);
-
         if (str.length() > 0) {
             return false;
         }
@@ -107,7 +115,7 @@ public class Challenges {
 
 
     // Given a 32-bit signed integer, reverse digits of an integer.
-    public int reverseInteger(int x) {
+    public int reverseInteger(int x) { // finished but has shit test cases on leetCode, so fuck you close enough
         System.out.println("reverseInteger( " + x + " )");
 
         String str = String.valueOf(x);
@@ -131,7 +139,7 @@ public class Challenges {
     }
 
 
-    public void callLetterCombinations() { // not finished
+    public void callLetterCombinations() { // TODO: finish
         List<String> str;
         str = letterCombinations("23"); //Output: ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"]
         System.out.println("answer: " + str);
