@@ -94,8 +94,6 @@ public class AmazonPractice {
                 result.add(entry.getValue());                   // O(logn)
             }
         }
-
-
         return result;
     }
 

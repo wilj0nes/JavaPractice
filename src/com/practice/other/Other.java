@@ -1,10 +1,60 @@
 package com.practice.other;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Other {
+
+    public void callLengthOfLongestSubstring() {
+        int n;
+        n = lengthOfLongestSubstring("abcabcbb"); // 'abc' is longest substring return 3
+        System.out.println("answer: " +n + " -- 3");
+        n = lengthOfLongestSubstring("");
+        System.out.println("answer: " +n + " -- 0");
+        n = lengthOfLongestSubstring(" ");
+        System.out.println("answer: " +n + " -- 1");
+        n = lengthOfLongestSubstring("au");
+        System.out.println("answer: " +n + " -- 2");
+        n = lengthOfLongestSubstring("bbbbb"); // 1
+        System.out.println("answer: " +n + " -- 1");
+        n = lengthOfLongestSubstring("dvdf"); // 3
+        System.out.println("answer: " +n + " -- 3");
+        n = lengthOfLongestSubstring("pwwkew"); // 3
+        System.out.println("answer: " +n + " -- 3");
+    }
+
+    // Given a string s, find the length of the longest substring without repeating characters.
+    public int lengthOfLongestSubstring(String s) {
+        System.out.println("input: " + s);
+        int bigLength = 0;
+        if (s.length() == 1) {
+            return 1;
+        }
+        else if (s.equals("")) {
+            return 0;
+        }
+
+        char[] arr = s.toCharArray();
+
+        StringBuilder str = new StringBuilder();
+        for (char c: arr) {
+            if (str.toString().contains(""+c)) {
+                if (str.length() > bigLength) {
+                    bigLength = str.length();
+                    System.out.println("biggest: " + bigLength);
+                }
+                str = new StringBuilder();
+                str.append(c);
+            }
+            else {
+                str.append(c);
+                System.out.println("str: " + str);
+            }
+        }
+
+
+
+        return bigLength;
+    }
 
     public static void callTwoSum() {
         int[] nums = {2,7,11,15};
