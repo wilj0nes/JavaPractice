@@ -5,13 +5,64 @@ import java.util.*;
 
 public class Challenges {
 
-    public void callMergeTwoLists() {
+    public void callMajorityElement() {
+        int n;
+        n = majorityElement(new int[]{3, 2, 3}); // 3
+        System.out.println("n: " + n);
+        n = majorityElement(new int[]{2,2,1,1,1,2,2}); // 2
+        System.out.println("n: " + n);
+        n = majorityElement(new int[]{3,3,4}); // 3
+        System.out.println("n: " + n);
 
     }
 
+    // Given an array of size n, find the majority element.
+    // The majority element is the element that appears more than ⌊ n/2 ⌋ times.
+    public int majorityElement(int[] nums) { // TODO finish 
+        if (nums.length == 1) {
+            return 1;
+        }
+        else if (nums.length == 0) {
+            return 0;
+        }
+
+        HashMap<Integer, Integer> map = new HashMap<>();
+        //       ^num      ^frequency
+        //       ^key      ^value
+
+        Integer max = 0;
+        for (int i = 0; i < nums.length; i++) {
+            System.out.println(nums[i]);
+            if (map.get(nums[i]) != null) {
+                int newVal = map.get(nums[i]);
+                map.put(nums[i], newVal+1);
+                if (newVal > max) {
+                    max = newVal;
+                    System.out.println("max is: " +max);
+                }
+            }
+            else {
+                map.put(nums[i], 1);
+            }
+
+        }
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            System.out.println(entry);
+            if (entry.getValue() > max) {
+                max = entry.getValue();
+            }
+
+        }
+
+        return map.get(max);
+    }
+
+
+    public void callMergeTwoLists() { }
+
     // Merge two sorted linked lists and return it as a new sorted list.
     // The new list should be made by splicing together the nodes of the first two lists.
-    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) { //TODO: finish
         return null;
     }
 

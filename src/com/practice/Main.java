@@ -34,8 +34,7 @@ public class Main {
 //        challenges.callIsValid();
 //        challenges.callLengthOfLastWord();
 
-        challenges.callMergeTwoLists();
-        other.callTwoSum();
+        challenges.callMajorityElement();
 
     }
 
