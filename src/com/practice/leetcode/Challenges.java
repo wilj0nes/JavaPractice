@@ -5,6 +5,42 @@ import java.util.*;
 
 public class Challenges {
 
+    public void callRunningSum() {
+        int[] arr;
+        arr = runningSum(new int[]{1,2,3,4});
+        System.out.println(Arrays.toString(arr));
+        arr = runningSum(new int[]{1,1,1,1,1});
+        System.out.println(Arrays.toString(arr));
+        arr = runningSum(new int[]{3,1,2,10,1});
+        System.out.println(Arrays.toString(arr));
+    }
+
+    // Given an array nums. We define a running sum of an array as runningSum[i] = sum(nums[0]…nums[i]).
+    // Return the running sum of nums.
+    // Input: nums = [1,2,3,4]
+    // Output: [1,3,6,10]
+    // Explanation: Running sum is obtained as follows: [1, 1+2, 1+2+3, 1+2+3+4].
+    public int[] runningSum(int[] nums) {
+        if (nums.length < 2) {
+            return nums;
+        }
+        int[] resultArr = new int[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            if (i == 0) {
+                resultArr[i] = nums[i];
+            }
+            else {
+                int temp = 0;
+                for (int j = 0; j <= i; j++) {
+                    temp += nums[j];
+                }
+                System.out.println("temp: " + temp);
+                resultArr[i] = temp;
+            }
+        }
+        return resultArr;
+    }
+
     public void callNumIdenticalPairs() {
         int n;
         n = numIdenticalPairs(new int[]{1, 2, 3, 1, 1, 3});
@@ -15,6 +51,9 @@ public class Challenges {
         System.out.println("pairCount: " + n);
     }
 
+    // Given an array of integers nums.
+    // A pair (i,j) is called good if nums[i] == nums[j] and i < j.
+    // Return the number of good pairs.
     public int numIdenticalPairs(int[] nums) {
         int pairCount = 0;
         if (nums.length < 2) {

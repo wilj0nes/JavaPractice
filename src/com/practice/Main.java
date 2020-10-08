@@ -34,8 +34,8 @@ public class Main {
 //        challenges.callIsValid();
 //        challenges.callLengthOfLastWord();
 //        challenges.callPermute();
-
-        challenges.callNumIdenticalPairs();
+//        challenges.callNumIdenticalPairs();
+        challenges.callRunningSum();
     }
 
 
