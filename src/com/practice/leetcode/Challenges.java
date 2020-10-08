@@ -9,10 +9,18 @@ public class Challenges {
         int n;
         n = numIdenticalPairs(new int[]{1, 2, 3, 1, 1, 3});
         System.out.println("pairCount: " + n);
+        n = numIdenticalPairs(new int[]{1,1,1,1});
+        System.out.println("pairCount: " + n);
+        n = numIdenticalPairs(new int[]{1,2,3});
+        System.out.println("pairCount: " + n);
     }
 
     public int numIdenticalPairs(int[] nums) {
         int pairCount = 0;
+        if (nums.length < 2) {
+            return pairCount;
+        }
+
         for (int i = 0; i < nums.length; i++) {
             for (int j = 0; j < nums.length; j++) {
                 if (nums[i] == nums[j] && i < j) {
@@ -20,7 +28,7 @@ public class Challenges {
                 }
             }
         }
-        return pairCount; 
+        return pairCount;
     }
 
 
