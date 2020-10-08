@@ -5,57 +5,74 @@ import java.util.*;
 
 public class Challenges {
 
-    public void callMajorityElement() {
+    public void callNumIdenticalPairs() {
         int n;
-        n = majorityElement(new int[]{3, 2, 3}); // 3
-        System.out.println("n: " + n);
-        n = majorityElement(new int[]{2,2,1,1,1,2,2}); // 2
-        System.out.println("n: " + n);
-        n = majorityElement(new int[]{3,3,4}); // 3
-        System.out.println("n: " + n);
-
+        n = numIdenticalPairs(new int[]{1, 2, 3, 1, 1, 3});
+        System.out.println("pairCount: " + n);
     }
 
-    // Given an array of size n, find the majority element.
-    // The majority element is the element that appears more than ⌊ n/2 ⌋ times.
-    public int majorityElement(int[] nums) { // TODO finish 
-        if (nums.length == 1) {
-            return 1;
-        }
-        else if (nums.length == 0) {
-            return 0;
-        }
-
-        HashMap<Integer, Integer> map = new HashMap<>();
-        //       ^num      ^frequency
-        //       ^key      ^value
-
-        Integer max = 0;
+    public int numIdenticalPairs(int[] nums) {
+        int pairCount = 0;
         for (int i = 0; i < nums.length; i++) {
-            System.out.println(nums[i]);
-            if (map.get(nums[i]) != null) {
-                int newVal = map.get(nums[i]);
-                map.put(nums[i], newVal+1);
-                if (newVal > max) {
-                    max = newVal;
-                    System.out.println("max is: " +max);
+            for (int j = 0; j < nums.length; j++) {
+                if (nums[i] == nums[j] && i < j) {
+                    pairCount++;
                 }
             }
-            else {
-                map.put(nums[i], 1);
-            }
-
         }
-        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
-            System.out.println(entry);
-            if (entry.getValue() > max) {
-                max = entry.getValue();
-            }
-
-        }
-
-        return map.get(max);
+        return pairCount; 
     }
+
+
+    public void callPermute() {
+        int[] intArr;
+        intArr = new int[]{1,2,3};
+        System.out.println(permute(intArr));
+        //  [1,2,3],
+        //  [1,3,2],
+        //  [2,1,3],
+        //  [2,3,1],
+        //  [3,1,2],
+        //  [3,2,1]
+
+//        intArr = new int[] {1,2,3,4};
+//        System.out.println(permute(intArr));
+    }
+
+    // Given a collection of distinct integers, return all possible permutations.
+    public List<List<Integer>> permute(int[] nums) { // TODO investigate further
+        if (nums == null || nums.length == 0) {
+            return new ArrayList<>();
+        }
+        List<List<Integer>> finalResult = new ArrayList<>();
+        permuteRecur(nums, finalResult, new ArrayList<>(), new boolean[nums.length]);
+        return finalResult;
+    } // not my solution
+
+    private void permuteRecur(int[] nums, List<List<Integer>> finalResult, List<Integer> currResult, boolean[] used) {
+        System.out.println("currResult: " + currResult);
+        System.out.println("used: " + Arrays.toString(used));
+        System.out.println("nums: " + Arrays.toString(nums) + " \n");
+
+        if (currResult.size() == nums.length) {
+            finalResult.add(new ArrayList<>(currResult));
+            System.out.println("finalResult: " + finalResult);
+            return;
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            if (used[i]) {
+                continue; // go to next iteration
+            }
+            currResult.add(nums[i]);
+            used[i] = true;
+            permuteRecur(nums, finalResult, currResult, used);
+            used[i] = false;
+            currResult.remove(currResult.size() - 1);
+        }
+        System.out.println("----------------------------------------------");
+    }
+
 
 
     public void callMergeTwoLists() { }
@@ -128,7 +145,6 @@ public class Challenges {
         for (int i = 0; i < arr.length-1; i++) {
             if (openerList.indexOf(arr[i]) == closerList.indexOf(arr[i+1]) && openerList.indexOf(arr[i]) > -1 && closerList.indexOf(arr[i+1]) > -1) {
                 str = str.replace(arr[i]+arr[i+1], "");
-//                System.out.println("str is now: " + str);
                 return removeProperty(str);
             }
         }

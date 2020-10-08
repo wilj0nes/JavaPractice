@@ -33,9 +33,9 @@ public class Main {
 //        challenges.callReverseInteger();
 //        challenges.callIsValid();
 //        challenges.callLengthOfLastWord();
+//        challenges.callPermute();
 
-        challenges.callMajorityElement();
-
+        challenges.callNumIdenticalPairs();
     }
 
 
