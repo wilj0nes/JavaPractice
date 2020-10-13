@@ -10,6 +10,9 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) {
+        double d = ((1.0 / 2.0) + (1.0 / 3.0))/2;
+        System.out.println(d);
+        System.out.println();
         AmazonPractice amazonPractice = new AmazonPractice();
         UdemyPractice udemyPractice = new UdemyPractice();
         Other other = new Other();
@@ -35,7 +38,8 @@ public class Main {
 //        challenges.callLengthOfLastWord();
 //        challenges.callPermute();
 //        challenges.callNumIdenticalPairs();
-        challenges.callRunningSum();
+//        challenges.callRunningSum();
+        challenges.callMinPathSum();
     }
 
 

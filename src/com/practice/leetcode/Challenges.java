@@ -5,6 +5,43 @@ import java.util.*;
 
 public class Challenges {
 
+    public void callMinPathSum() {
+        int[][] grid = new int[3][];
+        int[] ar1 = new int[]{1,3,1};
+        int[] ar2 = new int[]{1,5,1};
+        int[] ar3 = new int[]{4,2,1};
+        grid[0] = ar1;
+        grid[1] = ar2;
+        grid[2] = ar3;
+        System.out.println(minPathSum(grid));
+    }
+
+    // Given a m x n grid filled with non-negative numbers,
+    // find a path from top left to bottom right which minimizes the sum of all numbers along its path.
+    // Note: You can only move either down or right at any point in time.
+    public int minPathSum(int[][] grid) { // TODO finish
+        System.out.println(Arrays.deepToString(grid));
+        for(int i = 1; i < grid.length; i++) {
+            System.out.println("-- > " + Arrays.toString(grid[i]));
+            grid[i][0] = grid[i-1][0] + grid[i][0];
+            System.out.println(grid[i-1][0] + " + " + grid[i][0]);
+        }
+        System.out.println(Arrays.deepToString(grid));
+        for(int j = 1; j < grid[0].length; j++) {
+            grid[0][j] = grid[0][j-1] + grid[0][j];
+        }
+
+        System.out.println(Arrays.deepToString(grid));
+        for(int i = 1; i < grid.length; i++) {
+            for(int j = 1; j < grid[0].length; j++) {
+                grid[i][j] = Math.min(grid[i-1][j], grid[i][j-1]) + grid[i][j];
+            }
+        }
+        System.out.println(Arrays.deepToString(grid));
+        return grid[grid.length-1][grid[0].length-1];
+
+    }
+
     public void callRunningSum() {
         int[] arr;
         arr = runningSum(new int[]{1,2,3,4});
@@ -101,6 +138,8 @@ public class Challenges {
         System.out.println("used: " + Arrays.toString(used));
         System.out.println("nums: " + Arrays.toString(nums) + " \n");
 
+        System.out.println(finalResult.get(0).get(0));
+
         if (currResult.size() == nums.length) {
             finalResult.add(new ArrayList<>(currResult));
             System.out.println("finalResult: " + finalResult);
@@ -119,8 +158,6 @@ public class Challenges {
         }
         System.out.println("----------------------------------------------");
     }
-
-
 
     public void callMergeTwoLists() { }
 

@@ -6,10 +6,7 @@ import java.util.List;
 // CLASS BEGINS, THIS CLASS IS REQUIRED
 public class Stuff
 {
-    // METHOD SIGNATURE BEGINS, THIS METHOD IS REQUIRED
-    public static List<Integer> cellCompete(int[] states, int days){
-        // WRITE YOUR CODE HERE
-
+    public static List<Integer> cellCompete(int[] states, int days) {
         List<Integer> newStates = new ArrayList<>(states.length);
 
         for (int i = 0; i < states.length; i++) {
