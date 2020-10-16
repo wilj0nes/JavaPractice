@@ -36,7 +36,12 @@ public class Main {
 //        challenges.callNumIdenticalPairs();
 //        challenges.callRunningSum();
 //        challenges.callMinPathSum();
-        challenges.callMasProfit();
+//        challenges.callMasProfit();
+//        challenges.callContainsDuplicate();
+//        challenges.callProductExceptSelf();
+        challenges.callMaxSubArray();
+
+
     }
 
 

@@ -5,6 +5,79 @@ import java.util.*;
 
 public class Challenges {
 
+    public void callMaxSubArray() {
+        int n;
+        n = maxSubArray(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4});
+        System.out.println("Output (6):" + n);
+    }
+
+    // Given an integer array nums, find the contiguous subarray (containing at least one number)
+    // which has the largest sum and return its sum.
+    // Follow up: If you have figured out the O(n) solution,
+    // try coding another solution using the divide and conquer approach, which is more subtle.
+    public int maxSubArray(int[] nums) {
+        return 0;
+    }
+
+    public void callProductExceptSelf() {
+        int[] arr;
+        arr = productExceptSelf(new int[]{1, 2, 3, 4});
+        System.out.println(Arrays.toString(arr));
+    }
+
+    // Given an array nums of n integers where n > 1,
+    // return an array output such that output[i] is equal to the product of all the elements of nums except nums[i].
+    // Constraint: It's guaranteed that the product of the elements of any prefix
+    // or suffix of the array (including the whole array) fits in a 32 bit integer.
+    // Note: Please solve it without division and in O(n).
+    public int[] productExceptSelf(int[] nums) { // not my solution
+        int numsLength = nums.length;
+        int[] result = new int[numsLength];
+        int right = 1, left = 1;
+
+        System.out.println(Arrays.toString(nums));
+        Arrays.fill(result, 1);
+        System.out.println(Arrays.toString(result));
+
+        for (int i = 0; i < numsLength; i++) {
+            result[i] *= left;
+            System.out.println("result[i] * left ==> " + result[i] + " * " + left);
+            left *= nums[i];
+//            System.out.println("left is: " + left  + " * " + nums[i]);
+        }
+        System.out.println(Arrays.toString(result));
+
+        for (int i = numsLength - 1; i >= 0; i--) {
+            result[i] *= right;
+            System.out.println("result[i] * right ==> " + result[i] + " * " + right);
+            right *= nums[i];
+//            System.out.println("right is: " + right + " * " + nums[i]);
+        }
+
+        return result;
+    }
+
+
+    public void callContainsDuplicate() {
+        boolean bool;
+        bool = containsDuplicate(new int[]{1, 2, 3, 1});
+        System.out.println("output: " + bool);
+    }
+
+    // Given an array of integers, find if the array contains any duplicates.
+    public boolean containsDuplicate(int[] nums) {
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (hashMap.get(nums[i]) != null) {
+                return true;
+            }
+            else {
+                hashMap.put(nums[i], i);
+            }
+        }
+        return false;
+    }
+
     public void callMasProfit() {
         int n;
         n = maxProfit(new int[]{7, 1, 5, 3, 6, 4});
@@ -75,15 +148,16 @@ public class Challenges {
         return sellVal - buyVal;
     }
 
-    public int improvedMaxProfit(int[] prices) {
-        int ans=0;
-        if (prices.length==0) {
+    public int improvedMaxProfit(int[] prices) { // not my solution
+        int ans = 0;
+        if (prices.length == 0) {
             return ans;
         }
-        int bought=prices[0];
+        int bought = prices[0];
+
         for(int i = 1; i < prices.length; i++) {
-            if(prices[i]>bought) {
-                if(ans < (prices[i] - bought)) {
+            if (prices[i] > bought) {
+                if (ans < (prices[i] - bought)) {
                     ans = prices[i] - bought;
                 }
             }
