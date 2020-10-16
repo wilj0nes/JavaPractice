@@ -10,9 +10,6 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) {
-        double d = ((1.0 / 2.0) + (1.0 / 3.0))/2;
-        System.out.println(d);
-        System.out.println();
         AmazonPractice amazonPractice = new AmazonPractice();
         UdemyPractice udemyPractice = new UdemyPractice();
         Other other = new Other();
@@ -31,7 +28,6 @@ public class Main {
 
 //        other.callLengthOfLongestSubstring();
 
-
 //        challenges.callLetterCombinations();
 //        challenges.callReverseInteger();
 //        challenges.callIsValid();
@@ -39,7 +35,8 @@ public class Main {
 //        challenges.callPermute();
 //        challenges.callNumIdenticalPairs();
 //        challenges.callRunningSum();
-        challenges.callMinPathSum();
+//        challenges.callMinPathSum();
+        challenges.callMasProfit();
     }
 
 

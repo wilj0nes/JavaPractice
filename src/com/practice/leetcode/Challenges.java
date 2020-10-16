@@ -5,6 +5,96 @@ import java.util.*;
 
 public class Challenges {
 
+    public void callMasProfit() {
+        int n;
+        n = maxProfit(new int[]{7, 1, 5, 3, 6, 4});
+        System.out.println("profit (5):" + n);
+
+        n = maxProfit(new int[]{7, 6, 4, 3, 1});
+        System.out.println("profit (0):" + n);
+
+        n = maxProfit(new int[]{2, 4, 1});
+        System.out.println("profit (2):" + n);
+
+        n = maxProfit(new int[]{7, 6, 4, 3, 1});
+        System.out.println("profit (0):" + n);
+
+        n = maxProfit(new int[]{2, 1, 2, 0, 1});
+        System.out.println("profit (1):" + n);
+
+        n = maxProfit(new int[]{2, 1, 2, 1, 0, 1, 2});
+        System.out.println("profit (2):" + n);
+
+        n = maxProfit(new int[]{1, 2});
+        System.out.println("profit (1):" + n);
+
+        n = maxProfit(new int[]{2, 1, 4});
+        System.out.println("profit (3):" + n);
+
+        n = maxProfit(new int[]{2,1,2,1,0,0,1});
+        System.out.println("profit (1):" + n);
+
+        n = maxProfit(new int[]{3, 3, 5, 0, 0, 3, 1, 4});
+        System.out.println("profit (4):" + n);
+    }
+
+    // Say you have an array for which the ith element is the price of a given stock on day i.
+    // If you were only permitted to complete at most one transaction (i.e., buy one and sell one share of the stock)
+    // design an algorithm to find the maximum profit.
+    public int maxProfit(int[] prices) {
+        System.out.println(Arrays.toString(prices));
+        int buyVal = Integer.MAX_VALUE;
+        int sellVal = 0;
+
+        if (prices.length == 1) {
+            return sellVal;
+        }
+
+        for (int i = 0; i < prices.length; i++) {
+            if (buyVal > prices[i]) {
+                for (int j = i; j < prices.length; j++) { // check the future
+                    if (prices[j] - prices[i] > sellVal - buyVal) {
+                        buyVal = prices[i];
+                        sellVal = prices[j];
+                        break;
+                    }
+                }
+            }
+            else if (sellVal < prices[i]) {
+                sellVal = prices[i];
+            }
+        }
+
+        System.out.println("buyVal: " + buyVal);
+        System.out.println("sellVal: " + sellVal);
+
+        if (sellVal == 0 || buyVal > sellVal) {
+            return 0;
+        }
+
+        return sellVal - buyVal;
+    }
+
+    public int improvedMaxProfit(int[] prices) {
+        int ans=0;
+        if (prices.length==0) {
+            return ans;
+        }
+        int bought=prices[0];
+        for(int i = 1; i < prices.length; i++) {
+            if(prices[i]>bought) {
+                if(ans < (prices[i] - bought)) {
+                    ans = prices[i] - bought;
+                }
+            }
+            else {
+                bought = prices[i];
+            }
+        }
+        return ans;
+
+    }
+
     public void callMinPathSum() {
         int[][] grid = new int[3][];
         int[] ar1 = new int[]{1,3,1};
@@ -71,7 +161,7 @@ public class Challenges {
                 for (int j = 0; j <= i; j++) {
                     temp += nums[j];
                 }
-                System.out.println("temp: " + temp);
+//                System.out.println("temp: " + temp);
                 resultArr[i] = temp;
             }
         }
@@ -220,7 +310,7 @@ public class Challenges {
     }
 
     public String removeProperty(String str) {
-//        System.out.println("Calling... removeProperty: " + str);
+        System.out.println("Calling... removeProperty: " + str);
         ArrayList<String> openerList = new ArrayList<>(Arrays.asList("(", "[", "{"));
         ArrayList<String> closerList = new ArrayList<>(Arrays.asList(")", "]", "}"));
 

@@ -18,7 +18,7 @@ public class AmazonPractice {
         for (int i = 0; i < inputList.size(); i++) {
             List<Character> subList = inputList.subList(i+1, inputList.size());
             System.out.println(subList);
-            System.out.println("temp: " + temp + " ==> " + inputList.get(i) + " : " + i);
+//            System.out.println("temp: " + temp + " ==> " + inputList.get(i) + " : " + i);
 
             if (!temp.contains(inputList.get(i))) {
                 temp.add(inputList.get(i));
@@ -78,29 +78,6 @@ public class AmazonPractice {
         }
     }
 
-
-    List<PairInt> closestLocations(int totalCrates, List<PairInt> allLocations, int truckCapacity) {
-
-        List<PairInt> result = new ArrayList<>();
-        TreeMap<Double, PairInt> treeMap = new TreeMap<>(); // TreeMap keys are sorted by default
-
-        for (PairInt pairInt : allLocations) {
-            System.out.println("--> " + findDistance(pairInt.first, pairInt.second));
-            treeMap.put(findDistance(pairInt.first, pairInt.second), pairInt);
-        }
-
-        for (Map.Entry<Double, PairInt> entry: treeMap.entrySet()) {
-            if (result.size() < truckCapacity) {
-                result.add(entry.getValue());                   // O(logn)
-            }
-        }
-        return result;
-    }
-
-    public double findDistance(int x, int y) {
-        return Math.sqrt(x*x + y*y);
-    }
-
     public void testClosestLocations() {
         List<PairInt> pairIntList = new ArrayList<>();
         pairIntList.add(new PairInt(1, 2));
@@ -125,6 +102,30 @@ public class AmazonPractice {
         pairIntList.add(new PairInt(7, 9));
         System.out.println("Final result: " + closestLocations(6, pairIntList, 3).toString());
     }
+
+
+    List<PairInt> closestLocations(int totalCrates, List<PairInt> allLocations, int truckCapacity) {
+        List<PairInt> result = new ArrayList<>();
+        TreeMap<Double, PairInt> treeMap = new TreeMap<>(); // TreeMap keys are sorted by default
+
+        for (PairInt pairInt : allLocations) {
+            System.out.println("--> " + findDistance(pairInt.first, pairInt.second));
+            treeMap.put(findDistance(pairInt.first, pairInt.second), pairInt);
+        }
+
+        for (Map.Entry<Double, PairInt> entry: treeMap.entrySet()) {
+            System.out.println(entry.toString());
+            if (result.size() < truckCapacity) {
+                result.add(entry.getValue());                   // O(logn)
+            }
+        }
+        return result;
+    }
+
+    public double findDistance(int x, int y) {
+        return Math.sqrt(x*x + y*y);
+    }
+
 }
 
 class PairInt {
