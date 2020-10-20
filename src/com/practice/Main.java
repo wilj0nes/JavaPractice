@@ -5,8 +5,6 @@ import com.practice.leetcode.Challenges;
 import com.practice.other.Other;
 import com.practice.udemy.UdemyPractice;
 
-import java.util.*;
-
 public class Main {
 
     public static void main(String[] args) {
@@ -15,7 +13,7 @@ public class Main {
         Other other = new Other();
         Challenges challenges = new Challenges();
 
-        amazonPractice.testClosestLocations();
+//        amazonPractice.testClosestLocations();
 //        udemyPractice.callFindReoccurringNumber();
 //        udemyPractice.reverseLinkedList();
 //        int n = udemyPractice.fibonacciRecursive(6);
@@ -36,10 +34,10 @@ public class Main {
 //        challenges.callNumIdenticalPairs();
 //        challenges.callRunningSum();
 //        challenges.callMinPathSum();
-//        challenges.callMasProfit();
+        challenges.callMaxProfit();
 //        challenges.callContainsDuplicate();
 //        challenges.callProductExceptSelf();
-        challenges.callMaxSubArray();
+//        challenges.callMaxSubArray();
 
 
     }
