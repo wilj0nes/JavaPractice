@@ -9,6 +9,10 @@ public class Challenges {
         int n;
         n = maxSubArray(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4});
         System.out.println("Output (6):" + n);
+
+        n = maxSubArray(new int[]{1});
+        System.out.println("Output (1):" + n);
+
     }
 
     // Given an integer array nums, find the contiguous subarray (containing at least one number)
@@ -16,7 +20,13 @@ public class Challenges {
     // Follow up: If you have figured out the O(n) solution,
     // try coding another solution using the divide and conquer approach, which is more subtle.
     public int maxSubArray(int[] nums) {
-        return 0;
+        int currentSum = 0;
+        int maxSum = 0;
+        for (int i = 0; i < nums.length; i++) { // <-- Kadane's algorithm
+            currentSum = Math.max(0, currentSum + nums[i]);
+            maxSum = Math.max(maxSum, currentSum);
+        }
+        return maxSum;
     }
 
     public void callProductExceptSelf() {
