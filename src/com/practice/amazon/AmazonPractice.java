@@ -107,6 +107,7 @@ public class AmazonPractice {
     List<PairInt> closestLocations(int totalCrates, List<PairInt> allLocations, int truckCapacity) {
         List<PairInt> result = new ArrayList<>();
         TreeMap<Double, PairInt> treeMap = new TreeMap<>(); // TreeMap keys are sorted by default
+//        TreeMap<Double, PairInt> treeMap = new TreeMap<>(Collections.reverseOrder()); // <-- sort keys in reverse
 
         for (PairInt pairInt : allLocations) {
             System.out.println("--> " + findDistance(pairInt.first, pairInt.second));
@@ -119,6 +120,8 @@ public class AmazonPractice {
                 result.add(entry.getValue());                   // O(logn)
             }
         }
+
+
         return result;
     }
 

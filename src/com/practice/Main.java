@@ -15,7 +15,7 @@ public class Main {
         Other other = new Other();
         Challenges challenges = new Challenges();
 
-//        amazonPractice.testClosestLocations();
+        amazonPractice.testClosestLocations();
 //        udemyPractice.callFindReoccurringNumber();
 //        udemyPractice.reverseLinkedList();
 //        int n = udemyPractice.fibonacciRecursive(6);
