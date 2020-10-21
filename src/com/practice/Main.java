@@ -34,11 +34,12 @@ public class Main {
 //        challenges.callNumIdenticalPairs();
 //        challenges.callRunningSum();
 //        challenges.callMinPathSum();
-        challenges.callMaxProfit();
+//        challenges.callMaxProfit();
 //        challenges.callContainsDuplicate();
 //        challenges.callProductExceptSelf();
 //        challenges.callMaxSubArray();
 
+        challenges.callMaxArea();
 
     }
 

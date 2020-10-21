@@ -1,9 +1,46 @@
 package com.practice.leetcode;
 
-import java.math.BigInteger;
 import java.util.*;
 
 public class Challenges {
+
+    public void callMaxArea() {
+        int[] arr;
+        arr = new int[]{1, 8, 6, 2, 5, 4, 8, 3, 7};
+        System.out.println("result (49):" + maxArea(arr));
+
+        arr = new int[]{4, 3, 2, 1, 4};
+        System.out.println("result (16):" + maxArea(arr));
+
+        arr = new int[]{1, 1};
+        System.out.println("result (1):" + maxArea(arr));
+
+        arr = new int[]{1, 2, 1};
+        System.out.println("result (2):" + maxArea(arr));
+    }
+
+    public int maxArea(int[] height) {
+        int widthVal;
+        int maxArea = 0;
+        int tempArea;
+
+        for (int i = 0; i < height.length; i++) {
+            System.out.println("i ==> height[" + i + "] = " + height[i]);
+            for (int j = height.length-1; j > i; j--) {
+                System.out.println("j ==> height[" + j + "] = " + height[j]);
+                widthVal = j - i;
+                System.out.println("widthVal: " + widthVal);
+                tempArea = widthVal * Math.min(height[j], height[i]);
+                System.out.println("tempArea: " + tempArea);
+                if (tempArea > maxArea) {
+                    maxArea = tempArea;
+                    System.out.println("maxArea: " + maxArea);
+                }
+            }
+        }
+
+        return maxArea;
+    }
 
     public void callMaxSubArray() {
         int n;
@@ -12,7 +49,6 @@ public class Challenges {
 
         n = maxSubArray(new int[]{1});
         System.out.println("Output (1):" + n);
-
     }
 
     // Given an integer array nums, find the contiguous subarray (containing at least one number)
