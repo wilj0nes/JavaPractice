@@ -42,8 +42,9 @@ public class Main {
 //        challenges.callImprovedMaxArea();
 //        challenges.callIsAnagram();
 //        challenges.callIsPalendrome();
-        challenges.callGroupAnagrams();
+//        challenges.callGroupAnagrams();
 
+        challenges.callSetZeros();
 
     }
 

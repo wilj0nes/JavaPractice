@@ -1,9 +1,60 @@
 package com.practice.leetcode;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class Challenges {
+
+    public void callSetZeros() {
+        int[][] matrix = new int[3][];
+        int[] ar1, ar2, ar3;
+
+        ar1 = new int[]{1, 1, 1};
+        ar2 = new int[]{1, 0, 1};
+        ar3 = new int[]{1, 1, 1};
+        matrix[0] = ar1;
+        matrix[1] = ar2;
+        matrix[2] = ar3;
+        setZeros(matrix);
+
+        matrix = new int[3][];
+        ar1 = new int[]{0, 1, 2, 0};
+        ar2 = new int[]{3, 4, 5, 2};
+        ar3 = new int[]{1, 3, 1, 5};
+        matrix[0] = ar1;
+        matrix[1] = ar2;
+        matrix[2] = ar3;
+        setZeros(matrix);
+
+    }
+
+    // Given a matrix of m x n elements (m rows, n columns), return all elements of the matrix in spiral order.
+    public void setZeros(int[][] matrix) {
+        HashMap<Integer, Integer> hashCols = new HashMap<>();
+
+        boolean zeroFound;
+        for (int i = 0; i < matrix.length; i++) {
+            zeroFound = false;
+
+            for (int j = 0; j < matrix[i].length; j++) {
+                if (matrix[i][j] == 0) {
+                    hashCols.put(j, i); // keep track of j, the column value
+                    zeroFound = true;
+                }
+            }
+
+            if (zeroFound) {
+                Arrays.fill(matrix[i], 0);
+            }
+        }
+
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                if (hashCols.get(j) != null) {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+    }
 
     public void callIsPalendrome() {
         System.out.println("A man, a plan, a canal: Panama --> " + isPalindrome("A man, a plan, a canal: Panama"));
