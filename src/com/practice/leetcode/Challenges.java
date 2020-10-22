@@ -1,8 +1,141 @@
 package com.practice.leetcode;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class Challenges {
+
+    public void callIsPalendrome() {
+        System.out.println("A man, a plan, a canal: Panama --> " + isPalindrome("A man, a plan, a canal: Panama"));
+        System.out.println("race a car --> " + isPalindrome("race a car"));
+        System.out.println("racecar --> " + isPalindrome("racecar"));
+        System.out.println("0P --> " + isPalindrome("0P"));
+    }
+
+    // Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.
+    public boolean isPalindrome(String s) {
+        s = s.replaceAll("[^A-Za-z0-9]", "");
+        StringBuilder revStr = new StringBuilder();
+        for (int i = s.length() - 1; i >= 0; i--) {
+            revStr.append(s.charAt(i));
+        }
+
+        return s.toUpperCase().equals(revStr.toString().toUpperCase());
+    }
+
+
+    public void callGroupAnagrams() {
+        String[] arr = new String[]{"eat","tea","tan","ate","nat","bat"}; // [[eat, tea, ate], [bat], [tan, nat]]
+        System.out.println(groupAnagrams(arr));
+    }
+
+    // Given an array of strings strs, group the anagrams together. You can return the answer in any order.
+    // An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase,
+    // typically using all the original letters exactly once.
+    public List<List<String>> groupAnagrams(String[] strs) {
+        ArrayList<List<String>> resultList = new ArrayList<>();
+        if (strs.length == 1) {
+            resultList.add(new ArrayList<>(Arrays.asList(strs[0])));
+            return resultList;
+        }
+
+        HashMap<String, String> stringHash = new HashMap<>();
+        for (String s : strs) {
+            String[] arr = s.split("");
+            Arrays.sort(arr);
+            String sortedString = Arrays.toString(arr).replaceAll("[^a-z]", "");
+
+            if (stringHash.get(sortedString) == null) {
+                stringHash.put(sortedString, s);
+            }
+            else {
+                String str = stringHash.get(sortedString);
+                str += "/" + s;
+                stringHash.put(sortedString, str);
+            }
+        }
+
+        for (Map.Entry<String, String> entry : stringHash.entrySet()) {
+            resultList.add(new ArrayList<>(Arrays.asList(entry.getValue().split("/"))));
+        }
+
+        return resultList;
+    }
+
+
+    public void callIsAnagram() {
+        System.out.println("anagram --> nagaram : " + isAnagram("anagram", "nagaram"));
+        System.out.println("rat --> car : " + isAnagram("rat", "car"));
+    }
+
+    // Given two strings s and t , write a function to determine if t is an anagram of s.
+    public boolean isAnagram(String s, String t) {
+        int length = 0;
+        if (s.length() != t.length()) {
+            return false;
+        }
+        else {
+            length = s.length();
+        }
+
+        HashMap<Character, Integer> sMap = new HashMap<>();
+        HashMap<Character, Integer> tMap = new HashMap<>();
+
+        for (int i = 0; i < length; i++) {
+            if (sMap.get(s.charAt(i)) == null) {
+                sMap.put(s.charAt(i), 1);
+            }
+            else {
+                int quantity = sMap.get(s.charAt(i));
+                sMap.put(s.charAt(i), ++quantity);
+            }
+
+            if (tMap.get(t.charAt(i)) == null) {
+                tMap.put(t.charAt(i), 1);
+            }
+            else {
+                int quantity = tMap.get(t.charAt(i));
+                tMap.put(t.charAt(i), ++quantity);
+            }
+        }
+
+        for (Map.Entry<Character, Integer> entry : sMap.entrySet()) {
+            System.out.println(entry);
+            if (tMap.get(entry.getKey()) == null) {
+                return false;
+            }
+            else if (tMap.get(entry.getKey()) != null && !tMap.get(entry.getKey()).equals(entry.getValue())) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public void callImprovedMaxArea() {
+        int[] arr;
+        arr = new int[]{1, 8, 6, 2, 5, 4, 8, 3, 7};
+        System.out.println("result (49):" + improvedMaxArea(arr));
+
+        arr = new int[]{4, 3, 2, 1, 4};
+        System.out.println("result (16):" + improvedMaxArea(arr));
+    }
+
+    public int improvedMaxArea(int[] height) { // not my solution
+        int left = 0;
+        int right = height.length - 1;
+        int maxArea = 0;
+        while (left < right) {
+            maxArea = Math.max(maxArea, Math.min(height[left], height[right]) * (right-left));
+            if (height[left] < height[right]) {
+                left++;
+            }
+            else {
+                 right--;
+            }
+        }
+        return maxArea;
+    }
 
     public void callMaxArea() {
         int[] arr;
@@ -11,6 +144,7 @@ public class Challenges {
 
         arr = new int[]{4, 3, 2, 1, 4};
         System.out.println("result (16):" + maxArea(arr));
+
 
         arr = new int[]{1, 1};
         System.out.println("result (1):" + maxArea(arr));
@@ -26,12 +160,14 @@ public class Challenges {
 
         for (int i = 0; i < height.length; i++) {
             System.out.println("i ==> height[" + i + "] = " + height[i]);
+
             for (int j = height.length-1; j > i; j--) {
                 System.out.println("j ==> height[" + j + "] = " + height[j]);
                 widthVal = j - i;
                 System.out.println("widthVal: " + widthVal);
                 tempArea = widthVal * Math.min(height[j], height[i]);
                 System.out.println("tempArea: " + tempArea);
+
                 if (tempArea > maxArea) {
                     maxArea = tempArea;
                     System.out.println("maxArea: " + maxArea);
@@ -125,38 +261,37 @@ public class Challenges {
     }
 
     public void callMaxProfit() {
-//        int n;
-//        n = maxProfit(new int[]{7, 1, 5, 3, 6, 4});
-//        System.out.println("profit (5):" + n);
-//
-//        n = maxProfit(new int[]{7, 6, 4, 3, 1});
-//        System.out.println("profit (0):" + n);
-//
-//        n = maxProfit(new int[]{2, 4, 1});
-//        System.out.println("profit (2):" + n);
-//
-//        n = maxProfit(new int[]{7, 6, 4, 3, 1});
-//        System.out.println("profit (0):" + n);
-//
-//        n = maxProfit(new int[]{2, 1, 2, 0, 1});
-//        System.out.println("profit (1):" + n);
-//
-//        n = maxProfit(new int[]{2, 1, 2, 1, 0, 1, 2});
-//        System.out.println("profit (2):" + n);
-//
-//        n = maxProfit(new int[]{1, 2});
-//        System.out.println("profit (1):" + n);
-//
-//        n = maxProfit(new int[]{2, 1, 4});
-//        System.out.println("profit (3):" + n);
-//
-//        n = maxProfit(new int[]{2,1,2,1,0,0,1});
-//        System.out.println("profit (1):" + n);
-//
-//        n = maxProfit(new int[]{3, 3, 5, 0, 0, 3, 1, 4});
-//        System.out.println("profit (4):" + n);
+        int n;
+        n = maxProfit(new int[]{7, 1, 5, 3, 6, 4});
+        System.out.println("profit (5):" + n);
 
-        callImprovedMaxProfit();
+        n = maxProfit(new int[]{7, 6, 4, 3, 1});
+        System.out.println("profit (0):" + n);
+
+        n = maxProfit(new int[]{2, 4, 1});
+        System.out.println("profit (2):" + n);
+
+        n = maxProfit(new int[]{7, 6, 4, 3, 1});
+        System.out.println("profit (0):" + n);
+
+        n = maxProfit(new int[]{2, 1, 2, 0, 1});
+        System.out.println("profit (1):" + n);
+
+        n = maxProfit(new int[]{2, 1, 2, 1, 0, 1, 2});
+        System.out.println("profit (2):" + n);
+
+        n = maxProfit(new int[]{1, 2});
+        System.out.println("profit (1):" + n);
+
+        n = maxProfit(new int[]{2, 1, 4});
+        System.out.println("profit (3):" + n);
+
+        n = maxProfit(new int[]{2,1,2,1,0,0,1});
+        System.out.println("profit (1):" + n);
+
+        n = maxProfit(new int[]{3, 3, 5, 0, 0, 3, 1, 4});
+        System.out.println("profit (4):" + n);
+
     }
 
     // Say you have an array for which the ith element is the price of a given stock on day i.
@@ -265,7 +400,7 @@ public class Challenges {
     // Given a m x n grid filled with non-negative numbers,
     // find a path from top left to bottom right which minimizes the sum of all numbers along its path.
     // Note: You can only move either down or right at any point in time.
-    public int minPathSum(int[][] grid) { // TODO finish
+    public int minPathSum(int[][] grid) { // TODO investigate further
         System.out.println(Arrays.deepToString(grid));
         for(int i = 1; i < grid.length; i++) {
             System.out.println("-- > " + Arrays.toString(grid[i]));

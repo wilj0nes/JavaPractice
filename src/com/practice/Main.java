@@ -38,8 +38,12 @@ public class Main {
 //        challenges.callContainsDuplicate();
 //        challenges.callProductExceptSelf();
 //        challenges.callMaxSubArray();
+//        challenges.callMaxArea();
+//        challenges.callImprovedMaxArea();
+//        challenges.callIsAnagram();
+//        challenges.callIsPalendrome();
+        challenges.callGroupAnagrams();
 
-        challenges.callMaxArea();
 
     }
 
