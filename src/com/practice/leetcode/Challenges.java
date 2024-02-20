@@ -4,6 +4,65 @@ import java.util.*;
 
 public class Challenges {
 
+    public void callClimbStairs() { // https://leetcode.com/problems/climbing-stairs/
+        int n;
+        n = climbStairs(2);
+        System.out.println("result (2):" + n);
+        n = climbStairs(3);
+        System.out.println("result (3):" + n);
+        n = climbStairs(5);
+        System.out.println("result (8):" + n);
+
+
+        n = climbStairs_memoization(2);
+        System.out.println("result (2):" + n);
+        n = climbStairs_memoization(3);
+        System.out.println("result (3):" + n);
+        n = climbStairs_memoization(5);
+        System.out.println("result (8):" + n);
+    }
+
+    public int climbStairs_memoization(int n ) {
+        int memo[] = new int[n + 1];
+        return climb_memo(0, n, memo);
+    }
+
+    public int climb_memo(int i, int n, int memo[]) {
+        if (i > n) {
+            return 0;
+        }
+        if (i == n) {
+            return 1;
+        }
+
+        // the result of each step is stored in the memo array
+        // and returning result the result from array when fcn is called again
+        // this way the recursion tree is reduced reducing runtime to O(n)
+        memo[i] = climb_memo(i + 1, n, memo) + climb_memo(i + 2, n, memo);
+        System.out.println(Arrays.toString(memo));
+
+        System.out.println("returning: " + memo[i]);
+        return memo[i];
+    }
+
+
+    // You are climbing a staircase. It takes n steps to reach to the top.
+    //Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+    public int climbStairs(int n) { // brute force solution | O(2^n) time complexity
+        return climb( 0, n);
+    }
+    public int climb(int i, int n) {
+        System.out.println("climb( " + i + ", " + n + " )");
+        if (i > n) {
+            return 0;
+        }
+        if (i == n) {
+            return 1;
+        }
+        return climb(i + 1, n) + climb(i + 2, n);
+    }
+
+
     public void callSetZeros() {
         int[][] matrix = new int[3][];
         int[] ar1, ar2, ar3;
@@ -55,6 +114,27 @@ public class Challenges {
             }
         }
     }
+
+    public void callLongestPalindrome() {
+        String str = "babad";
+        System.out.println(str + " longest palindrome --> " + longestPalindrome(str));
+    }
+
+    // Given a string s, return the longest palindromic substring in s.
+    // A string is palindromic if it reads the same forward and backward.
+    //    Input: s = "babad"
+    //    Output: "bab"
+    //    Explanation: "aba" is also a valid answer.
+
+    public String longestPalindrome(String s) {
+        return s;
+    }
+
+    public boolean isPal(String str) {
+        String strReversed = new StringBuilder(str).reverse().toString();
+        return str.equals(strReversed);
+    }
+
 
     public void callIsPalendrome() {
         System.out.println("A man, a plan, a canal: Panama --> " + isPalindrome("A man, a plan, a canal: Panama"));
@@ -357,7 +437,7 @@ public class Challenges {
             return sellVal;
         }
 
-        for (int i = 0; i < prices.length; i++) {
+        for (int i = 0; i < prices.length; i++) { // O(n^2)
             if (buyVal > prices[i]) {
                 for (int j = i; j < prices.length; j++) { // check the future
                     if (prices[j] - prices[i] > sellVal - buyVal) {
@@ -448,7 +528,7 @@ public class Challenges {
         System.out.println(minPathSum(grid));
     }
 
-    // Given a m x n grid filled with non-negative numbers,
+    // Given an m x n grid filled with non-negative numbers,
     // find a path from top left to bottom right which minimizes the sum of all numbers along its path.
     // Note: You can only move either down or right at any point in time.
     public int minPathSum(int[][] grid) { // TODO investigate further
@@ -472,6 +552,221 @@ public class Challenges {
         System.out.println(Arrays.deepToString(grid));
         return grid[grid.length-1][grid[0].length-1];
 
+    }
+
+    public void callConvert() {
+        System.out.println("PAYPALISHIRING --> " + convert("PAYPALISHIRING", 3)); // PAHNAPLSIIGYIR
+    }
+
+
+    //The string "PAYPALISHIRING" is written in a zigzag pattern on a given number of rows
+    //      like this: (you may want to display this pattern in a fixed font for better legibility)
+    // P   A   H   N
+    // A P L S I I G
+    // Y   I   R
+    public String convert(String s, int numRows) {
+
+        String[][] stringMatrix = new String[s.length() / 2][numRows-1];
+
+        return null;
+    }
+
+    public void callRotate() {
+        int[][] matrix = new int[3][];
+        int[] ar1, ar2, ar3;
+
+        ar1 = new int[]{1, 2, 3};
+        ar2 = new int[]{4, 5, 6};
+        ar3 = new int[]{7, 8, 9};
+        matrix[0] = ar1;
+        matrix[1] = ar2;
+        matrix[2] = ar3;
+
+        printMatrix(matrix);
+        System.out.println("\n");
+        printMatrix(rotate(matrix));
+
+        int[][] bigMatrix = new int[4][];
+        bigMatrix[0] = new int[]{5, 1, 9, 11};
+        bigMatrix[1] = new int[]{2, 4, 8, 10};
+        bigMatrix[2] = new int[]{13, 3, 6, 7};
+        bigMatrix[3] = new int[]{15, 14, 12, 16};
+
+        System.out.println("\n");
+
+        printMatrix(bigMatrix);
+        System.out.println("\n");
+        printMatrix(rotate(bigMatrix));
+    }
+
+    // You are given an n x n 2D matrix representing an image, rotate the image by 90 degrees (clockwise).
+    // You have to rotate the image in-place, which means you have to modify the input 2D matrix directly.
+    // DO NOT allocate another 2D matrix and do the rotation
+
+    // Input: matrix = [[1,2,3],[4,5,6],[7,8,9]]
+    // Output: [[7,4,1],[8,5,2],[9,6,3]]
+
+    // Input: matrix = [[5,1,9,11],[2,4,8,10],[13,3,6,7],[15,14,12,16]]
+    // Output: [[15,13,2,5],[14,3,4,1],[12,6,8,9],[16,7,10,11]]
+
+    public int[][] rotate(int[][] matrix) {
+        if (matrix == null) {
+            return null;
+        }
+        else if (matrix.length == 1) {
+            return matrix;
+        }
+
+        for (int i = 0; i < matrix.length; i++) { // transpose matrix
+            for (int j = 0; j < matrix[i].length; j++) {
+                if (j >= i) {
+                    System.out.print(matrix[i][j] + " <--> " + matrix[j][i] + "\t\t\t" + "i:" + i + ", j:" + j  + "\n");
+                    int x = matrix[i][j];
+                    int y = matrix[j][i];
+                    matrix[i][j] = y;
+                    matrix[j][i] = x;
+                }
+            }
+        }
+
+        for (int i = 0; i < matrix.length; i++) { // reverse each sub array
+            for (int j = 0; j < matrix[i].length / 2; j++) {
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[i][matrix[i].length - j - 1];
+                matrix[i][matrix[i].length - j - 1] = temp;
+            }
+        }
+        return matrix;
+    }
+
+    public void callIntToRoman() {
+//        System.out.println("Input: 3000 --> " + intToRoman(3000)); // MMM
+//        System.out.println("Input: 1994 --> " + intToRoman(1994)); // MCMXCIV
+//        System.out.println("Input: 9 --> " + intToRoman(9)); // IX
+//        System.out.println("Input: 8 --> " + intToRoman(8)); // IX
+//        System.out.println("Input: 7 --> " + intToRoman(7)); //
+//        System.out.println("Input: 58 --> " + intToRoman(58)); // LVIII
+        System.out.println("Input: 99 --> " + intToRoman(99)); // MDCCCXCIV
+    }
+
+    // Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M.
+    //    Symbol       Value
+    //    I             1
+    //    V             5
+    //    X             10
+    //    L             50
+    //    C             100
+    //    D             500
+    //    M             1000
+
+    //    For example, 2 is written as II in Roman numeral, just two one's added together. 12 is written as XII, which is simply X + II.
+    //    The number 27 is written as XXVII, which is XX + V + II.
+
+    //    Roman numerals are usually written largest to smallest from left to right. However, the numeral for four is not IIII.
+    //    Instead, the number four is written as IV. Because the one is before the five we subtract it making four.
+    //    The same principle applies to the number nine, which is written as IX. There are six instances where subtraction is used:
+
+    //    I can be placed before V (5) and X (10) to make 4 and 9.
+    //    X can be placed before L (50) and C (100) to make 40 and 90.
+    //    C can be placed before D (500) and M (1000) to make 400 and 900.
+    //    Constraints: 1 <= num <= 3999
+
+    public String intToRoman(int num) { // not finished
+        int numHolder = num;
+        StringBuilder answer = new StringBuilder();
+        Map<String, Integer> map = new LinkedHashMap<>(); // preserves the insertion order
+        map.put("M", 1000);
+        map.put("D", 500);
+        map.put("C", 100);
+        map.put("L", 50);
+        map.put("X", 10);
+        map.put("V", 5);
+        map.put("I", 1);
+
+        while (num > 0) {
+            int tempNum = 0;
+            for (Map.Entry<String, Integer> entry : map.entrySet()) {
+                if (num >= entry.getValue() && num >= num - entry.getValue()) {
+                    answer.append(entry.getKey());
+                    num = num - entry.getValue();
+                    System.out.println("num: " + num + ", answer: " + answer);
+                    break;
+                }
+            }
+        }
+
+        System.out.println("answer: " + answer.toString());
+        String str = answer.toString();
+        if (numHolder < 10) {
+            str = str.replace("VIIII", "IX");
+        }
+        else {
+            str = str.replace("DCCCC", "CM").replace("LXXXX", "XC").replace("IIII", "IV");
+        }
+        return str;
+    }
+
+    public void callSingleNumber() {
+        System.out.println("[2,2,1] : " + singleNumber(new int[]{2, 2, 1})); // 1
+        System.out.println("[4,1,2,1,2] : " + singleNumber(new int[]{4,1,2,1,2})); // 4
+        System.out.println("[1,1,2,3,3,4] : " + singleNumber(new int[]{1,1,3,3,4})); //
+        // somehow XOR bitwise operations on each element magically returns the fucking solution
+    }
+
+    // 136. Single Number
+
+    // Given a non-empty array of integers nums, every element appears twice except for one. Find that single one.
+    // You must implement a solution with a linear runtime complexity and use only constant extra space.
+    // Example 1:
+    //
+    //Input: nums = [2,2,1]
+    //Output: 1
+    //Example 2:
+    //
+    //Input: nums = [4,1,2,1,2]
+    //Output: 4
+    //Example 3:
+    //
+    //Input: nums = [1]
+    //Output: 1
+
+    public int singleNumber(int[] nums) { // not my solution
+        int answer = nums[0];
+
+        int i = 0;
+
+        while (i < nums.length - 1) {
+            int n = nums[i + 1];
+            answer = answer ^ n; // XOR bit manipulation
+            i++;
+        }
+
+        return answer;
+    }
+
+    public void callMissingNumber() {
+        System.out.println("[3,0,1] : " + missingNumber(new int[]{3,0,1})); // 2
+        System.out.println("[9,6,4,2,3,5,7,0,1] : " + missingNumber(new int[]{9,6,4,2,3,5,7,0,1})); // 8
+
+    }
+
+    // 268. Missing Number
+    // Given an array nums containing n distinct numbers in the range [0, n],
+    // return the only number in the range that is missing from the array.
+    // Input: nums = [3,0,1]
+    // Output: 2
+    // Explanation: n = 3 since there are 3 numbers, so all numbers are in the range [0,3].
+    // 2 is the missing number in the range since it does not appear in nums.
+
+    public int missingNumber(int[] nums) {
+        int count = 0;
+        for(int i=0; i<nums.length; i++){
+            count = count - nums[i];
+            count = count + i+1;
+
+        }
+
+        return count;
     }
 
     public void callRunningSum() {
@@ -794,7 +1089,6 @@ public class Challenges {
                         answer.add(firstChar + str);
                     }
                     System.out.println(answer);
-
                 }
             }
         }
@@ -802,4 +1096,23 @@ public class Challenges {
         return answer;
     }
 
+    public static void printMatrix(int[][] matrix) {
+        Arrays.stream(matrix).forEach((row) -> {
+            System.out.print("[");
+            Arrays.stream(row).forEach((el) -> System.out.print(" " + el + " "));
+            System.out.println("]");
+        });
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+

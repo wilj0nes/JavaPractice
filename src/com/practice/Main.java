@@ -17,12 +17,13 @@ public class Main {
 //        udemyPractice.callFindReoccurringNumber();
 //        udemyPractice.reverseLinkedList();
 //        int n = udemyPractice.fibonacciRecursive(6);
-//        System.out.println("result: " + n);
+//        System.out.println("result: " + n);z
 //        String str = udemyPractice.reverseStringRecursion("yoyo mastery");
 //        System.out.println("yoyo mastery --> " + str);*/
 
-//        amazonPractice.callLengthEachScene();
+//        amazonPractice.callFindReoccurringNumberllLengthEachScene();
 //        amazonPractice.callGeneralizedGCD();
+//        amazonPractice.callLengthEachScene();
 
 //        other.callLengthOfLongestSubstring();
 
@@ -35,6 +36,7 @@ public class Main {
 //        challenges.callRunningSum();
 //        challenges.callMinPathSum();
 //        challenges.callMaxProfit();
+//        challenges.callImprovedMaxProfit();
 //        challenges.callContainsDuplicate();
 //        challenges.callProductExceptSelf();
 //        challenges.callMaxSubArray();
@@ -44,8 +46,18 @@ public class Main {
 //        challenges.callIsPalendrome();
 //        challenges.callGroupAnagrams();
 
-        challenges.callSetZeros();
+//        challenges.callSetZeros();
 
+//        challenges.callClimbStairs();
+//        challenges.callRotate();
+//        challenges.callLongestPalindrome();
+
+//        challenges.callIntToRoman();
+
+//        other.callRearrangeWord();
+//        challenges.callSingleNumber();
+
+        challenges.callMissingNumber();
     }
 
 

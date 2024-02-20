@@ -68,7 +68,7 @@ public class Other {
         System.out.println(Arrays.toString(twoSum(nums3, target)));
     }
 
-    // Given an array of integers nums and and integer target,
+    // Given an array of integers nums and integer target,
     // return the indices of the two numbers such that they add up to target.
     // You may assume that each input would have exactly one solution, and you may not use the same element twice.
     // You can return the answer in any order.
@@ -132,5 +132,96 @@ public class Other {
         }
     }
 
+    public static void callRearrangeWord() {
+        System.out.println("abc --> " + rearrangeWord("abc")); // bcaa
+//        System.out.println("baca --> " + rearrangeWord("baca")); // bcaa
+//        System.out.println("hefg --> " + rearrangeWord("hefg")); // hegf
+    }
 
+    // JPMorgan Chase interview question
+
+    // Given word, return the next alphabetically greateer string in all permutations of that word. if there is no greater permutation
+    // return the string "no asnwer" instead
+    //The string 'baca' has the following permutations in alphabetical order:
+    // 'aabc', 'aacb; 'abac' 'abca', 'acab', 'acha', 'baac' 'baca', 'bcaa', caab' 'caba', and 'cbaa'
+    // The next alphabetically greater permutation of the original string is 'baa:
+
+    public static Map<String, Integer> map = new TreeMap<>();
+    public static String rearrangeWord(String word) {
+
+        int length = word.length();
+        permute(word, 0, length - 1);
+        System.out.println(map.toString());
+
+        boolean found = false;
+
+        for (Map.Entry<String, Integer> entry: map.entrySet()) {
+            if (entry.getKey().equals(word)) {
+                found = true;
+            }
+            else if (found) {
+                map = new TreeMap<>();
+                return entry.getKey();
+            }
+        }
+
+
+        return null;
+    }
+
+    public static void permute(String str, int start, int end) {
+
+        if (start == end) {
+            System.out.println(">> " + str);
+            map.put(str, null);
+        }
+        else {
+            for (int i = start; i <= end; i++) {
+                str = swap(str, start, i);
+                permute(str, start + 1, end);
+            }
+        }
+    }
+
+    public static String swap(String str, int i, int j) {
+        char tempChar;
+        char[] charArr = str.toCharArray();
+
+        System.out.println("swap: " + charArr[i] + " <--> " + charArr[j]);
+
+        tempChar = charArr[i];
+        charArr[i] = charArr[j];
+        charArr[j] = tempChar;
+
+        return String.valueOf(charArr);
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

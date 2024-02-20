@@ -4,8 +4,7 @@ import java.util.List;
 // SOME CLASSES WITHIN A PACKAGE MAY BE RESTRICTED
 // DEFINE ANY CLASS AND METHOD NEEDED
 // CLASS BEGINS, THIS CLASS IS REQUIRED
-public class Stuff
-{
+public class Stuff {
     public static List<Integer> cellCompete(int[] states, int days) {
         List<Integer> newStates = new ArrayList<>(states.length);
 

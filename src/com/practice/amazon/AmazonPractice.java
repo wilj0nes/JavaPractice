@@ -6,9 +6,9 @@ public class AmazonPractice {
 
 
     public void callLengthEachScene() {
-        lengthEachScene(Arrays.asList('a', 'b', 'a', 'b','c','b','a','c','a' ,'d','e','f','e','g','d','e','h','i','j','h','k','l','i','j'));
+//        lengthEachScene(Arrays.asList('a', 'b', 'a', 'b','c','b','a','c','a' ,'d','e','f','e','g','d','e','h','i','j','h','k','l','i','j'));
         lengthEachScene(Arrays.asList('a','b','c','d','a','e','f','g','h','i','j','e'));
-        lengthEachScene(Arrays.asList('z','z','c','b','z','c','h','f','i','h','i'));
+//        lengthEachScene(Arrays.asList('z','z','c','b','z','c','h','f','i','h','i'));
     }
 
     public void lengthEachScene(List<Character> inputList) {
@@ -52,7 +52,7 @@ public class AmazonPractice {
         System.out.println("answer: " + n);
     }
 
-    // the greatest common divisor (GCD) is also called highest common factor of N numbers is
+    // the greatest common divisor (GCD) is also called the highest common factor of N numbers is
     // the largest positive integer that divides all number without giving a remainder
     // write an algorithm to determine the GCD of N positive integers
     public int generalizedGCD(int num, int[] arr) {
@@ -107,7 +107,7 @@ public class AmazonPractice {
     List<PairInt> closestLocations(int totalCrates, List<PairInt> allLocations, int truckCapacity) {
         List<PairInt> result = new ArrayList<>();
         TreeMap<Double, PairInt> treeMap = new TreeMap<>(); // TreeMap keys are sorted by default
-        TreeMap<Double, PairInt> treeMapp = new TreeMap<>(Collections.reverseOrder()); // <-- sort keys in reverse
+        TreeMap<Double, PairInt> treeMap2 = new TreeMap<>(Collections.reverseOrder()); // <-- sort keys in reverse
 
         for (PairInt pairInt : allLocations) {
             System.out.println("--> " + findDistance(pairInt.first, pairInt.second));
