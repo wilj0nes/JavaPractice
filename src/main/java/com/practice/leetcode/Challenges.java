@@ -4,30 +4,12 @@ import java.util.*;
 
 public class Challenges {
 
-    public void callClimbStairs() { // https://leetcode.com/problems/climbing-stairs/
-        int n;
-        n = climbStairs(2);
-        System.out.println("result (2):" + n);
-        n = climbStairs(3);
-        System.out.println("result (3):" + n);
-        n = climbStairs(5);
-        System.out.println("result (8):" + n);
-
-
-        n = climbStairs_memoization(2);
-        System.out.println("result (2):" + n);
-        n = climbStairs_memoization(3);
-        System.out.println("result (3):" + n);
-        n = climbStairs_memoization(5);
-        System.out.println("result (8):" + n);
-    }
-
     public int climbStairs_memoization(int n ) {
         int memo[] = new int[n + 1];
         return climb_memo(0, n, memo);
     }
 
-    public int climb_memo(int i, int n, int memo[]) {
+    public int climb_memo(int i, int n, int memo[]) { // https://leetcode.com/problems/climbing-stairs/
         if (i > n) {
             return 0;
         }
@@ -44,8 +26,6 @@ public class Challenges {
         System.out.println("returning: " + memo[i]);
         return memo[i];
     }
-
-
     // You are climbing a staircase. It takes n steps to reach to the top.
     //Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
     public int climbStairs(int n) { // brute force solution | O(2^n) time complexity
@@ -63,28 +43,118 @@ public class Challenges {
     }
 
 
-    public void callSetZeros() {
-        int[][] matrix = new int[3][];
-        int[] ar1, ar2, ar3;
+    // 448. Find All Numbers Disappeared in an Array
+    // Given an array nums of n integers where nums[i] is in the range [1, n],
+    // return an array of all the integers in the range [1, n] that do not appear in nums
 
-        ar1 = new int[]{1, 1, 1};
-        ar2 = new int[]{1, 0, 1};
-        ar3 = new int[]{1, 1, 1};
-        matrix[0] = ar1;
-        matrix[1] = ar2;
-        matrix[2] = ar3;
-        setZeros(matrix);
+    //Example 1:
+    //
+    //Input: nums = [4,3,2,7,8,2,3,1]
+    //Output: [5,6]
 
-        matrix = new int[3][];
-        ar1 = new int[]{0, 1, 2, 0};
-        ar2 = new int[]{3, 4, 5, 2};
-        ar3 = new int[]{1, 3, 1, 5};
-        matrix[0] = ar1;
-        matrix[1] = ar2;
-        matrix[2] = ar3;
-        setZeros(matrix);
+    //Example 2:
+    //
+    //Input: nums = [1,1]
+    //Output: [2]
 
+    // Follow up: Could you do it without extra space and in O(n) runtime? You may assume the returned list does not count as extra space.
+
+    public List<Integer> findDisappearedNumbers(int[] nums) {
+        int length = nums.length;
+        HashMap<Integer, Integer> hashMap = new HashMap<>(); // adds space complexity
+        List<Integer> result = new ArrayList<>();
+
+        for (int i = 0; i < length; i++) {
+            hashMap.put(nums[i], i);
+        }
+
+        for (int i = 1; i <= length; i++) {
+            if (hashMap.get(i) == null) {
+                result.add(i);
+            }
+        }
+
+//        System.out.println(result);
+        return result;
     }
+
+
+        public List<Integer> findDisappearedNumbers_improvedMemory2(int[] nums) { // not my solution
+            List<Integer> result = new ArrayList<>();
+            int index = 0;
+
+            while (index < nums.length) {
+                int correct = nums[index] - 1;
+
+                if (nums[index] != nums[correct]) {
+                    int temp = nums[index];
+                    nums[index] = nums[correct];
+                    nums[correct] = temp;
+                }
+                else {
+                    index++;
+                }
+            }
+            System.out.println(Arrays.toString(nums));
+
+            for (int i = 0; i < nums.length; i++) {
+                if (nums[i] != i + 1) { // check if vals are in sequental order
+                    result.add(i + 1);
+                }
+            }
+
+            return result;
+        }
+
+
+        public List<Integer> findDisappearedNumbers_improvedMemory(int[] nums) { // this works but leetcode is a cunt
+        List<Integer> result = new ArrayList<>();
+
+        for (int i = 1; i <= nums.length; i++) {        // 1 .. num.length
+            for (int j = 0; j < nums.length; j++) {     // 0 .. num.length-1
+                if (i == nums[j]) {
+                    break;
+                }
+                else if (j == nums.length-1 && i != nums[j]) {
+                    result.add(i);
+                }
+            }
+        }
+
+//        System.out.println(result);
+        return result;
+    }
+
+
+
+    // 303. Range Sum Query - Immutable
+    //Calculate the sum of the elements of nums between indices left and right inclusive where left <= right.
+    // Implement the NumArray class:
+
+    // NumArray(int[] nums) Initializes the object with the integer array nums.
+    //int sumRange(int left, int right) Returns the sum of the elements of nums between indices left and right inclusive
+    // (i.e. nums[left] + nums[left + 1] + ... + nums[right]).
+
+
+    // Input
+    // ["NumArray", "sumRange", "sumRange", "sumRange"]
+    // [[[-2, 0, 3, -5, 2, -1]], [0, 2], [2, 5], [0, 5]]
+    // Output
+    // [null, 1, -1, -3]
+
+    // Explanation
+    // NumArray numArray = new NumArray([-2, 0, 3, -5, 2, -1]);
+    // numArray.sumRange(0, 2); // return (-2) + 0 + 3 = 1
+    // numArray.sumRange(2, 5); // return 3 + (-5) + 2 + (-1) = -1
+    // numArray.sumRange(0, 5); // return (-2) + 0 + 3 + (-5) + 2 + (-1) = -3
+
+    public void callNumArray() {
+        NumArray numArray = new NumArray(new int[]{-2, 0, 3, -5, 2, -1});
+        System.out.println("(0, 2) => " + numArray.sumRange(0, 2)); // 1
+        System.out.println("(2, 5) => " + numArray.sumRange(2, 5)); // -1
+        System.out.println("(0, 5) => " + numArray.sumRange(0, 5)); // -3
+    }
+
 
     // Given a matrix of m x n elements (m rows, n columns), return all elements of the matrix in spiral order.
     public void setZeros(int[][] matrix) {
@@ -115,9 +185,33 @@ public class Challenges {
         }
     }
 
-    public void callLongestPalindrome() {
-        String str = "babad";
-        System.out.println(str + " longest palindrome --> " + longestPalindrome(str));
+
+    // 141. Linked List Cycle
+    // Given head, the head of a linked list, determine if the linked list has a cycle in it.
+    //
+    // There is a cycle in a linked list if there is some node in the list that can be reached again by continuously following the next pointer.
+    // Internally, pos is used to denote the index of the node that tail's next pointer is connected to.
+    // Note that pos is not passed as a parameter.
+    //
+    // Return true if there is a cycle in the linked list. Otherwise, return false.
+    public boolean hasCycle(ListNode head) {
+        if (head == null) {
+            return false;
+        }
+        HashMap<ListNode, Integer> hashMap = new HashMap<>();
+
+        while (head.next != null) {
+            if (hashMap.get(head) == null) {
+                hashMap.put(head, head.val);
+            }
+            else if (hashMap.get(head) != null){
+                return true;
+            }
+
+            head = head.next;
+        }
+
+        return false;
     }
 
     // Given a string s, return the longest palindromic substring in s.
@@ -136,16 +230,10 @@ public class Challenges {
     }
 
 
-    public void callIsPalendrome() {
-        System.out.println("A man, a plan, a canal: Panama --> " + isPalindrome("A man, a plan, a canal: Panama"));
-        System.out.println("race a car --> " + isPalindrome("race a car"));
-        System.out.println("racecar --> " + isPalindrome("racecar"));
-        System.out.println("0P --> " + isPalindrome("0P"));
-    }
 
     // Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.
     public boolean isPalindrome(String s) {
-        s = s.replaceAll("[^A-Za-z0-9]", "");
+        s = s.replaceAll("[^A-Za-z0-9]", ""); // regex will remove everything that's NOT alphanumeric
         StringBuilder revStr = new StringBuilder();
         for (int i = s.length() - 1; i >= 0; i--) {
             revStr.append(s.charAt(i));
@@ -155,10 +243,6 @@ public class Challenges {
     }
 
 
-    public void callGroupAnagrams() {
-        String[] arr = new String[]{"eat","tea","tan","ate","nat","bat"}; // [[eat, tea, ate], [bat], [tan, nat]]
-        System.out.println(groupAnagrams(arr));
-    }
 
     // Given an array of strings strs, group the anagrams together. You can return the answer in any order.
     // An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase,
@@ -190,14 +274,49 @@ public class Challenges {
             resultList.add(new ArrayList<>(Arrays.asList(entry.getValue().split("/"))));
         }
 
+        System.out.println(resultList);
         return resultList;
     }
 
 
-    public void callIsAnagram() {
-        System.out.println("anagram --> nagaram : " + isAnagram("anagram", "nagaram"));
-        System.out.println("rat --> car : " + isAnagram("rat", "car"));
+    // 338. Counting Bits
+    // Given an integer n, return an array ans of length n + 1 such that for each i (0 <= i <= n),
+    // ans[i] is the number of 1's in the binary representation of i.
+
+    // Example 1:
+    //
+    // Input: n = 2
+    // Output: [0,1,1]
+    // Explanation:
+    // 0 --> 0
+    // 1 --> 1
+    // 2 --> 10
+
+    // Example 2:
+    //
+    // Input: n = 5
+    // Output: [0,1,1,2,1,2]
+    // Explanation:
+    // 0 --> 0
+    // 1 --> 1
+    // 2 --> 10
+    // 3 --> 11
+    // 4 --> 100
+    // 5 --> 101
+
+    public int[] countBits(int n) {
+        int[] result = new int[n + 1];
+        for (int i = 0; i <= n; i++) {
+//            String str = Integer.toBinaryString(i).replace("0", "");
+//            str = str.replace("0", "");
+//            result[i] = str.length();
+            result[i] = Integer.bitCount(i); // this returns number of "one" bits in an int
+            // much faster
+        }
+
+        return result;
     }
+
 
     // Given two strings s and t , write a function to determine if t is an anagram of s.
     public boolean isAnagram(String s, String t) {
@@ -231,7 +350,7 @@ public class Challenges {
         }
 
         for (Map.Entry<Character, Integer> entry : sMap.entrySet()) {
-            System.out.println(entry);
+//            System.out.println(entry);
             if (tMap.get(entry.getKey()) == null) {
                 return false;
             }
@@ -243,14 +362,6 @@ public class Challenges {
         return true;
     }
 
-    public void callImprovedMaxArea() {
-        int[] arr;
-        arr = new int[]{1, 8, 6, 2, 5, 4, 8, 3, 7};
-        System.out.println("result (49):" + improvedMaxArea(arr));
-
-        arr = new int[]{4, 3, 2, 1, 4};
-        System.out.println("result (16):" + improvedMaxArea(arr));
-    }
 
     public int improvedMaxArea(int[] height) { // not my solution
         int left = 0;
@@ -268,21 +379,6 @@ public class Challenges {
         return maxArea;
     }
 
-    public void callMaxArea() {
-        int[] arr;
-        arr = new int[]{1, 8, 6, 2, 5, 4, 8, 3, 7};
-        System.out.println("result (49):" + maxArea(arr));
-
-        arr = new int[]{4, 3, 2, 1, 4};
-        System.out.println("result (16):" + maxArea(arr));
-
-
-        arr = new int[]{1, 1};
-        System.out.println("result (1):" + maxArea(arr));
-
-        arr = new int[]{1, 2, 1};
-        System.out.println("result (2):" + maxArea(arr));
-    }
 
     public int maxArea(int[] height) {
         int widthVal;
@@ -391,45 +487,35 @@ public class Challenges {
         return false;
     }
 
-    public void callMaxProfit() {
-        int n;
-        n = maxProfit(new int[]{7, 1, 5, 3, 6, 4});
-        System.out.println("profit (5):" + n);
 
-        n = maxProfit(new int[]{7, 6, 4, 3, 1});
-        System.out.println("profit (0):" + n);
 
-        n = maxProfit(new int[]{2, 4, 1});
-        System.out.println("profit (2):" + n);
-
-        n = maxProfit(new int[]{7, 6, 4, 3, 1});
-        System.out.println("profit (0):" + n);
-
-        n = maxProfit(new int[]{2, 1, 2, 0, 1});
-        System.out.println("profit (1):" + n);
-
-        n = maxProfit(new int[]{2, 1, 2, 1, 0, 1, 2});
-        System.out.println("profit (2):" + n);
-
-        n = maxProfit(new int[]{1, 2});
-        System.out.println("profit (1):" + n);
-
-        n = maxProfit(new int[]{2, 1, 4});
-        System.out.println("profit (3):" + n);
-
-        n = maxProfit(new int[]{2,1,2,1,0,0,1});
-        System.out.println("profit (1):" + n);
-
-        n = maxProfit(new int[]{3, 3, 5, 0, 0, 3, 1, 4});
-        System.out.println("profit (4):" + n);
-
-    }
 
     // Say you have an array for which the ith element is the price of a given stock on day i.
     // If you were only permitted to complete at most one transaction (i.e., buy one and sell one share of the stock)
     // design an algorithm to find the maximum profit.
+
+    public int betterMaxProfit(int[] prices) { // not my solution
+        System.out.println("prices: " + Arrays.toString(prices));
+        int lowest = Integer.MAX_VALUE;
+        int currentProfit;
+        int maxProfit = 0;
+
+        for (int i = 0; i < prices.length; i++) {
+            if (lowest > prices[i]) {
+                lowest = prices[i];
+            }
+
+            currentProfit = prices[i] - lowest;
+
+            if (currentProfit > maxProfit) {
+                maxProfit = currentProfit;
+            }
+        }
+
+        return maxProfit;
+    }
+
     public int maxProfit(int[] prices) {
-        System.out.println(Arrays.toString(prices));
         int buyVal = Integer.MAX_VALUE;
         int sellVal = 0;
 
@@ -451,7 +537,6 @@ public class Challenges {
                 sellVal = prices[i];
             }
         }
-
         System.out.println("buyVal: " + buyVal);
         System.out.println("sellVal: " + sellVal);
 
@@ -462,60 +547,56 @@ public class Challenges {
         return sellVal - buyVal;
     }
 
-    public void callImprovedMaxProfit() {
-        int n;
-        n = improvedMaxProfit(new int[]{7, 1, 5, 3, 6, 4});
-        System.out.println("profit (5):" + n);
 
-        n = improvedMaxProfit(new int[]{7, 6, 4, 3, 1});
-        System.out.println("profit (0):" + n);
+    // 1. Two Sum
+    // Given an array of integers nums and integer target,
+    // return the indices of the two numbers such that they add up to target.
+    // You may assume that each input would have exactly one solution, and you may not use the same element twice.
+    // You can return the answer in any order.
 
-        n = improvedMaxProfit(new int[]{2, 4, 1});
-        System.out.println("profit (2):" + n);
+    public int[] twoSumWithBetterRunTime(int[] nums, int target) {
+        int[] result = new int[2];
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
 
-        n = improvedMaxProfit(new int[]{7, 6, 4, 3, 1});
-        System.out.println("profit (0):" + n);
-
-        n = improvedMaxProfit(new int[]{2, 1, 2, 0, 1});
-        System.out.println("profit (1):" + n);
-
-        n = improvedMaxProfit(new int[]{2, 1, 2, 1, 0, 1, 2});
-        System.out.println("profit (2):" + n);
-
-        n = improvedMaxProfit(new int[]{1, 2});
-        System.out.println("profit (1):" + n);
-
-        n = improvedMaxProfit(new int[]{2, 1, 4});
-        System.out.println("profit (3):" + n);
-
-        n = improvedMaxProfit(new int[]{2,1,2,1,0,0,1});
-        System.out.println("profit (1):" + n);
-
-        n = improvedMaxProfit(new int[]{3, 3, 5, 0, 0, 3, 1, 4});
-        System.out.println("profit (4):" + n);
-    }
-
-    public int improvedMaxProfit(int[] prices) { // not my solution
-        System.out.println(Arrays.toString(prices));
-        int answer = 0;
-        if (prices.length == 0) {
-            return answer;
+        for (int i = 0; i < nums.length; i++) {
+            hashMap.put(target - nums[i], i);
         }
-        int bought = prices[0];
 
-        for (int i = 1; i < prices.length; i++) {
-            if (prices[i] > bought) {
-                if (answer < (prices[i] - bought)) {
-                    answer = prices[i] - bought;
+        for (int i = 0; i < nums.length; i++) {
+            if (hashMap.get(nums[i]) != null) {
+                int hashNum = hashMap.get(nums[i]);
+
+                if (nums[i] + nums[hashNum] == target && i != hashNum) {
+                    result[0] = i;
+                    result[1] = hashNum;
+                    return result;
                 }
             }
-            else {
-                bought = prices[i];
+        }
+
+        return result;
+    }
+
+
+    public int[] twoSum(int[] nums, int target) {
+        int[] resultArr = new int[2];
+
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = i+1; j < nums.length; j++) { // O(n^2)
+
+                if (nums[i] + nums[j] == target) {
+                    resultArr[0] = i;
+                    resultArr[1] = j;
+                    return resultArr;
+                }
             }
         }
-        return answer;
 
+        // somehow this solution used less memory than all other submissions on leetcode
+        // but leetcode is retarded so prob doesn't matterr
+        return null;
     }
+
 
     public void callMinPathSum() {
         int[][] grid = new int[3][];
@@ -552,23 +633,6 @@ public class Challenges {
         System.out.println(Arrays.deepToString(grid));
         return grid[grid.length-1][grid[0].length-1];
 
-    }
-
-    public void callConvert() {
-        System.out.println("PAYPALISHIRING --> " + convert("PAYPALISHIRING", 3)); // PAHNAPLSIIGYIR
-    }
-
-
-    //The string "PAYPALISHIRING" is written in a zigzag pattern on a given number of rows
-    //      like this: (you may want to display this pattern in a fixed font for better legibility)
-    // P   A   H   N
-    // A P L S I I G
-    // Y   I   R
-    public String convert(String s, int numRows) {
-
-        String[][] stringMatrix = new String[s.length() / 2][numRows-1];
-
-        return null;
     }
 
     public void callRotate() {
@@ -744,11 +808,6 @@ public class Challenges {
         return answer;
     }
 
-    public void callMissingNumber() {
-        System.out.println("[3,0,1] : " + missingNumber(new int[]{3,0,1})); // 2
-        System.out.println("[9,6,4,2,3,5,7,0,1] : " + missingNumber(new int[]{9,6,4,2,3,5,7,0,1})); // 8
-
-    }
 
     // 268. Missing Number
     // Given an array nums containing n distinct numbers in the range [0, n],
@@ -1017,7 +1076,7 @@ public class Challenges {
     }
 
 
-    public void callLetterCombinations() { // TODO: finish
+    public void callLetterCombinations() { // todo finish
         List<String> str;
         str = letterCombinations("23"); //Output: ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"]
         System.out.println("answer: " + str);

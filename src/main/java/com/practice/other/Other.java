@@ -2,11 +2,19 @@ package com.practice.other;
 
 import java.util.*;
 
-public class Other {
+public class Other { // challenges that were presented in interviews
+
+
+    // Get the String representation of array
+//    Arrays.toString(arr);
+
+
+
+
 
     public void callLengthOfLongestSubstring() {
         int n;
-        n = lengthOfLongestSubstring("abcabcbb"); // 'abc' is longest substring return 3
+        n = lengthOfLongestSubstring("abcabcbb"); // 'abc' is the longest substring return 3
         System.out.println("answer: " +n + " -- 3");
         n = lengthOfLongestSubstring("");
         System.out.println("answer: " +n + " -- 0");
@@ -56,41 +64,6 @@ public class Other {
         return bigLength;
     }
 
-    public void callTwoSum() {
-        int[] nums = {2,7,11,15};
-        int target = 9;
-        System.out.println(Arrays.toString(twoSum(nums, target)));
-        int[] nums2 = {3, 2, 4};
-        target = 6;
-        System.out.println(Arrays.toString(twoSum(nums2, target)));
-        int[] nums3 = {3, 3};
-        target = 6;
-        System.out.println(Arrays.toString(twoSum(nums3, target)));
-    }
-
-    // Given an array of integers nums and integer target,
-    // return the indices of the two numbers such that they add up to target.
-    // You may assume that each input would have exactly one solution, and you may not use the same element twice.
-    // You can return the answer in any order.
-    public int[] twoSum(int[] nums, int target) {
-//        System.out.println(nums.length);
-        int[] resultArr = new int[2];
-
-        for (int i = 0; i < nums.length; i++) {
-            for (int j = i+1; j < nums.length; j++) {
-//                System.out.println(nums[i] + ", " + nums[j]);
-
-                if (nums[i] + nums[j] == target) {
-                    resultArr[0] = i;
-                    resultArr[1] = j;
-                    return resultArr;
-                }
-
-            }
-        }
-
-        return null;
-    }
 
     public static List<Integer> cellCompete(int[] states, int days){
         System.out.println("cellComplete()");
