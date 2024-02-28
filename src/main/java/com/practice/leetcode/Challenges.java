@@ -79,35 +79,34 @@ public class Challenges {
     }
 
 
-        public List<Integer> findDisappearedNumbers_improvedMemory2(int[] nums) { // not my solution
-            List<Integer> result = new ArrayList<>();
-            int index = 0;
+    public List<Integer> findDisappearedNumbers_improvedMemory2(int[] nums) { // not my solution
+        List<Integer> result = new ArrayList<>();
+        int index = 0;
 
-            while (index < nums.length) {
-                int correct = nums[index] - 1;
+        while (index < nums.length) {
+            int correct = nums[index] - 1;
 
-                if (nums[index] != nums[correct]) {
-                    int temp = nums[index];
-                    nums[index] = nums[correct];
-                    nums[correct] = temp;
-                }
-                else {
-                    index++;
-                }
+            if (nums[index] != nums[correct]) {
+                int temp = nums[index];
+                nums[index] = nums[correct];
+                nums[correct] = temp;
             }
-            System.out.println(Arrays.toString(nums));
-
-            for (int i = 0; i < nums.length; i++) {
-                if (nums[i] != i + 1) { // check if vals are in sequental order
-                    result.add(i + 1);
-                }
+            else {
+                index++;
             }
+        }
+        System.out.println(Arrays.toString(nums));
 
-            return result;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != i + 1) { // check if vals are in sequental order
+                result.add(i + 1);
+            }
         }
 
+        return result;
+    }
 
-        public List<Integer> findDisappearedNumbers_improvedMemory(int[] nums) { // this works but leetcode is a cunt
+    public List<Integer> findDisappearedNumbers_improvedMemory(int[] nums) { // this works but leetcode is a cunt
         List<Integer> result = new ArrayList<>();
 
         for (int i = 1; i <= nums.length; i++) {        // 1 .. num.length
@@ -126,35 +125,173 @@ public class Challenges {
     }
 
 
+    // 704. Binary Search
+    // Given an array of integers nums which is sorted in ascending order, and an integer target,
+    // write a function to search target in nums. If target exists, then return its index. Otherwise, return -1.
+    // You must write an algorithm with O(log n) runtime complexity.
 
-    // 303. Range Sum Query - Immutable
-    //Calculate the sum of the elements of nums between indices left and right inclusive where left <= right.
-    // Implement the NumArray class:
+    //Example 1:
+    //Input: nums = [-1,0,3,5,9,12], target = 9
+    //Output: 4
+    //Explanation: 9 exists in nums and its index is 4
 
-    // NumArray(int[] nums) Initializes the object with the integer array nums.
-    //int sumRange(int left, int right) Returns the sum of the elements of nums between indices left and right inclusive
-    // (i.e. nums[left] + nums[left + 1] + ... + nums[right]).
+    //Example 2:
+    //Input: nums = [-1,0,3,5,9,12], target = 2
+    //Output: -1
+    //Explanation: 2 does not exist in nums so return -1
 
+    public int search(int[] nums, int target) {
+        // // O(n) runtime, it wants O(log n)
+//        for (int i = 0; i < nums.length; i++) {
+//            if (nums[i] == target) {
+//                return i;
+//            }
+//        }
+        int low = 0;
+        int high = nums.length - 1;
 
-    // Input
-    // ["NumArray", "sumRange", "sumRange", "sumRange"]
-    // [[[-2, 0, 3, -5, 2, -1]], [0, 2], [2, 5], [0, 5]]
-    // Output
-    // [null, 1, -1, -3]
-
-    // Explanation
-    // NumArray numArray = new NumArray([-2, 0, 3, -5, 2, -1]);
-    // numArray.sumRange(0, 2); // return (-2) + 0 + 3 = 1
-    // numArray.sumRange(2, 5); // return 3 + (-5) + 2 + (-1) = -1
-    // numArray.sumRange(0, 5); // return (-2) + 0 + 3 + (-5) + 2 + (-1) = -3
-
-    public void callNumArray() {
-        NumArray numArray = new NumArray(new int[]{-2, 0, 3, -5, 2, -1});
-        System.out.println("(0, 2) => " + numArray.sumRange(0, 2)); // 1
-        System.out.println("(2, 5) => " + numArray.sumRange(2, 5)); // -1
-        System.out.println("(0, 5) => " + numArray.sumRange(0, 5)); // -3
+        return binarySearch(nums, low, high, target);
     }
 
+    public int binarySearch(int[] nums, int low, int high, int target) { // not my solution
+        if (low > high) {
+            return -1;
+        }
+
+        int mid = (low + high) / 2;
+        if (nums[mid] == target) {
+            return mid;
+        }
+        else if (target > nums[mid]) {
+            return binarySearch(nums, mid+1, high, target);
+        }
+        else {
+            return binarySearch(nums, low, mid-1, target);
+        }
+    }
+
+    // 744. Find Smallest Letter Greater Than Target
+    // You are given an array of characters letters that is sorted in non-decreasing order, and a character target.
+    // There are at least two different characters in letters.
+    // Return the smallest character in letters that is lexicographically greater than target. If such a character does not exist,
+    // return the first character in letters.
+
+    // Example 1:
+    // Input: letters = ["c","f","j"], target = "a"
+    // Output: "c"
+    // Explanation: The smallest character that is lexicographically greater than 'a' in letters is 'c'.
+
+    // Example 2:
+    // Input: letters = ["c","f","j"], target = "c"
+    // Output: "f"
+    // Explanation: The smallest character that is lexicographically greater than 'c' in letters is 'f'.
+
+    // Example 3:
+    // Input: letters = ["x","x","y","y"], target = "z"
+    // Output: "x"
+    // Explanation: There are no characters in letters that is lexicographically greater than 'z' so we return letters[0].
+    public char nextGreatestLetter(char[] letters, char target) {
+        char result = 'z';
+        boolean found = false;
+
+        for (char c: letters) {
+            if (c > target && c <= result) {
+                result = c;
+                found = true;
+            }
+        }
+
+        if (!found) {
+            return letters[0];
+        }
+        return result;
+    }
+
+    public char nextGreatestLetter_binarySearch(char[] letters, char target) { // not my solution
+        int start = 0;
+        int end = letters.length - 1;
+
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
+            if (letters[mid] > target) {
+                end = mid - 1;
+            }
+            else {
+                start = mid + 1;
+            }
+        }
+
+        return letters[start % letters.length];
+    }
+
+    // 637. Average of Levels in Binary Tree
+    // Given the root of a binary tree, return the average value of the nodes on each level in the form of an array.
+    // Answers within 10-5 of the actual answer will be accepted.
+
+    // Example 1:
+    // Input: root = [3,9,20,null,null,15,7]
+    // Output: [3.00000,14.50000,11.00000]
+    // Explanation: The average value of nodes on level 0 is 3, on level 1 is 14.5, and on level 2 is 11.
+    // Hence return [3, 14.5, 11].
+
+    // Example 2:
+    // Input: root = [3,9,20,15,7]
+    // Output: [3.00000,14.50000,11.00000]
+    public List<Double> averageOfLevels_BFS(TreeNode root) {
+        // level order traversal
+        // uses a q to keep track of nodes to visit. after visiting each node it's children are put in a queue
+        // to get a new node to traverse we take out elements from the q
+
+        List<Double> resultList = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        resultList.add((double) root.val);
+
+        int level = 0;
+        int count = 0;
+        double sum = 0;
+
+        queue.add(root);
+        queue.add(null); // add null at the end of each level, so when all nodes in that level are reached, reset count/sum
+
+        while (!queue.isEmpty()) {
+            TreeNode temp = queue.poll();
+            if (temp == null) {
+                level++;
+
+                Double result = sum / (double) count;
+                if (!result.isNaN()) {
+                    resultList.add(result);
+                }
+                count = 0;
+                sum = 0;
+
+                queue.add(null);
+                if (queue.peek() == null) {
+                    break; // two consecutive nulls means all nodes have been visited
+                }
+                else {
+                    continue;
+                }
+            }
+
+            if (temp.left != null) {
+                count++;
+                sum += temp.left.val;
+                queue.add(temp.left);
+            }
+
+            if (temp.right != null) {
+                count++;
+                sum += temp.right.val;
+                queue.add(temp.right);
+            }
+        }
+
+        return resultList;
+    }
+
+
+    // 2,147,483,647.0
 
     // Given a matrix of m x n elements (m rows, n columns), return all elements of the matrix in spiral order.
     public void setZeros(int[][] matrix) {
@@ -214,12 +351,254 @@ public class Challenges {
         return false;
     }
 
+    // 876. Middle of the Linked List
+    // Given the head of a singly linked list, return the middle node of the linked list.
+    //
+    // If there are two middle nodes, return the second middle node.
+    // Example 1:
+    // Input: head = [1,2,3,4,5]
+    // Output: [3,4,5]
+    // Explanation: The middle node of the list is node 3.
+    // Example 2:
+    // Input: head = [1,2,3,4,5,6]
+    // Output: [4,5,6]
+    // Explanation: Since the list has two middle nodes with values 3 and 4, we return the second one.
+    public ListNode middleNode(ListNode head) {
+        if (head.next == null) {
+            return head;
+        }
+        List<ListNode> nodeList = new ArrayList<>();
+
+        do {
+            nodeList.add(head);
+            head = head.next;
+        } while (head != null);
+
+        // equivalent to nodeList.size() / 2 but result is rounded up, returning the middle value
+        return nodeList.get((nodeList.size() >> 1));
+    }
+
+    // 206. Reverse Linked List
+    // Given the head of a singly linked list, reverse the list, and return the reversed list.
+    // Example 1:
+    // Input: head = [1,2,3,4,5]
+    // Output: [5,4,3,2,1]
+
+    // Example 2:
+    // Input: head = [1,2]
+    // Output: [2,1]
+    public ListNode reverseList(ListNode head) {
+        // put them in a list
+        // iterate on the list backwards
+
+        List<ListNode> nodeLists = new ArrayList<>();
+
+        while (head != null) {
+            nodeLists.add(head);
+            if (head.next == null) {
+                break;
+            }
+            head = head.next;
+        }
+        for (ListNode node : nodeLists) {
+            node.next = null;
+        }
+        Collections.reverse(nodeLists); // O(n)
+
+        ListNode ptr = head;
+
+        for (int i = 0; i < nodeLists.size()-1; i++) {
+            ptr = nodeLists.get(i);
+            ptr.next = nodeLists.get(i + 1);
+            ptr = ptr.next;
+        }
+
+        return head;
+    }
+
+
+    // 234. Palindrome Linked List
+    // Given the head of a singly linked list, return true if it is a palindrome or false otherwise
+
+    // A palindrome is a sequence that reads the same forward and backward.
+
+    // Example 1:
+    //Input: head = [1,2,2,1]
+    //Output: true
+
+    // Example 2:
+    //Input: head = [1,2]
+    //Output: false
+    public boolean isPalendrome(ListNode head) { // O(n) runtime, O(n) space
+        if (head.next == null) {
+            return true;
+        }
+
+        List<ListNode> nodeList = new ArrayList<>();
+        while (head != null) {
+            nodeList.add(head);
+            head = head.next;
+        }
+
+        List<ListNode> newArr = new ArrayList<>(nodeList);
+        Collections.reverse(nodeList); // reverse list;
+
+        for (int i = 0; i < nodeList.size(); i++) {
+            if (nodeList.get(i).val != newArr.get(i).val) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public boolean isPalendrome_betterRuntime(ListNode head) { // not my solution, faster but uses more memory
+        if (head.next == null) {
+            return true;
+        }
+
+        ListNode node = new ListNode(head.val);
+        ListNode i = head.next;
+
+        while (i.next != null) {
+            // this builds out new LL by adding node to head
+            // resulting in reversed ll
+            node = new ListNode(i.val, node); // build out new linked list by adding new i at beginning of ll
+            i = i.next;
+        }
+        // i now pointing to last node
+
+        node = new ListNode(i.val, node);  // ???
+        ListNode j = node;
+        i = head;
+
+        while (i != null) {
+            if(i.val != j.val) {
+                return false;
+            }
+
+            i =  i.next;
+            j =  j.next;
+        }
+
+        return true;
+    }
+
+
+    // 203. Remove Linked List Elements
+    // Given the head of a linked list and an integer val,
+    // remove all the nodes of the linked list that has Node.val == val, and return the new head.
+    //
+    //Example 1:
+    //Input: head = [1,2,6,3,4,5,6], val = 6
+    //Output: [1,2,3,4,5]
+
+    //Example 2:
+    //Input: head = [], val = 1
+    //Output: []
+
+    //Example 3:
+    //Input: head = [7,7,7,7], val = 7
+    //Output: []
+    public ListNode removeElements(ListNode head, int val) { // shit solution, too messy, too many hard coded edge cases
+        if (head == null) {
+            return null;
+        }
+        else if (head.next == null && head.val != val) {
+            return head;
+        }
+
+        List<Integer> listNodes = new ArrayList<>();
+        // ^ better to use int instead of ListNode so any unwanted node references are not passed into this array
+
+        ListNode ptr = head;
+        while(ptr != null) {
+             if (ptr.val != val) {
+                 listNodes.add(ptr.val);
+             }
+             ptr = ptr.next;
+        }
+
+        if (listNodes.isEmpty()) {
+            return null;
+        }
+        else if (listNodes.size() < 2) {
+            return new ListNode(listNodes.get(0));
+        }
+
+        ListNode newHead = new ListNode();
+        ListNode node = newHead;
+        for (int i = 0; i < listNodes.size()-1; i++) {
+            node.val = listNodes.get(i);
+            node.next = new ListNode(listNodes.get(i + 1));
+            node = node.next;
+        }
+
+        return newHead;
+    }
+
+    public ListNode removeElements_improved(ListNode head, int val) { // not my solution
+        ListNode dummy = new ListNode();
+        dummy.next = head; // head node placeholder
+        ListNode prev = dummy;
+        ListNode curr = head;
+
+        while (curr != null) {
+            if (curr.val == val) {
+                prev.next = curr.next;
+            }
+            else {
+                prev = curr;
+            }
+            curr = curr.next;
+        }
+
+        return dummy.next;
+    }
+
+    // 21. Merge Two Sorted Lists
+    // You are given the heads of two sorted linked lists list1 and list2.
+    // Merge the two lists into one sorted list. The list should be made by splicing together the nodes of the first two lists.
+    // Return the head of the merged linked list.
+
+    // Example 1:
+    // Input: list1 = [1,2,4], list2 = [1,3,4]
+    // Output: [1,1,2,3,4,4]
+
+    // Example 2:
+    // Input: list1 = [], list2 = []
+    // Output: []
+
+    // Example 3:
+    // Input: list1 = [], list2 = [0]
+    // Output: [0]
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) { // not my solution
+        if (l1 == null) {
+            return l2;
+        }
+        else if (l2 == null) {
+            return l1;
+        }
+        ListNode nodeHead, nodeTail;
+
+        if (l1.val < l2.val) {
+            nodeHead = l1;
+            nodeTail = this.mergeTwoLists(l1.next, l2);
+        }
+        else {
+            nodeHead = l2;
+            nodeTail = this.mergeTwoLists(l1, l2.next);
+        }
+
+        nodeHead.next = nodeTail;
+        return nodeHead;
+    }
+
     // Given a string s, return the longest palindromic substring in s.
     // A string is palindromic if it reads the same forward and backward.
     //    Input: s = "babad"
     //    Output: "bab"
     //    Explanation: "aba" is also a valid answer.
-
     public String longestPalindrome(String s) {
         return s;
     }
@@ -405,14 +784,6 @@ public class Challenges {
         return maxArea;
     }
 
-    public void callMaxSubArray() {
-        int n;
-        n = maxSubArray(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4});
-        System.out.println("Output (6):" + n);
-
-        n = maxSubArray(new int[]{1});
-        System.out.println("Output (1):" + n);
-    }
 
     // Given an integer array nums, find the contiguous subarray (containing at least one number)
     // which has the largest sum and return its sum.
@@ -428,11 +799,6 @@ public class Challenges {
         return maxSum;
     }
 
-    public void callProductExceptSelf() {
-        int[] arr;
-        arr = productExceptSelf(new int[]{1, 2, 3, 4});
-        System.out.println(Arrays.toString(arr));
-    }
 
     // Given an array nums of n integers where n > 1,
     // return an array output such that output[i] is equal to the product of all the elements of nums except nums[i].
@@ -467,11 +833,6 @@ public class Challenges {
     }
 
 
-    public void callContainsDuplicate() {
-        boolean bool;
-        bool = containsDuplicate(new int[]{1, 2, 3, 1});
-        System.out.println("output: " + bool);
-    }
 
     // Given an array of integers, find if the array contains any duplicates.
     public boolean containsDuplicate(int[] nums) {
@@ -486,7 +847,6 @@ public class Challenges {
         }
         return false;
     }
-
 
 
 
@@ -598,16 +958,6 @@ public class Challenges {
     }
 
 
-    public void callMinPathSum() {
-        int[][] grid = new int[3][];
-        int[] ar1 = new int[]{1,3,1};
-        int[] ar2 = new int[]{1,5,1};
-        int[] ar3 = new int[]{4,2,1};
-        grid[0] = ar1;
-        grid[1] = ar2;
-        grid[2] = ar3;
-        System.out.println(minPathSum(grid));
-    }
 
     // Given an m x n grid filled with non-negative numbers,
     // find a path from top left to bottom right which minimizes the sum of all numbers along its path.
@@ -635,33 +985,6 @@ public class Challenges {
 
     }
 
-    public void callRotate() {
-        int[][] matrix = new int[3][];
-        int[] ar1, ar2, ar3;
-
-        ar1 = new int[]{1, 2, 3};
-        ar2 = new int[]{4, 5, 6};
-        ar3 = new int[]{7, 8, 9};
-        matrix[0] = ar1;
-        matrix[1] = ar2;
-        matrix[2] = ar3;
-
-        printMatrix(matrix);
-        System.out.println("\n");
-        printMatrix(rotate(matrix));
-
-        int[][] bigMatrix = new int[4][];
-        bigMatrix[0] = new int[]{5, 1, 9, 11};
-        bigMatrix[1] = new int[]{2, 4, 8, 10};
-        bigMatrix[2] = new int[]{13, 3, 6, 7};
-        bigMatrix[3] = new int[]{15, 14, 12, 16};
-
-        System.out.println("\n");
-
-        printMatrix(bigMatrix);
-        System.out.println("\n");
-        printMatrix(rotate(bigMatrix));
-    }
 
     // You are given an n x n 2D matrix representing an image, rotate the image by 90 degrees (clockwise).
     // You have to rotate the image in-place, which means you have to modify the input 2D matrix directly.
@@ -703,15 +1026,6 @@ public class Challenges {
         return matrix;
     }
 
-    public void callIntToRoman() {
-//        System.out.println("Input: 3000 --> " + intToRoman(3000)); // MMM
-//        System.out.println("Input: 1994 --> " + intToRoman(1994)); // MCMXCIV
-//        System.out.println("Input: 9 --> " + intToRoman(9)); // IX
-//        System.out.println("Input: 8 --> " + intToRoman(8)); // IX
-//        System.out.println("Input: 7 --> " + intToRoman(7)); //
-//        System.out.println("Input: 58 --> " + intToRoman(58)); // LVIII
-        System.out.println("Input: 99 --> " + intToRoman(99)); // MDCCCXCIV
-    }
 
     // Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M.
     //    Symbol       Value
@@ -770,12 +1084,6 @@ public class Challenges {
         return str;
     }
 
-    public void callSingleNumber() {
-        System.out.println("[2,2,1] : " + singleNumber(new int[]{2, 2, 1})); // 1
-        System.out.println("[4,1,2,1,2] : " + singleNumber(new int[]{4,1,2,1,2})); // 4
-        System.out.println("[1,1,2,3,3,4] : " + singleNumber(new int[]{1,1,3,3,4})); //
-        // somehow XOR bitwise operations on each element magically returns the fucking solution
-    }
 
     // 136. Single Number
 
@@ -864,15 +1172,6 @@ public class Challenges {
         return resultArr;
     }
 
-    public void callNumIdenticalPairs() {
-        int n;
-        n = numIdenticalPairs(new int[]{1, 2, 3, 1, 1, 3});
-        System.out.println("pairCount: " + n);
-        n = numIdenticalPairs(new int[]{1,1,1,1});
-        System.out.println("pairCount: " + n);
-        n = numIdenticalPairs(new int[]{1,2,3});
-        System.out.println("pairCount: " + n);
-    }
 
     // Given an array of integers nums.
     // A pair (i,j) is called good if nums[i] == nums[j] and i < j.
@@ -894,20 +1193,6 @@ public class Challenges {
     }
 
 
-    public void callPermute() {
-        int[] intArr;
-        intArr = new int[]{1,2,3};
-        System.out.println(permute(intArr));
-        //  [1,2,3],
-        //  [1,3,2],
-        //  [2,1,3],
-        //  [2,3,1],
-        //  [3,1,2],
-        //  [3,2,1]
-
-//        intArr = new int[] {1,2,3,4};
-//        System.out.println(permute(intArr));
-    }
 
     // Given a collection of distinct integers, return all possible permutations.
     public List<List<Integer>> permute(int[] nums) { // TODO investigate further
@@ -945,21 +1230,6 @@ public class Challenges {
         System.out.println("----------------------------------------------");
     }
 
-    public void callMergeTwoLists() { }
-
-    // Merge two sorted linked lists and return it as a new sorted list.
-    // The new list should be made by splicing together the nodes of the first two lists.
-    public ListNode mergeTwoLists(ListNode l1, ListNode l2) { //TODO: finish
-        return null;
-    }
-
-    public void callLengthOfLastWord() {
-        int answer;
-        answer = lengthOfLastWord("Hello world");
-        System.out.println("length of last word: " + answer);
-        answer = lengthOfLastWord("     ");
-        System.out.println("length of last word: " + answer);
-    }
 
     public int lengthOfLastWord(String s) {
         String[] arr = s.split(" ");
@@ -973,15 +1243,6 @@ public class Challenges {
         return arr[arr.length-1].length();
     }
 
-    public void callIsValid() {
-        System.out.println("() --> " + isValid("()")); // true
-        System.out.println(")) --> " + isValid("))")); // false
-        System.out.println("()) --> " + isValid("())")); // false
-        System.out.println("()[]{} --> " + isValid("()[]{}")); // true
-        System.out.println("([)] --> " + isValid("([)]")); // false
-        System.out.println("{ { ( { } ) } } --> " + isValid("{{({})}}")); // true
-        System.out.println("[ --> " + isValid("[")); // false
-    }
 
     // Given a string s containing just the characters '(', ')', '{', '}', '[' and ']',
     // determine if the input string is valid.
@@ -1022,18 +1283,6 @@ public class Challenges {
     }
 
 
-    public void callReverseInteger() {
-        long x;
-        x = reverseInteger(123); // output: 321
-        System.out.println("reversed int: " + x);
-
-        x = reverseInteger(-123); // output: 321
-        System.out.println("reversed int: " + x);
-
-        // 9,646,324,351 --> 1,534,236,469
-//        x = reverse(9646324351); // 9646324351 --> 1534236469
-
-    }
 
     public int reverse(int x) {
         long reverseNum=0;
@@ -1076,14 +1325,6 @@ public class Challenges {
     }
 
 
-    public void callLetterCombinations() { // todo finish
-        List<String> str;
-        str = letterCombinations("23"); //Output: ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"]
-        System.out.println("answer: " + str);
-
-        str = letterCombinations("234"); // ["adg","adh","adi","aeg","aeh","aei","afg","afh","afi","bdg","bdh","bdi","beg","beh","bei","bfg","bfh","bfi","cdg","cdh","cdi","ceg","ceh","cei","cfg","cfh","cfi"]
-        System.out.println("answer: " + str);
-    }
 
     //    Given a string containing digits from 2-9 inclusive,
     //    return all possible letter combinations that the number could represent.
@@ -1162,6 +1403,8 @@ public class Challenges {
             System.out.println("]");
         });
     }
+
+
 
 }
 
