@@ -1,9 +1,9 @@
-package com.practice.leetcode;
+package com.practice.misc;
 
 public class TreeNode {
-    int val;
-    TreeNode left = null;
-    TreeNode right = null;
+    public int val;
+    public TreeNode left = null;
+    public TreeNode right = null;
 
     public TreeNode() {}
 

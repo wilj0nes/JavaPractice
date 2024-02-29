@@ -1,7 +1,7 @@
 package testpackage;
 
-import com.practice.leetcode.Challenges;
-import com.practice.leetcode.ListNode;
+import com.practice.leetcode.LinkedListChallenges;
+import com.practice.misc.ListNode;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -9,7 +9,7 @@ import static org.junit.Assert.assertNull;
 
 public class TestRemoveElements {
 
-    public static final Challenges c = new Challenges();
+    public static final LinkedListChallenges l = new LinkedListChallenges();
 
     @Test
     public void testRemoveElements() {
@@ -39,7 +39,7 @@ public class TestRemoveElements {
         ans3.setNext(ans4);
         ans4.setNext(ans5);
 
-        ListNode resultNode = c.removeElements_improved(head, 6);
+        ListNode resultNode = l.removeElements_improved(head, 6);
 
         while (resultNode.getNext() != null) {
             assertEquals(ans1.getVal(), resultNode.getVal());
@@ -59,14 +59,14 @@ public class TestRemoveElements {
         node1.setNext(node2);
         node2.setNext(node3);
 
-        ListNode resultNode = c.removeElements_improved(head, 7);
+        ListNode resultNode = l.removeElements_improved(head, 7);
 
         assertNull(resultNode);
     }
     @Test
     public void testRemoveElements3() {
         ListNode head = new ListNode(1);
-        ListNode resultNode = c.removeElements_improved(head, 2);
+        ListNode resultNode = l.removeElements_improved(head, 2);
         assertEquals(new ListNode(1, null).getVal(), resultNode.getVal());
         assertEquals(new ListNode(1, null).getNext(), resultNode.getNext());
     }
@@ -79,7 +79,7 @@ public class TestRemoveElements {
 
         ListNode ans1 = new ListNode(2);
 
-        ListNode resultNode = c.removeElements_improved(head, 1);
+        ListNode resultNode = l.removeElements_improved(head, 1);
         assertEquals(ans1.getVal(), resultNode.getVal());
         assertEquals(ans1.getNext(), resultNode.getNext());
 

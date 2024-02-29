@@ -1,7 +1,7 @@
 package testpackage;
 
-import com.practice.leetcode.Challenges;
-import com.practice.leetcode.TreeNode;
+import com.practice.leetcode.TreeChallenges;
+import com.practice.misc.TreeNode;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -10,9 +10,9 @@ import java.util.List;
 
 import static org.junit.Assert.assertArrayEquals;
 
-public class TestAverageOfLevels {
+public class TestAverageOfLevels_BFS {
 
-    public static final Challenges c = new Challenges();
+    public static final TreeChallenges t = new TreeChallenges();
 
     @Test
     public void testAverageOfLevels_BFS() {
@@ -29,7 +29,7 @@ public class TestAverageOfLevels {
         node1.setRight(node3);
 
         List<Double> answerList = new ArrayList<>(Arrays.asList(3.00000,14.50000,11.00000));
-        assertArrayEquals(answerList.toArray(), c.averageOfLevels_BFS(node1).toArray());
+        assertArrayEquals(answerList.toArray(), t.averageOfLevels_BFS(node1).toArray());
     }
     @Test
     public void testAverageOfLevels_BFS5() {
@@ -46,7 +46,7 @@ public class TestAverageOfLevels {
         node1.setRight(node3);
 
         List<Double> answerList = new ArrayList<>(Arrays.asList(3.00000,14.50000,11.00000));
-        assertArrayEquals(answerList.toArray(), c.averageOfLevels_BFS(node1).toArray());
+        assertArrayEquals(answerList.toArray(), t.averageOfLevels_BFS(node1).toArray());
     }
     @Test
     public void testAverageOfLevels_BFS2() {
@@ -63,7 +63,7 @@ public class TestAverageOfLevels {
         node1.setRight(node3);
 
         List<Double> answerList = new ArrayList<>(Arrays.asList(3.00000,14.50000,11.00000));
-        assertArrayEquals(answerList.toArray(), c.averageOfLevels_BFS(node1).toArray());
+        assertArrayEquals(answerList.toArray(), t.averageOfLevels_BFS(node1).toArray());
     }
     @Test
     public void testAverageOfLevels_BFS4() {
@@ -76,14 +76,14 @@ public class TestAverageOfLevels {
 
 
         List<Double> answerList = new ArrayList<>(Arrays.asList(2147483647.0,2147483647.0));
-        assertArrayEquals(answerList.toArray(), c.averageOfLevels_BFS(node1).toArray());
+        assertArrayEquals(answerList.toArray(), t.averageOfLevels_BFS(node1).toArray());
     }
     @Test
     public void testAverageOfLevels_BFS3() {
         TreeNode node1 = new TreeNode(3);
 
         List<Double> answerList = new ArrayList<>(Arrays.asList(3.00000));
-        assertArrayEquals(answerList.toArray(), c.averageOfLevels_BFS(node1).toArray());
+        assertArrayEquals(answerList.toArray(), t.averageOfLevels_BFS(node1).toArray());
     }
 
 }
