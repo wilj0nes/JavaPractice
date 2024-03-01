@@ -1,11 +1,10 @@
 package testpackage;
 
-import com.practice.leetcode.TreeChallenges;
+import com.practice.challenges.TreeChallenges;
 import com.practice.misc.TreeNode;
 import org.junit.Test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class TestHasPathSum {
     public static final TreeChallenges t = new TreeChallenges();
@@ -54,6 +53,11 @@ public class TestHasPathSum {
     @Test
     public void testHasPathSum3() {
         assertFalse(t.hasPathSum(new TreeNode(), 0));
+    }
+
+    @Test
+    public void testHasPathSum4() {
+        assertTrue(t.hasPathSum(new TreeNode(1), 1));
     }
 
 }

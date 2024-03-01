@@ -1,7 +1,8 @@
 package testpackage;
 
-import com.practice.leetcode.Challenges;
-import com.practice.misc.ListNode;
+import com.practice.challenges.ArrayChallenges;
+import com.practice.challenges.Challenges;
+import com.practice.challenges.LinkedListChallenges;
 import com.practice.misc.NumArray;
 import org.junit.Test;
 
@@ -11,9 +12,11 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class CodeChallengeTest {
+public class CodeChallengeTests {
 
     public static final Challenges c = new Challenges();
+    public static final ArrayChallenges a = new ArrayChallenges();
+    public static final LinkedListChallenges l = new LinkedListChallenges();
 
     @Test
     public void testCallTwoSumWithBetterRunTime() {
@@ -26,15 +29,15 @@ public class CodeChallengeTest {
 
     @Test
     public void testTwoSum() {
-        assertArrayEquals(new int[]{0, 1}, c.twoSum(new int[]{2, 7, 11, 15}, 9));
-        assertArrayEquals(new int[]{1, 2}, c.twoSum(new int[]{3, 2, 4}, 6));
-        assertArrayEquals(new int[]{0, 1}, c.twoSum(new int[]{3, 3}, 6));
+        assertArrayEquals(new int[]{0, 1}, a.twoSum(new int[]{2, 7, 11, 15}, 9));
+        assertArrayEquals(new int[]{1, 2}, a.twoSum(new int[]{3, 2, 4}, 6));
+        assertArrayEquals(new int[]{0, 1}, a.twoSum(new int[]{3, 3}, 6));
     }
 
     @Test
     public void testSearch() {
-        assertEquals(4, c.search(new int[]{-1, 0, 3, 5, 9, 12}, 9));
-        assertEquals(-1, c.search(new int[]{-1, 0, 3, 5, 9, 12}, 2));
+        assertEquals(4, a.search(new int[]{-1, 0, 3, 5, 9, 12}, 9));
+        assertEquals(-1, a.search(new int[]{-1, 0, 3, 5, 9, 12}, 2));
     }
 
     @Test
@@ -67,9 +70,9 @@ public class CodeChallengeTest {
 
     @Test
     public void testFindDisappearedNumbers() {
-        assertEquals(Arrays.asList(2), c.findDisappearedNumbers(new int[]{1, 1}));
-        assertEquals(Arrays.asList(), c.findDisappearedNumbers(new int[]{1}));
-        assertEquals(Arrays.asList(5,6), c.findDisappearedNumbers(new int[]{4,3,2,7,8,2,3,1}));
+        assertEquals(Arrays.asList(2), a.findDisappearedNumbers(new int[]{1, 1}));
+        assertEquals(Arrays.asList(), a.findDisappearedNumbers(new int[]{1}));
+        assertEquals(Arrays.asList(5,6), a.findDisappearedNumbers(new int[]{4,3,2,7,8,2,3,1}));
     }
 
     @Test
@@ -80,9 +83,9 @@ public class CodeChallengeTest {
     }
     @Test
     public void testFindDisappearedNumbers_improvedMemory2() {
-        assertEquals(Arrays.asList(5,6), c.findDisappearedNumbers_improvedMemory2(new int[]{4,3,2,7,8,2,3,1}));
-        assertEquals(Arrays.asList(2), c.findDisappearedNumbers_improvedMemory2(new int[]{1, 1}));
-        assertEquals(Arrays.asList(), c.findDisappearedNumbers_improvedMemory2(new int[]{1}));
+        assertEquals(Arrays.asList(5,6), a.findDisappearedNumbers_improvedMemory2(new int[]{4,3,2,7,8,2,3,1}));
+        assertEquals(Arrays.asList(2), a.findDisappearedNumbers_improvedMemory2(new int[]{1, 1}));
+        assertEquals(Arrays.asList(), a.findDisappearedNumbers_improvedMemory2(new int[]{1}));
     }
 
     @Test
@@ -93,10 +96,8 @@ public class CodeChallengeTest {
         assertFalse(c.isPalindrome("0P"));
     }
 
-
-
     @Test
-    public void callGroupAnagrams() {
+    public void testGroupAnagrams() {
         String[] arr = new String[]{"eat","tea","tan","ate","nat","bat"}; // [[eat, tea, ate], [bat], [tan, nat]]
         ArrayList<List<String>> resultList = new ArrayList<>();
         resultList.add(new ArrayList<>(Arrays.asList("eat", "tea", "ate")));
@@ -107,9 +108,9 @@ public class CodeChallengeTest {
 
 
     @Test
-    public void callCountBits() {
-        assertArrayEquals(new int[]{0, 1, 1}, c.countBits(2));
-        assertArrayEquals(new int[]{0, 1, 1, 2, 1, 2}, c.countBits(5));
+    public void testCountBits() {
+        assertArrayEquals(new int[]{0, 1, 1}, a.countBits(2));
+        assertArrayEquals(new int[]{0, 1, 1, 2, 1, 2}, a.countBits(5));
     }
 
     @Test
@@ -125,9 +126,8 @@ public class CodeChallengeTest {
     }
 
     @Test
-    public void callLongestPalindrome() {
-        String str = "babad";
-        assertEquals(str, c.longestPalindrome(str));
+    public void testLongestPalindrome() {
+        assertEquals("babad", c.longestPalindrome("babad"));
     }
 
     @Test
@@ -135,14 +135,12 @@ public class CodeChallengeTest {
         List<String> str;
         str = c.letterCombinations("23"); //Output: ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"]
         System.out.println("answer: " + str);
-
         str = c.letterCombinations("234"); // ["adg","adh","adi","aeg","aeh","aei","afg","afh","afi","bdg","bdh","bdi","beg","beh","bei","bfg","bfh","bfi","cdg","cdh","cdi","ceg","ceh","cei","cfg","cfh","cfi"]
         System.out.println("answer: " + str);
     }
 
-
     @Test
-    public void callIntToRoman() {
+    public void callIntToRoman() { // not done
         assertEquals("MMM", c.intToRoman(3000));
         assertEquals("MCMXCIV", c.intToRoman(1994));
         assertEquals("IX", c.intToRoman(9));
@@ -178,23 +176,19 @@ public class CodeChallengeTest {
 
 
     @Test
-    public void callSingleNumber() {
-        System.out.println("[2,2,1] : " + c.singleNumber(new int[]{2, 2, 1})); // 1
-        System.out.println("[4,1,2,1,2] : " + c.singleNumber(new int[]{4,1,2,1,2})); // 4
-        System.out.println("[1,1,2,3,3,4] : " + c.singleNumber(new int[]{1,1,3,3,4})); //
+    public void testSingleNumber() {
+        assertEquals(1, c.singleNumber(new int[]{2, 2, 1}));
+        assertEquals(4, c.singleNumber(new int[]{4,1,2,1,2}));
+        assertEquals(4, c.singleNumber(new int[]{1,1,3,3,4}));
         // somehow XOR bitwise operations on each element magically returns the fucking solution
     }
 
 
     @Test
-    public void callNumIdenticalPairs() {
-        int n;
-        n = c.numIdenticalPairs(new int[]{1, 2, 3, 1, 1, 3});
-        System.out.println("pairCount: " + n);
-        n = c.numIdenticalPairs(new int[]{1,1,1,1});
-        System.out.println("pairCount: " + n);
-        n = c.numIdenticalPairs(new int[]{1,2,3});
-        System.out.println("pairCount: " + n);
+    public void testlNumIdenticalPairs() {
+        assertEquals(4, c.numIdenticalPairs(new int[]{1, 2, 3, 1, 1, 3}));
+        assertEquals(6, c.numIdenticalPairs(new int[]{1,1,1,1}));
+        assertEquals(0, c.numIdenticalPairs(new int[]{1,2,3}));
     }
 
     @Test
@@ -215,11 +209,8 @@ public class CodeChallengeTest {
 
     @Test
     public void callLengthOfLastWord() {
-        int answer;
-        answer = c.lengthOfLastWord("Hello world");
-        System.out.println("length of last word: " + answer);
-        answer = c.lengthOfLastWord("     ");
-        System.out.println("length of last word: " + answer);
+        assertEquals(5, c.lengthOfLastWord("Hello world"));
+        assertEquals(5, c.lengthOfLastWord("     "));
     }
 
     @Test
@@ -265,15 +256,13 @@ public class CodeChallengeTest {
     }
 
     @Test
-    public void callContainsDuplicate() {
+    public void testContainsDuplicate() {
         assertTrue(c.containsDuplicate(new int[]{1, 2, 3, 1}));
     }
 
     @Test
-    public void callProductExceptSelf() {
-        int[] arr;
-        arr = c.productExceptSelf(new int[]{1, 2, 3, 4});
-        System.out.println(Arrays.toString(arr));
+    public void testProductExceptSelf() {
+        assertArrayEquals(new int[]{24, 12, 8, 6}, c.productExceptSelf(new int[]{1, 2, 3, 4}));
     }
 
     @Test
@@ -283,8 +272,6 @@ public class CodeChallengeTest {
         assertEquals(-1, numArray.sumRange(2, 5));
         assertEquals(-3, numArray.sumRange(0, 5));
     }
-
-
 
     @Test
     public void callMinPathSum() {
@@ -296,6 +283,13 @@ public class CodeChallengeTest {
         grid[1] = ar2;
         grid[2] = ar3;
         System.out.println(c.minPathSum(grid));
+    }
+
+    @Test
+    public void testRunningSum() {
+        assertArrayEquals(new int[]{1, 3, 6, 10}, c.runningSum(new int[]{1,2,3,4}));
+        assertArrayEquals(new int[]{1, 2, 3, 4, 5}, c.runningSum(new int[]{1,1,1,1,1}));
+        assertArrayEquals(new int[]{3, 4, 6, 16, 17}, c.runningSum(new int[]{3,1,2,10,1}));
     }
 
     @Test

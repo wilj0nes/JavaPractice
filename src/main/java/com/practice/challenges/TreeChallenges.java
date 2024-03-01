@@ -1,9 +1,7 @@
-package com.practice.leetcode;
+package com.practice.challenges;
 
 import com.practice.misc.TreeNode;
-import com.sun.source.tree.Tree;
 
-import javax.swing.text.html.HTMLDocument;
 import java.util.*;
 
 public class TreeChallenges {
@@ -281,35 +279,73 @@ public class TreeChallenges {
     // Output: false
     // Explanation: Since the tree is empty, there are no root-to-leaf paths.
 
-    public boolean hasPathSum(TreeNode node, int targetSum) {
-        if (node == null) {
+    public boolean hasPathSum(TreeNode root, int targetSum) {
+        if (root == null) {
             return false;
         }
-        else if (node.val == targetSum) {
-            return true;
+        else if (root.left == null && root.right == null && root.val == 0) {
+            return false;
         }
-        int sum = node.val;
-        return this.searchNodes(node, sum, targetSum);
+
+        return this.searchNodes(root, 0, targetSum);
     }
 
     public boolean searchNodes(TreeNode node, int sum, int targetSum) {
-        if (sum == targetSum) {
-            return true;
-        }
+        sum += node.val;
 
-        if (node.left != null && node.right != null) {
-            sum += node.val;
-            return (this.searchNodes(node.left, sum, targetSum) && this.searchNodes(node.right, sum, targetSum));
+        if (node.left != null && node.right != null) {          // left and right
+            return (this.searchNodes(node.left, sum, targetSum) || this.searchNodes(node.right, sum, targetSum));
         }
-        else if (node.left == null && node.right == null) { // leaf found, end of path
-            sum += node.val;
+        else if (node.left == null && node.right == null) {     // leaf found, end of path
             return (sum == targetSum);
         }
-        else {
+        else {                                                  // left or right
             TreeNode tempNode = node.left != null ? node.left : node.right;
-            sum += tempNode.val;
             return this.searchNodes(tempNode, sum, targetSum);
         }
+    }
+
+
+    // 104. Maximum Depth of Binary Tree
+    // Given the root of a binary tree, return its maximum depth.
+    // A binary tree's maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.
+    //
+    // Example 1:
+    // Input: root = [3,9,20,null,null,15,7]
+    // Output: 3
+    // Example 2:
+    //
+    // Input: root = [1,null,2]
+    // Output: 2
+    public int maxDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        else if (root.left == null && root.right == null && root.val == 0) {
+            return 1;
+        }
+        return this.findMaxDepth(root, 0);
+    }
+
+    public int findMaxDepth(TreeNode node, int depth) {
+        depth++;
+
+        if (node.left == null && node.right == null) {
+            return depth;
+        }
+        else if (node.left != null && node.right != null) {
+            return Math.max(this.findMaxDepth(node.left, depth), this.findMaxDepth(node.right, depth));
+        }
+        else {
+            return this.findMaxDepth(node.left != null ? node.left : node.right, depth);
+        }
+    }
+
+    public int findMaxDepth_fork(TreeNode root) { // not my solution
+        if (root == null) {
+            return 0;
+        }
+        return 1 + Math.max(this.maxDepth(root.left), this.maxDepth(root.right));
     }
 
 }

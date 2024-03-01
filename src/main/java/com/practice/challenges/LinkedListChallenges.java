@@ -1,4 +1,4 @@
-package com.practice.leetcode;
+package com.practice.challenges;
 
 import com.practice.misc.ListNode;
 

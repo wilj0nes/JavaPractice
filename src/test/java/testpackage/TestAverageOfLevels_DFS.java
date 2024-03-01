@@ -1,6 +1,6 @@
 package testpackage;
 
-import com.practice.leetcode.TreeChallenges;
+import com.practice.challenges.TreeChallenges;
 import com.practice.misc.TreeNode;
 import org.junit.After;
 import org.junit.Test;

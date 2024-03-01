@@ -1,6 +1,4 @@
-package com.practice.leetcode;
-
-import com.practice.misc.ListNode;
+package com.practice.challenges;
 
 import java.util.*;
 
@@ -45,69 +43,6 @@ public class Challenges {
     }
 
 
-    // 448. Find All Numbers Disappeared in an Array
-    // Given an array nums of n integers where nums[i] is in the range [1, n],
-    // return an array of all the integers in the range [1, n] that do not appear in nums
-
-    //Example 1:
-    //
-    //Input: nums = [4,3,2,7,8,2,3,1]
-    //Output: [5,6]
-
-    //Example 2:
-    //
-    //Input: nums = [1,1]
-    //Output: [2]
-
-    // Follow up: Could you do it without extra space and in O(n) runtime? You may assume the returned list does not count as extra space.
-
-    public List<Integer> findDisappearedNumbers(int[] nums) {
-        int length = nums.length;
-        HashMap<Integer, Integer> hashMap = new HashMap<>(); // adds space complexity
-        List<Integer> result = new ArrayList<>();
-
-        for (int i = 0; i < length; i++) {
-            hashMap.put(nums[i], i);
-        }
-
-        for (int i = 1; i <= length; i++) {
-            if (hashMap.get(i) == null) {
-                result.add(i);
-            }
-        }
-
-//        System.out.println(result);
-        return result;
-    }
-
-
-    public List<Integer> findDisappearedNumbers_improvedMemory2(int[] nums) { // not my solution
-        List<Integer> result = new ArrayList<>();
-        int index = 0;
-
-        while (index < nums.length) {
-            int correct = nums[index] - 1;
-
-            if (nums[index] != nums[correct]) {
-                int temp = nums[index];
-                nums[index] = nums[correct];
-                nums[correct] = temp;
-            }
-            else {
-                index++;
-            }
-        }
-        System.out.println(Arrays.toString(nums));
-
-        for (int i = 0; i < nums.length; i++) {
-            if (nums[i] != i + 1) { // check if vals are in sequental order
-                result.add(i + 1);
-            }
-        }
-
-        return result;
-    }
-
     public List<Integer> findDisappearedNumbers_improvedMemory(int[] nums) { // this works but leetcode is a cunt
         List<Integer> result = new ArrayList<>();
 
@@ -127,104 +62,6 @@ public class Challenges {
     }
 
 
-    // 704. Binary Search
-    // Given an array of integers nums which is sorted in ascending order, and an integer target,
-    // write a function to search target in nums. If target exists, then return its index. Otherwise, return -1.
-    // You must write an algorithm with O(log n) runtime complexity.
-
-    //Example 1:
-    //Input: nums = [-1,0,3,5,9,12], target = 9
-    //Output: 4
-    //Explanation: 9 exists in nums and its index is 4
-
-    //Example 2:
-    //Input: nums = [-1,0,3,5,9,12], target = 2
-    //Output: -1
-    //Explanation: 2 does not exist in nums so return -1
-
-    public int search(int[] nums, int target) {
-        // // O(n) runtime, it wants O(log n)
-//        for (int i = 0; i < nums.length; i++) {
-//            if (nums[i] == target) {
-//                return i;
-//            }
-//        }
-        int low = 0;
-        int high = nums.length - 1;
-
-        return binarySearch(nums, low, high, target);
-    }
-
-    public int binarySearch(int[] nums, int low, int high, int target) { // not my solution
-        if (low > high) {
-            return -1;
-        }
-
-        int mid = (low + high) / 2;
-        if (nums[mid] == target) {
-            return mid;
-        }
-        else if (target > nums[mid]) {
-            return binarySearch(nums, mid+1, high, target);
-        }
-        else {
-            return binarySearch(nums, low, mid-1, target);
-        }
-    }
-
-    // 744. Find Smallest Letter Greater Than Target
-    // You are given an array of characters letters that is sorted in non-decreasing order, and a character target.
-    // There are at least two different characters in letters.
-    // Return the smallest character in letters that is lexicographically greater than target. If such a character does not exist,
-    // return the first character in letters.
-
-    // Example 1:
-    // Input: letters = ["c","f","j"], target = "a"
-    // Output: "c"
-    // Explanation: The smallest character that is lexicographically greater than 'a' in letters is 'c'.
-
-    // Example 2:
-    // Input: letters = ["c","f","j"], target = "c"
-    // Output: "f"
-    // Explanation: The smallest character that is lexicographically greater than 'c' in letters is 'f'.
-
-    // Example 3:
-    // Input: letters = ["x","x","y","y"], target = "z"
-    // Output: "x"
-    // Explanation: There are no characters in letters that is lexicographically greater than 'z' so we return letters[0].
-    public char nextGreatestLetter(char[] letters, char target) {
-        char result = 'z';
-        boolean found = false;
-
-        for (char c: letters) {
-            if (c > target && c <= result) {
-                result = c;
-                found = true;
-            }
-        }
-
-        if (!found) {
-            return letters[0];
-        }
-        return result;
-    }
-
-    public char nextGreatestLetter_binarySearch(char[] letters, char target) { // not my solution
-        int start = 0;
-        int end = letters.length - 1;
-
-        while (start <= end) {
-            int mid = start + (end - start) / 2;
-            if (letters[mid] > target) {
-                end = mid - 1;
-            }
-            else {
-                start = mid + 1;
-            }
-        }
-
-        return letters[start % letters.length];
-    }
 
     // Given a matrix of m x n elements (m rows, n columns), return all elements of the matrix in spiral order.
     public void setZeros(int[][] matrix) {
@@ -256,7 +93,6 @@ public class Challenges {
     }
 
 
-
     // Given a string s, return the longest palindromic substring in s.
     // A string is palindromic if it reads the same forward and backward.
     //    Input: s = "babad"
@@ -270,7 +106,6 @@ public class Challenges {
         String strReversed = new StringBuilder(str).reverse().toString();
         return str.equals(strReversed);
     }
-
 
 
     // Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.
@@ -318,45 +153,6 @@ public class Challenges {
 
         System.out.println(resultList);
         return resultList;
-    }
-
-
-    // 338. Counting Bits
-    // Given an integer n, return an array ans of length n + 1 such that for each i (0 <= i <= n),
-    // ans[i] is the number of 1's in the binary representation of i.
-
-    // Example 1:
-    //
-    // Input: n = 2
-    // Output: [0,1,1]
-    // Explanation:
-    // 0 --> 0
-    // 1 --> 1
-    // 2 --> 10
-
-    // Example 2:
-    //
-    // Input: n = 5
-    // Output: [0,1,1,2,1,2]
-    // Explanation:
-    // 0 --> 0
-    // 1 --> 1
-    // 2 --> 10
-    // 3 --> 11
-    // 4 --> 100
-    // 5 --> 101
-
-    public int[] countBits(int n) {
-        int[] result = new int[n + 1];
-        for (int i = 0; i <= n; i++) {
-//            String str = Integer.toBinaryString(i).replace("0", "");
-//            str = str.replace("0", "");
-//            result[i] = str.length();
-            result[i] = Integer.bitCount(i); // this returns number of "one" bits in an int
-            // much faster
-        }
-
-        return result;
     }
 
 
@@ -601,27 +397,6 @@ public class Challenges {
     }
 
 
-    public int[] twoSum(int[] nums, int target) {
-        int[] resultArr = new int[2];
-
-        for (int i = 0; i < nums.length; i++) {
-            for (int j = i+1; j < nums.length; j++) { // O(n^2)
-
-                if (nums[i] + nums[j] == target) {
-                    resultArr[0] = i;
-                    resultArr[1] = j;
-                    return resultArr;
-                }
-            }
-        }
-
-        // somehow this solution used less memory than all other submissions on leetcode
-        // but leetcode is retarded so prob doesn't matterr
-        return null;
-    }
-
-
-
     // Given an m x n grid filled with non-negative numbers,
     // find a path from top left to bottom right which minimizes the sum of all numbers along its path.
     // Note: You can only move either down or right at any point in time.
@@ -799,15 +574,7 @@ public class Challenges {
         return count;
     }
 
-    public void callRunningSum() {
-        int[] arr;
-        arr = runningSum(new int[]{1,2,3,4});
-        System.out.println(Arrays.toString(arr));
-        arr = runningSum(new int[]{1,1,1,1,1});
-        System.out.println(Arrays.toString(arr));
-        arr = runningSum(new int[]{3,1,2,10,1});
-        System.out.println(Arrays.toString(arr));
-    }
+
 
     // Given an array nums. We define a running sum of an array as runningSum[i] = sum(nums[0]…nums[i]).
     // Return the running sum of nums.

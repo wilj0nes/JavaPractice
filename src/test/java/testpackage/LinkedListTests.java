@@ -1,6 +1,6 @@
 package testpackage;
 
-import com.practice.leetcode.LinkedListChallenges;
+import com.practice.challenges.LinkedListChallenges;
 import com.practice.misc.ListNode;
 import org.junit.Test;
 
