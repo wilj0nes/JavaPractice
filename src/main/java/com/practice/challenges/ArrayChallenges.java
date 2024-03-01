@@ -14,6 +14,72 @@ public class ArrayChallenges {
 
 
 
+    // Given an array nums. We define a running sum of an array as runningSum[i] = sum(nums[0]…nums[i]).
+    // Return the running sum of nums.
+    // Input: nums = [1,2,3,4]
+    // Output: [1,3,6,10]
+    // Explanation: Running sum is obtained as follows: [1, 1+2, 1+2+3, 1+2+3+4].
+    public int[] runningSum(int[] nums) {
+        if (nums.length < 2) {
+            return nums;
+        }
+        int[] resultArr = new int[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            if (i == 0) {
+                resultArr[i] = nums[i];
+            }
+            else {
+                int temp = 0;
+                for (int j = 0; j <= i; j++) {
+                    temp += nums[j];
+                }
+//                System.out.println("temp: " + temp);
+                resultArr[i] = temp;
+            }
+        }
+        return resultArr;
+    }
+
+
+    // Given an array of integers nums.
+    // A pair (i,j) is called good if nums[i] == nums[j] and i < j.
+    // Return the number of good pairs.
+    public int numIdenticalPairs(int[] nums) {
+        int pairCount = 0;
+        if (nums.length < 2) {
+            return pairCount;
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = 0; j < nums.length; j++) {
+                if (nums[i] == nums[j] && i < j) {
+                    pairCount++;
+                }
+            }
+        }
+        return pairCount;
+    }
+
+
+    // 268. Missing Number
+    // Given an array nums containing n distinct numbers in the range [0, n],
+    // return the only number in the range that is missing from the array.
+    // Input: nums = [3,0,1]
+    // Output: 2
+    // Explanation: n = 3 since there are 3 numbers, so all numbers are in the range [0,3].
+    // 2 is the missing number in the range since it does not appear in nums.
+
+    public int missingNumber(int[] nums) {
+        int count = 0;
+        for(int i=0; i<nums.length; i++){
+            count = count - nums[i];
+            count = count + i+1;
+
+        }
+        return count;
+    }
+
+
     // 448. Find All Numbers Disappeared in an Array
     // Given an array nums of n integers where nums[i] is in the range [1, n],
     // return an array of all the integers in the range [1, n] that do not appear in nums
@@ -77,6 +143,55 @@ public class ArrayChallenges {
         return result;
     }
 
+    // 136. Single Number
+
+    // Given a non-empty array of integers nums, every element appears twice except for one. Find that single one.
+    // You must implement a solution with a linear runtime complexity and use only constant extra space.
+    // Example 1:
+    //
+    //Input: nums = [2,2,1]
+    //Output: 1
+    //Example 2:
+    //
+    //Input: nums = [4,1,2,1,2]
+    //Output: 4
+    //Example 3:
+    //
+    //Input: nums = [1]
+    //Output: 1
+
+    public int singleNumber(int[] nums) { // not my solution
+        int answer = nums[0];
+
+        int i = 0;
+
+        while (i < nums.length - 1) {
+            int n = nums[i + 1];
+            answer = answer ^ n; // XOR bit manipulation
+            i++;
+        }
+
+        return answer;
+    }
+
+
+
+    // Given an array of integers, find if the array contains any duplicates.
+    public boolean containsDuplicate(int[] nums) {
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (hashMap.get(nums[i]) != null) {
+                return true;
+            }
+            else {
+                hashMap.put(nums[i], i);
+            }
+        }
+        return false;
+    }
+
+
+
 
     // 704. Binary Search
     // Given an array of integers nums which is sorted in ascending order, and an integer target,
@@ -122,8 +237,6 @@ public class ArrayChallenges {
             return binarySearch(nums, low, mid-1, target);
         }
     }
-
-
 
     // 744. Find Smallest Letter Greater Than Target
     // You are given an array of characters letters that is sorted in non-decreasing order, and a character target.
@@ -294,62 +407,6 @@ public class ArrayChallenges {
     }
 
 
-    // 844. Backspace String Compare
-    // Given two strings s and t, return true if they are equal when both are typed into empty text editors.
-    // '#' means a backspace character.
-    //
-    // Note that after backspacing an empty text, the text will continue empty.
-    //
-    // Example 1:
-    //
-    // Input: s = "ab#c", t = "ad#c"
-    // Output: true
-    // Explanation: Both s and t become "ac".
-    // Example 2:
-    //
-    // Input: s = "ab##", t = "c#d#"
-    // Output: true
-    // Explanation: Both s and t become "".
-    // Example 3:
-    //
-    // Input: s = "a#c", t = "b"
-    // Output: false
-    // Explanation: s becomes "c" while t becomes "b".
-
-    // Follow up: Can you solve it in O(n) time and O(1) space?
-    public boolean backSpaceCompare(String s, String t) {
-        return this.delComparer(s).equals(this.delComparer(t));
-    }
-
-    public Stack<Character> delComparer(String s) {
-        Stack<Character> stack = new Stack<Character>();
-        //  ^ O(n) space complexity
-
-        int delsFound = 0;
-        for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i) != '#' && delsFound == 0) {
-                stack.push(s.charAt(i));
-            }
-            else if (s.charAt(i) == '#') {
-                stack = this.stackPopper(stack, delsFound);
-                delsFound = 0;
-            }
-            else {
-                delsFound++;
-            }
-        }
-
-        return stack;
-    }
-
-    private Stack<Character> stackPopper(Stack<Character> stack, int dels) {
-        for (int i = 0; i <= dels; i++) {
-            if (!stack.isEmpty()) {
-                stack.pop();
-            }
-        }
-        return stack;
-    }
 
     // 169. Majority Element
     // Given an array nums of size n, return the majority element.
@@ -394,11 +451,83 @@ public class ArrayChallenges {
         return nums[nums.length / 2];
     }
 
+    // 283. Move Zeroes
+    // Given an integer array nums, move all 0's to the end of it while maintaining the relative order of the non-zero elements.
+    // Note that you must do this in-place without making a copy of the array.
+    //      In-place means we should not be allocating any space for extra array.
+
+    // Example 1:
+    //
+    // Input: nums = [0,1,0,3,12]
+    // Output: [1,3,12,0,0]
+    // Example 2:
+    //
+    // Input: nums = [0]
+    // Output: [0]
+    // Follow up: Could you minimize the total number of operations done?
+    public int[] moveZeros(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return nums;
+        }
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = i+1; j < nums.length; j++) {
+                if (nums[i] == 0 && nums[j] != 0) {
+                    int temp = nums[i];
+                    nums[i] = nums[j];
+                    nums[j] = temp;
+                    i++;
+                }
+                else if (nums[i] != 0 && nums[j] == 0) {
+                    i = j;
+                }
+            }
+        }
+
+        return nums;
+    }
+    public int[] moveZeros_betterTimeComplexity(int[] nums) { // mostly my solution
+        if (nums == null || nums.length == 0) {
+            return nums;
+        }
+
+        int i, j;
+        for (i = 0, j = 0; j < nums.length;) {
+            if (nums[i] == 0 && nums[j] != 0) {
+                int temp = nums[i];
+                nums[i] = nums[j];
+                nums[j] = temp;
+                i++;
+                j++;
+            }
+            else if (nums[i] == 0 && nums[j] == 0) {
+                j++;
+            }
+            else if (nums[i] != 0 && nums[j] != 0) {
+                i++;
+                j++;
+            }
+        }
+
+        return nums;
+    }
+    public void moveZeros_betterTimeComplexity_simplified(int[] nums) { // not my solution
+        int i, j;
+        for (i = 0, j = 0; i < nums.length;) {
+            if (nums[i] == 0) {
+                i++;
+            }
+            else {
+                int temp = nums[i];
+                nums[i] = nums[j];
+                nums[j] = temp;
+                i++;
+                j++;
+            }
+        }
+    }
+
+
     // 2022. Convert 1D Array Into 2D Array
-    // Easy
-    // Topics
-    // Companies
-    // Hint
     // You are given a 0-indexed 1-dimensional (1D) integer array original, and two integers, m and n.
     // You are tasked with creating a 2-dimensional (2D) array with  m rows and n columns using all the elements from original.
     //
@@ -408,7 +537,6 @@ public class ArrayChallenges {
     // Return an m x n 2D array constructed according to the above procedure, or an empty 2D array if it is impossible.
     //
     // Example 1:
-    //
     //
     // Input: original = [1,2,3,4], m = 2, n = 2
     // Output: [[1,2],[3,4]]
@@ -431,11 +559,20 @@ public class ArrayChallenges {
     // It is impossible to fit 2 elements in a 1x1 2D array, so return an empty 2D array.
     public int[][] construct2DArray(int[] original, int m, int n) {
         if (m * n != original.length) {
-            return null;
+            return new int[0][0];
         }
         int matrix[][] = new int[m][n];
-        return null;
+        int count = 0;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                matrix[i][j] = original[count++];
+            }
+        }
+
+        return matrix;
     }
+
+
 }
 
 

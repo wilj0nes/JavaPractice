@@ -23,9 +23,22 @@ public class TestConstruct2DArray {
 
         assertArrayEquals(matrix, a.construct2DArray(new int[]{1,2,3,4}, 2, 2));
     }
-
     @Test
     public void testConstruct2DArray2() {
+        int[][] matrix = new int[2][];
+        int[] ar1, ar2;
+
+        ar1 = new int[]{1, 2, 3};
+        ar2 = new int[]{4, 5, 6};
+
+        matrix[0] = ar1;
+        matrix[1] = ar2;
+
+        assertArrayEquals(matrix, a.construct2DArray(new int[]{1,2,3,4,5,6}, 2, 3));
+    }
+
+    @Test
+    public void testConstruct2DArray3() {
         int[][] matrix = new int[1][];
         int[] ar1;
 
@@ -33,5 +46,10 @@ public class TestConstruct2DArray {
         matrix[0] = ar1;
 
         assertArrayEquals(matrix, a.construct2DArray(new int[]{1,2,3}, 1, 3));
+    }
+
+    @Test
+    public void testConstruct2DArray4() {
+        assertArrayEquals(new int[0][0], a.construct2DArray(new int[]{1,2}, 1, 1));
     }
 }

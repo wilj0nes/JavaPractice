@@ -3,6 +3,7 @@ package testpackage;
 import com.practice.challenges.ArrayChallenges;
 import com.practice.challenges.Challenges;
 import com.practice.challenges.LinkedListChallenges;
+import com.practice.challenges.StringChallenges;
 import com.practice.misc.NumArray;
 import org.junit.Test;
 
@@ -17,9 +18,10 @@ public class CodeChallengeTests {
     public static final Challenges c = new Challenges();
     public static final ArrayChallenges a = new ArrayChallenges();
     public static final LinkedListChallenges l = new LinkedListChallenges();
+    public static final StringChallenges s = new StringChallenges();
 
     @Test
-    public void testCallTwoSumWithBetterRunTime() {
+    public void testTwoSumWithBetterRunTime() {
         assertArrayEquals(new int[]{2, 4}, c.twoSumWithBetterRunTime(new int[]{2, 7, 11, 15, 4}, 15));
         assertArrayEquals(new int[]{2, 4}, c.twoSumWithBetterRunTime(new int[]{-1, -2, -3, -4, -5}, -8));
         assertArrayEquals(new int[]{0, 1}, c.twoSumWithBetterRunTime(new int[]{3, 3}, 6));
@@ -41,7 +43,7 @@ public class CodeChallengeTests {
     }
 
     @Test
-    public void callMaxProfit() {
+    public void testMaxProfit() {
         assertEquals(c.betterMaxProfit(new int[]{7, 1, 5, 3, 6, 4}), 5);
         assertEquals(c.betterMaxProfit(new int[]{7, 6, 4, 3, 1}), 0);
         assertEquals(c.betterMaxProfit(new int[]{2, 4, 1}), 2);
@@ -121,8 +123,8 @@ public class CodeChallengeTests {
 
     @Test
     public void testMissingNumber() {
-        assertEquals(2, c.missingNumber(new int[]{3,0,1}));
-        assertEquals(8, c.missingNumber(new int[]{9,6,4,2,3,5,7,0,1}));
+        assertEquals(2, a.missingNumber(new int[]{3,0,1}));
+        assertEquals(8, a.missingNumber(new int[]{9,6,4,2,3,5,7,0,1}));
     }
 
     @Test
@@ -131,7 +133,7 @@ public class CodeChallengeTests {
     }
 
     @Test
-    public void callLetterCombinations() {  // not done
+    public void testLetterCombinations() {  // not done
         List<String> str;
         str = c.letterCombinations("23"); //Output: ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"]
         System.out.println("answer: " + str);
@@ -140,7 +142,7 @@ public class CodeChallengeTests {
     }
 
     @Test
-    public void callIntToRoman() { // not done
+    public void testIntToRoman() { // not done
         assertEquals("MMM", c.intToRoman(3000));
         assertEquals("MCMXCIV", c.intToRoman(1994));
         assertEquals("IX", c.intToRoman(9));
@@ -177,22 +179,22 @@ public class CodeChallengeTests {
 
     @Test
     public void testSingleNumber() {
-        assertEquals(1, c.singleNumber(new int[]{2, 2, 1}));
-        assertEquals(4, c.singleNumber(new int[]{4,1,2,1,2}));
-        assertEquals(4, c.singleNumber(new int[]{1,1,3,3,4}));
+        assertEquals(1, a.singleNumber(new int[]{2, 2, 1}));
+        assertEquals(4, a.singleNumber(new int[]{4,1,2,1,2}));
+        assertEquals(4, a.singleNumber(new int[]{1,1,3,3,4}));
         // somehow XOR bitwise operations on each element magically returns the fucking solution
     }
 
 
     @Test
     public void testlNumIdenticalPairs() {
-        assertEquals(4, c.numIdenticalPairs(new int[]{1, 2, 3, 1, 1, 3}));
-        assertEquals(6, c.numIdenticalPairs(new int[]{1,1,1,1}));
-        assertEquals(0, c.numIdenticalPairs(new int[]{1,2,3}));
+        assertEquals(4, a.numIdenticalPairs(new int[]{1, 2, 3, 1, 1, 3}));
+        assertEquals(6, a.numIdenticalPairs(new int[]{1,1,1,1}));
+        assertEquals(0, a.numIdenticalPairs(new int[]{1,2,3}));
     }
 
     @Test
-    public void callPermute() {
+    public void testPermute() {
         int[] intArr;
         intArr = new int[]{1,2,3};
         System.out.println(c.permute(intArr));
@@ -208,24 +210,24 @@ public class CodeChallengeTests {
     }
 
     @Test
-    public void callLengthOfLastWord() {
-        assertEquals(5, c.lengthOfLastWord("Hello world"));
-        assertEquals(5, c.lengthOfLastWord("     "));
+    public void testLengthOfLastWord() {
+        assertEquals(5, s.lengthOfLastWord("Hello world"));
+        assertEquals(5, s.lengthOfLastWord("     "));
     }
 
     @Test
-    public void callIsValid() {
-        assertTrue(c.isValid("()"));
-        assertFalse(c.isValid("))"));
-        assertFalse(c.isValid("())"));
-        assertTrue(c.isValid("()[]{}"));
-        assertFalse(c.isValid("([)]"));
-        assertTrue(c.isValid("{{({})}}"));
-        assertFalse(c.isValid("["));
+    public void testIsValid() {
+        assertTrue(s.isValid("()"));
+        assertFalse(s.isValid("))"));
+        assertFalse(s.isValid("())"));
+        assertTrue(s.isValid("()[]{}"));
+        assertFalse(s.isValid("([)]"));
+        assertTrue(s.isValid("{{({})}}"));
+        assertFalse(s.isValid("["));
     }
 
     @Test
-    public void callReverseInteger() {
+    public void testReverseInteger() {
         assertEquals(321, c.reverseInteger(123));
         assertEquals(321, c.reverseInteger(-123));
 
@@ -257,7 +259,7 @@ public class CodeChallengeTests {
 
     @Test
     public void testContainsDuplicate() {
-        assertTrue(c.containsDuplicate(new int[]{1, 2, 3, 1}));
+        assertTrue(a.containsDuplicate(new int[]{1, 2, 3, 1}));
     }
 
     @Test
@@ -266,7 +268,7 @@ public class CodeChallengeTests {
     }
 
     @Test
-    public void callNumArray() {
+    public void testNumArray() {
         NumArray numArray = new NumArray(new int[]{-2, 0, 3, -5, 2, -1});
         assertEquals(1 ,numArray.sumRange(0, 2));
         assertEquals(-1, numArray.sumRange(2, 5));
@@ -274,7 +276,7 @@ public class CodeChallengeTests {
     }
 
     @Test
-    public void callMinPathSum() {
+    public void testMinPathSum() {
         int[][] grid = new int[3][];
         int[] ar1 = new int[]{1,3,1};
         int[] ar2 = new int[]{1,5,1};
@@ -287,9 +289,9 @@ public class CodeChallengeTests {
 
     @Test
     public void testRunningSum() {
-        assertArrayEquals(new int[]{1, 3, 6, 10}, c.runningSum(new int[]{1,2,3,4}));
-        assertArrayEquals(new int[]{1, 2, 3, 4, 5}, c.runningSum(new int[]{1,1,1,1,1}));
-        assertArrayEquals(new int[]{3, 4, 6, 16, 17}, c.runningSum(new int[]{3,1,2,10,1}));
+        assertArrayEquals(new int[]{1, 3, 6, 10}, a.runningSum(new int[]{1,2,3,4}));
+        assertArrayEquals(new int[]{1, 2, 3, 4, 5}, a.runningSum(new int[]{1,1,1,1,1}));
+        assertArrayEquals(new int[]{3, 4, 6, 16, 17}, a.runningSum(new int[]{3,1,2,10,1}));
     }
 
     @Test

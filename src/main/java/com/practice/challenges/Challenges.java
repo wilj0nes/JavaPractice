@@ -293,21 +293,6 @@ public class Challenges {
 
 
 
-    // Given an array of integers, find if the array contains any duplicates.
-    public boolean containsDuplicate(int[] nums) {
-        HashMap<Integer, Integer> hashMap = new HashMap<>();
-        for (int i = 0; i < nums.length; i++) {
-            if (hashMap.get(nums[i]) != null) {
-                return true;
-            }
-            else {
-                hashMap.put(nums[i], i);
-            }
-        }
-        return false;
-    }
-
-
 
     // Say you have an array for which the ith element is the price of a given stock on day i.
     // If you were only permitted to complete at most one transaction (i.e., buy one and sell one share of the stock)
@@ -523,107 +508,6 @@ public class Challenges {
     }
 
 
-    // 136. Single Number
-
-    // Given a non-empty array of integers nums, every element appears twice except for one. Find that single one.
-    // You must implement a solution with a linear runtime complexity and use only constant extra space.
-    // Example 1:
-    //
-    //Input: nums = [2,2,1]
-    //Output: 1
-    //Example 2:
-    //
-    //Input: nums = [4,1,2,1,2]
-    //Output: 4
-    //Example 3:
-    //
-    //Input: nums = [1]
-    //Output: 1
-
-    public int singleNumber(int[] nums) { // not my solution
-        int answer = nums[0];
-
-        int i = 0;
-
-        while (i < nums.length - 1) {
-            int n = nums[i + 1];
-            answer = answer ^ n; // XOR bit manipulation
-            i++;
-        }
-
-        return answer;
-    }
-
-
-    // 268. Missing Number
-    // Given an array nums containing n distinct numbers in the range [0, n],
-    // return the only number in the range that is missing from the array.
-    // Input: nums = [3,0,1]
-    // Output: 2
-    // Explanation: n = 3 since there are 3 numbers, so all numbers are in the range [0,3].
-    // 2 is the missing number in the range since it does not appear in nums.
-
-    public int missingNumber(int[] nums) {
-        int count = 0;
-        for(int i=0; i<nums.length; i++){
-            count = count - nums[i];
-            count = count + i+1;
-
-        }
-
-        return count;
-    }
-
-
-
-    // Given an array nums. We define a running sum of an array as runningSum[i] = sum(nums[0]…nums[i]).
-    // Return the running sum of nums.
-    // Input: nums = [1,2,3,4]
-    // Output: [1,3,6,10]
-    // Explanation: Running sum is obtained as follows: [1, 1+2, 1+2+3, 1+2+3+4].
-    public int[] runningSum(int[] nums) {
-        if (nums.length < 2) {
-            return nums;
-        }
-        int[] resultArr = new int[nums.length];
-        for (int i = 0; i < nums.length; i++) {
-            if (i == 0) {
-                resultArr[i] = nums[i];
-            }
-            else {
-                int temp = 0;
-                for (int j = 0; j <= i; j++) {
-                    temp += nums[j];
-                }
-//                System.out.println("temp: " + temp);
-                resultArr[i] = temp;
-            }
-        }
-        return resultArr;
-    }
-
-
-    // Given an array of integers nums.
-    // A pair (i,j) is called good if nums[i] == nums[j] and i < j.
-    // Return the number of good pairs.
-    public int numIdenticalPairs(int[] nums) {
-        int pairCount = 0;
-        if (nums.length < 2) {
-            return pairCount;
-        }
-
-        for (int i = 0; i < nums.length; i++) {
-            for (int j = 0; j < nums.length; j++) {
-                if (nums[i] == nums[j] && i < j) {
-                    pairCount++;
-                }
-            }
-        }
-        return pairCount;
-    }
-
-
-
     // Given a collection of distinct integers, return all possible permutations.
     public List<List<Integer>> permute(int[] nums) { // TODO investigate further
         if (nums == null || nums.length == 0) {
@@ -658,58 +542,6 @@ public class Challenges {
             currResult.remove(currResult.size() - 1);
         }
         System.out.println("----------------------------------------------");
-    }
-
-
-    public int lengthOfLastWord(String s) {
-        String[] arr = s.split(" ");
-        if (s.length() == 1) {
-            return 0;
-        }
-        else if (arr.length == 0 || arr.length == 1) {
-            return s.length();
-        }
-
-        return arr[arr.length-1].length();
-    }
-
-
-    // Given a string s containing just the characters '(', ')', '{', '}', '[' and ']',
-    // determine if the input string is valid.
-    public boolean isValid(String s) {
-        if (s.length() <= 1) {
-            return false;
-        }
-        if (s.startsWith(")") || s.startsWith("]") || s.startsWith("}") ||
-            s.endsWith("(") || s.endsWith("[") || s.endsWith("{")) {
-
-            return false;
-        }
-        if (!(s.length() % 2 == 0)) {
-            return false;
-        }
-
-        String str = removeProperty(s);
-        if (str.length() > 0) {
-            return false;
-        }
-        return true;
-    }
-
-    public String removeProperty(String str) {
-        System.out.println("Calling... removeProperty: " + str);
-        ArrayList<String> openerList = new ArrayList<>(Arrays.asList("(", "[", "{"));
-        ArrayList<String> closerList = new ArrayList<>(Arrays.asList(")", "]", "}"));
-
-        String[] arr = str.split("");
-
-        for (int i = 0; i < arr.length-1; i++) {
-            if (openerList.indexOf(arr[i]) == closerList.indexOf(arr[i+1]) && openerList.indexOf(arr[i]) > -1 && closerList.indexOf(arr[i+1]) > -1) {
-                str = str.replace(arr[i]+arr[i+1], "");
-                return removeProperty(str);
-            }
-        }
-        return str;
     }
 
 
