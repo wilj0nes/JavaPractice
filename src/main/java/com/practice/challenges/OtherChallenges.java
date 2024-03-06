@@ -1,34 +1,13 @@
-package com.practice.other;
+package com.practice.challenges;
 
 import java.util.*;
 
-public class Other { // challenges that were presented in interviews
+public class OtherChallenges { // challenges that were presented in interviews
 
 
     // Get the String representation of array
 //    Arrays.toString(arr);
 
-
-
-
-
-    public void callLengthOfLongestSubstring() {
-        int n;
-        n = lengthOfLongestSubstring("abcabcbb"); // 'abc' is the longest substring return 3
-        System.out.println("answer: " +n + " -- 3");
-        n = lengthOfLongestSubstring("");
-        System.out.println("answer: " +n + " -- 0");
-        n = lengthOfLongestSubstring(" ");
-        System.out.println("answer: " +n + " -- 1");
-        n = lengthOfLongestSubstring("au");
-        System.out.println("answer: " +n + " -- 2");
-        n = lengthOfLongestSubstring("bbbbb"); // 1
-        System.out.println("answer: " +n + " -- 1");
-        n = lengthOfLongestSubstring("dvdf"); // 3
-        System.out.println("answer: " +n + " -- 3");
-        n = lengthOfLongestSubstring("pwwkew"); // 3
-        System.out.println("answer: " +n + " -- 3");
-    }
 
     // Given a string s, find the length of the longest substring without repeating characters.
     public int lengthOfLongestSubstring(String s) {
@@ -105,11 +84,6 @@ public class Other { // challenges that were presented in interviews
         }
     }
 
-    public static void callRearrangeWord() {
-        System.out.println("abc --> " + rearrangeWord("abc")); // bcaa
-//        System.out.println("baca --> " + rearrangeWord("baca")); // bcaa
-//        System.out.println("hefg --> " + rearrangeWord("hefg")); // hegf
-    }
 
     // JPMorgan Chase interview question
 

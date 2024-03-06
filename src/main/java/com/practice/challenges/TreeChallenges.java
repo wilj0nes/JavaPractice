@@ -306,6 +306,37 @@ public class TreeChallenges {
     }
 
 
+    // 257. Binary Tree Paths
+    // Given the root of a binary tree, return all root-to-leaf paths in any order.
+    // A leaf is a node with no children.
+    //
+    // Example 1:
+    //
+    // Input: root = [1,2,3,null,5]
+    // Output: ["1->2->5","1->3"]
+    // Example 2:
+    //
+    // Input: root = [1]
+    // Output: ["1"]
+    public List<String> binaryTreePaths(TreeNode root) {
+        return root != null? List.of(this.traverseTreePath(root, "").split("#")) : null;
+    }
+    public String traverseTreePath(TreeNode node, String str) { // need to use StringBuilder next time, not String
+
+        if (node.left != null && node.right != null) {
+            str += node.val + "->";
+            return traverseTreePath(node.left, str) + traverseTreePath(node.right, str);
+        }
+        else if (node.left == null && node.right == null) { // leaf found
+            return str + node.val + "#";
+        }
+        else {
+            str += node.val + "->";
+            TreeNode tempNode = node.left != null ? node.left : node.right;
+            return this.traverseTreePath(tempNode, str);
+        }
+    }
+
     // 104. Maximum Depth of Binary Tree
     // Given the root of a binary tree, return its maximum depth.
     // A binary tree's maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.

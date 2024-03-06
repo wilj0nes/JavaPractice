@@ -5,16 +5,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 public class UdemyPractice {
-    public void callFindReoccurringNumber() {
-        int[] arr1 = new int[]{2,5,1,2,3,5,1,2,4}; // should return 2
-        findReoccurringNumber(arr1);
-        int[] arr2 = new int[]{2,1,1,2,3,5,1,2,4}; // should return 1
-        findReoccurringNumber(arr2);
-        int[] arr3 = new int[]{2,3,4,5}; // should return default
-        findReoccurringNumber(arr3);
-    }
-
-
 
     // Given a number N return the index value of the Fibonacci sequence, where the sequence is:
 

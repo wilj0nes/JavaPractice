@@ -1,10 +1,8 @@
 package testpackage;
 
-import com.practice.challenges.ArrayChallenges;
-import com.practice.challenges.Challenges;
-import com.practice.challenges.LinkedListChallenges;
-import com.practice.challenges.StringChallenges;
+import com.practice.challenges.*;
 import com.practice.misc.NumArray;
+import com.practice.udemy.UdemyPractice;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -19,6 +17,8 @@ public class CodeChallengeTests {
     public static final ArrayChallenges a = new ArrayChallenges();
     public static final LinkedListChallenges l = new LinkedListChallenges();
     public static final StringChallenges s = new StringChallenges();
+    public static final UdemyPractice u = new UdemyPractice();
+    public static final OtherChallenges o = new OtherChallenges();
 
     @Test
     public void testTwoSumWithBetterRunTime() {
@@ -321,6 +321,42 @@ public class CodeChallengeTests {
         printMatrix(bigMatrix);
         System.out.println("\n");
         printMatrix(c.rotate(bigMatrix));
+    }
+
+    @Test
+    public void testFindReoccurringNumber() {
+        int[] arr1 = new int[]{2,5,1,2,3,5,1,2,4}; // should return 2
+        u.findReoccurringNumber(arr1);
+        int[] arr2 = new int[]{2,1,1,2,3,5,1,2,4}; // should return 1
+        u.findReoccurringNumber(arr2);
+        int[] arr3 = new int[]{2,3,4,5}; // should return default
+        u.findReoccurringNumber(arr3);
+    }
+
+    @Test
+    public void callLengthOfLongestSubstring() {
+        int n;
+        n = o.lengthOfLongestSubstring("abcabcbb"); // 'abc' is the longest substring return 3
+        System.out.println("answer: " +n + " -- 3");
+        n = o.lengthOfLongestSubstring("");
+        System.out.println("answer: " +n + " -- 0");
+        n = o.lengthOfLongestSubstring(" ");
+        System.out.println("answer: " +n + " -- 1");
+        n = o.lengthOfLongestSubstring("au");
+        System.out.println("answer: " +n + " -- 2");
+        n = o.lengthOfLongestSubstring("bbbbb"); // 1
+        System.out.println("answer: " +n + " -- 1");
+        n = o.lengthOfLongestSubstring("dvdf"); // 3
+        System.out.println("answer: " +n + " -- 3");
+        n = o.lengthOfLongestSubstring("pwwkew"); // 3
+        System.out.println("answer: " +n + " -- 3");
+    }
+
+    @Test
+    public static void callRearrangeWord() {
+        System.out.println("abc --> " + o.rearrangeWord("abc")); // bcaa
+//        System.out.println("baca --> " + rearrangeWord("baca")); // bcaa
+//        System.out.println("hefg --> " + rearrangeWord("hefg")); // hegf
     }
 
     public static void printMatrix(int[][] matrix) {
