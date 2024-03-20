@@ -1,13 +1,14 @@
 package testpackage;
 
 import com.practice.challenges.ArrayChallenges;
+import com.practice.challenges.BacktrackingChallenges;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class TestWordSearch {
-    ArrayChallenges a = new ArrayChallenges();
+    BacktrackingChallenges b = new BacktrackingChallenges();
 
     @Test
     public void testWordSearch1() {
@@ -21,7 +22,7 @@ public class TestWordSearch {
         matrix[0] = ar1;
         matrix[1] = ar2;
         matrix[2] = ar3;
-        assertTrue(a.exist(matrix, "ABCCED"));
+        assertTrue(b.exist(matrix, "ABCCED"));
     }
 
     @Test
@@ -37,7 +38,7 @@ public class TestWordSearch {
         matrix[1] = ar2;
         matrix[2] = ar3;
 
-        assertTrue(a.exist(matrix, "SEE"));
+        assertTrue(b.exist(matrix, "SEE"));
     }
 
     @Test
@@ -53,7 +54,7 @@ public class TestWordSearch {
         matrix[1] = ar2;
         matrix[2] = ar3;
 
-        assertFalse(a.exist(matrix, "ABCB"));
+        assertFalse(b.exist(matrix, "ABCB"));
     }
 
     @Test
@@ -67,7 +68,7 @@ public class TestWordSearch {
         matrix[0] = ar1;
         matrix[1] = ar2;
 
-        assertFalse(a.exist(matrix, "aaa"));
+        assertFalse(b.exist(matrix, "aaa"));
     }
     @Test
     public void testWordSearch5() {
@@ -77,7 +78,7 @@ public class TestWordSearch {
         ar1 = new char[]{'a'};
         matrix[0] = ar1;
 
-        assertTrue(a.exist(matrix, "a"));
+        assertTrue(b.exist(matrix, "a"));
     }
     @Test
     public void testWordSearch6() {
@@ -90,7 +91,7 @@ public class TestWordSearch {
         matrix[0] = ar1;
         matrix[1] = ar2;
 
-        assertTrue(a.exist(matrix, "cdba"));
+        assertTrue(b.exist(matrix, "cdba"));
     }
 
     @Test
@@ -105,7 +106,7 @@ public class TestWordSearch {
         matrix[0] = ar1;
         matrix[1] = ar2;
         matrix[2] = ar3;
-        assertTrue(a.exist(matrix, "AAB"));
+        assertTrue(b.exist(matrix, "AAB"));
     }
 
 }

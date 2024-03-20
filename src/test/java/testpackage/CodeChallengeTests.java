@@ -316,7 +316,7 @@ public class CodeChallengeTests {
     }
 
     @Test
-    public static void testRearrangeWord() {
+    public void testRearrangeWord() {
         System.out.println("abc --> " + o.rearrangeWord("abc")); // bcaa
         System.out.println("baca --> " + o.rearrangeWord("baca")); // bcaa
         System.out.println("hefg --> " + o.rearrangeWord("hefg")); // hegf
