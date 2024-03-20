@@ -136,7 +136,7 @@ public class StringChallenges {
     // 1 <= s.length <= 12
     // s consists of lowercase English letters, uppercase English letters, and digits.
     // backtracking example
-    public List<String> letterCasePermutation(String s) { // not my solution todo
+    public List<String> letterCasePermutation(String s) { // not my solution
         List<String> resultList = new ArrayList<>();
         this.recurse(s.toCharArray(), 0, resultList);
 

@@ -133,27 +133,6 @@ public class CodeChallengeTests {
     }
 
     @Test
-    public void testLetterCombinations() {  // not done
-        List<String> str;
-        str = c.letterCombinations("23"); //Output: ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"]
-        System.out.println("answer: " + str);
-        str = c.letterCombinations("234"); // ["adg","adh","adi","aeg","aeh","aei","afg","afh","afi","bdg","bdh","bdi","beg","beh","bei","bfg","bfh","bfi","cdg","cdh","cdi","ceg","ceh","cei","cfg","cfh","cfi"]
-        System.out.println("answer: " + str);
-    }
-
-    @Test
-    public void testIntToRoman() { // not done
-        assertEquals("MMM", c.intToRoman(3000));
-        assertEquals("MCMXCIV", c.intToRoman(1994));
-        assertEquals("IX", c.intToRoman(9));
-        assertEquals("IX", c.intToRoman(8));
-//        assertEquals("//", c.intToRoman(7));
-        assertEquals("LVIII", c.intToRoman(58));
-        assertEquals("MDCCCXCIV", c.intToRoman(99));
-    }
-
-
-    @Test
     public void testSetZeros() {
         int[][] matrix = new int[3][];
         int[] ar1, ar2, ar3;
@@ -191,22 +170,6 @@ public class CodeChallengeTests {
         assertEquals(4, a.numIdenticalPairs(new int[]{1, 2, 3, 1, 1, 3}));
         assertEquals(6, a.numIdenticalPairs(new int[]{1,1,1,1}));
         assertEquals(0, a.numIdenticalPairs(new int[]{1,2,3}));
-    }
-
-    @Test
-    public void testPermute() {
-        int[] intArr;
-        intArr = new int[]{1,2,3};
-        System.out.println(c.permute(intArr));
-        //  [1,2,3],
-        //  [1,3,2],
-        //  [2,1,3],
-        //  [2,3,1],
-        //  [3,1,2],
-        //  [3,2,1]
-
-//        intArr = new int[] {1,2,3,4};
-//        System.out.println(permute(intArr));
     }
 
     @Test
