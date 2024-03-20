@@ -321,7 +321,7 @@ public class TreeChallenges {
     public List<String> binaryTreePaths(TreeNode root) {
         return root != null? List.of(this.traverseTreePath(root, "").split("#")) : null;
     }
-    public String traverseTreePath(TreeNode node, String str) { // need to use StringBuilder next time, not String
+    public String traverseTreePath(TreeNode node, String str) { //  use StringBuilder next time??
 
         if (node.left != null && node.right != null) {
             str += node.val + "->";

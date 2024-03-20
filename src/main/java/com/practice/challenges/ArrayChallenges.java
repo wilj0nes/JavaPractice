@@ -33,7 +33,6 @@ public class ArrayChallenges {
                 for (int j = 0; j <= i; j++) {
                     temp += nums[j];
                 }
-//                System.out.println("temp: " + temp);
                 resultArr[i] = temp;
             }
         }
@@ -489,8 +488,8 @@ public class ArrayChallenges {
     public int[] productExceptSelf(int[] nums) { // not my solution
         int[] ans = new int[nums.length];
         int current = 1;
-        //Calculating product till i except nums[i] from left
-        //At this point, ans[i] holds product from nums[0] to nums[i-1]
+        // Calculating product till i except nums[i] from left
+        // At this point, ans[i] holds product from nums[0] to nums[i-1]
 
         for (int i = 0; i < nums.length; i++) {
             ans[i] = current;
@@ -507,6 +506,50 @@ public class ArrayChallenges {
         return ans;
     }
 
+
+    // 442. Find All Duplicates in an Array
+    // Medium
+    // Given an integer array nums of length n where all the integers of nums are in the range [1, n] and each integer appears once or twice, return an array of all the integers that appears twice.
+    //
+    // You must write an algorithm that runs in O(n) time and uses only constant extra space.
+    //
+    // Example 1:
+    //
+    // Input: nums = [4,3,2,7,8,2,3,1]
+    // Output: [2,3]
+    // Example 2:
+    //
+    // Input: nums = [1,1,2]
+    // Output: [1]
+    // Example 3:
+    //
+    // Input: nums = [1]
+    // Output: []
+    // Each element in nums appears once or twice.
+    public List<Integer> findDuplicates(int[] nums) {
+        int totalFound = 0;
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+
+        for (int i = 0; i < nums.length; i++) {
+            if (hashMap.get(nums[i]) == null) {
+                hashMap.put(nums[i], 1);
+            }
+            else {
+                int count = hashMap.get(nums[i]) + 1;
+                totalFound++;
+                hashMap.put(nums[i], count);
+            }
+        }
+
+        List<Integer> answer = new ArrayList<>(totalFound);
+        for (Map.Entry<Integer, Integer> entry : hashMap.entrySet()) {
+            if (entry.getValue() > 1) {
+                answer.add(entry.getKey());
+            }
+        }
+
+        return answer;
+    }
 
 
     // 169. Majority Element
@@ -551,6 +594,274 @@ public class ArrayChallenges {
         Arrays.sort(nums);
         return nums[nums.length / 2];
     }
+
+    // 128. Longest Consecutive Sequence
+    // Medium
+    // Given an unsorted array of integers nums, return the length of the longest consecutive elements sequence.
+    //
+    // You must write an algorithm that runs in O(n) time.
+    //
+    // Example 1:
+    // Input: nums = [100,4,200,1,3,2]
+    // Output: 4
+    // Explanation: The longest consecutive elements sequence is [1, 2, 3, 4]. Therefore its length is 4.
+
+    // Example 2:
+    //
+    // Input: nums = [0,3,7,2,5,8,4,6,0,1]
+    // Output: 9
+    public int longestConsecutive(int[] nums) {
+        TreeMap<Integer, Integer> treeMap = new TreeMap<>(); // this sorts keys
+        for (int i = 0; i < nums.length; i++) {
+            treeMap.put(nums[i], i);
+        }
+
+        int count = 0;
+        int maxCount = 0;
+        int placeHolder = Integer.MIN_VALUE; // keeps track of the previous entry in the loop
+        for (Map.Entry<Integer, Integer> entry : treeMap.entrySet()) {
+            if (placeHolder == Integer.MIN_VALUE && placeHolder < entry.getKey() || entry.getKey() == placeHolder + 1) {
+                count++;
+            }
+            else {
+                maxCount = Math.max(maxCount, count);
+                count = 1;
+            }
+            placeHolder = entry.getKey();
+        }
+
+        return Math.max(maxCount, count);
+    }
+
+
+    // 78. Subsets
+    // Medium
+    // Given an integer array nums of unique elements, return all possible
+    // subsets (the power set).
+    //
+    // The solution set must not contain duplicate subsets. Return the solution in any order.
+    //
+    // Example 1:
+    //
+    // Input: nums = [1,2,3]
+    // Output: [[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]
+    // Example 2:
+    //
+    // Input: nums = [0]
+    // Output: [[],[0]]
+    //
+    // Constraints:
+    //
+    // 1 <= nums.length <= 10
+    // -10 <= nums[i] <= 10
+    // All the numbers of nums are unique.
+    // backtracking example
+    public List<List<Integer>> subSets(int[] nums) {
+        List<List<Integer>> resultList = new ArrayList<>();
+        this.backtrack(resultList, new ArrayList<>(), nums, 0);
+        return resultList;
+    }
+
+    public void backtrack(List<List<Integer>> resultList, List<Integer> tempList, int[] nums, int start) { // not my solution
+        resultList.add(new ArrayList<>(tempList));
+
+        for (int i = start; i < nums.length; i++) {
+            tempList.add(nums[i]);
+            this.backtrack(resultList, tempList, nums, i + 1);
+            tempList.remove(tempList.size() - 1);
+        }
+    }
+
+
+    public List<List<Integer>> subSets_ATTEMPT(int[] nums) {
+        Set<List<Integer>> resultSet = new HashSet<>(); // ignores duplicate values
+        for (int i = 0; i < nums.length; i++) {
+            this.permuteSubSets_BROKEN(nums[i], 0, nums.length-1, resultSet, nums);
+        }
+        resultSet.add(new ArrayList<>());
+
+        System.out.println(resultSet);
+        return new ArrayList<>(resultSet);
+    }
+
+    public void permuteSubSets_BROKEN(int val, int startIndex, int endIndex, Set<List<Integer>> resultSet, int[] nums) {
+        // doesn't work
+
+        if (startIndex < 0 || endIndex > nums.length) {
+            return;
+        }
+
+        if (startIndex == endIndex) {
+            resultSet.add(new ArrayList<>(Arrays.asList(val))); // end of branch
+            return;
+        }
+        else {
+            List<Integer> tempList = new ArrayList<>();
+            for (int i = startIndex; i <= endIndex; i++) {
+                tempList.add(nums[i]);
+            }
+            resultSet.add(tempList);
+        }
+
+        if (nums[startIndex] == val) { // start
+            int tempVal = nums[startIndex + 1];
+            nums[startIndex + 1] = val;
+
+            this.permuteSubSets_BROKEN(val, startIndex+1, endIndex, resultSet, nums); // shift val -->
+            nums[startIndex + 1] = tempVal; // backtracking
+            this.permuteSubSets_BROKEN(val, startIndex, endIndex-1, resultSet, nums); // < -- shift endIndex
+        }
+        else if (nums[endIndex] == val) { // end
+            int tempVal = nums[endIndex - 1];
+            nums[endIndex - 1] = val;
+
+            this.permuteSubSets_BROKEN(val, startIndex, endIndex-1, resultSet, nums); // <-- shift val
+            nums[endIndex - 1] = tempVal; // backtracking
+            this.permuteSubSets_BROKEN(val, startIndex+1, endIndex, resultSet, nums); // shift startIndex -->
+        }
+        else { // middle
+            this.permuteSubSets_BROKEN(val, startIndex, endIndex-1, resultSet, nums); // split val left
+            this.permuteSubSets_BROKEN(val, startIndex+1, endIndex, resultSet, nums); // split val right
+        }
+    }
+
+
+
+    // 79. Word Search
+    // Medium
+    // Given an m x n grid of characters board and a string word, return true if word exists in the grid.
+    // The word can be constructed from letters of sequentially adjacent cells,
+    // where adjacent cells are horizontally or vertically neighboring. The same letter cell may not be used more than once.
+    //
+    // Example 1:
+    //
+    // Input: board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCCED"
+    // Output: true
+
+    // Example 2:
+    // Input: board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "SEE"
+    // Output: true
+
+    // Example 3:
+    // Input: board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCB"
+    // Output: false
+
+    // board and word consists of only lowercase and uppercase English letters.
+    // Follow up: Could you use search pruning to make your solution faster with a larger board?
+    //Constraints:
+    //
+    // m == board.length
+    // n = board[i].length
+    // 1 <= m, n <= 6
+    // 1 <= word.length <= 15
+    // backtracking example
+    public boolean exist(char[][] board, String word) {
+//        HashMap<String, Character> coordinateMap = new HashMap<String, Character>();
+        for (int i = 0; i < board.length; i++) { // find matching node first
+            for (int j = 0; j < board[i].length; j++) {
+                if (board[i][j] == word.charAt(0)) {
+//                    if (this.traverseBoard(board, i, j, "", word, 0, coordinateMap)) {
+//                        return true;
+//                    }
+                    if (this.traverseBoard_fork(board, word, i, j, 0)) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public boolean traverseBoard_fork(char[][] board, String word, int i, int j, int index) {
+        if (index == word.length()) { // found
+            return true;
+        }
+
+        if (i < 0 || j < 0 || i >= board.length || j >= board[0].length || board[i][j] != word.charAt(index)) { // out of bounds
+            return false;
+        }
+
+        // before exploring neighboring cells the char at position i, j is temporarily replaced by a ' ' to indicate it's been visited
+        char tempChar = board[i][j];
+        board[i][j] = ' ';
+        index++;
+
+        boolean found = this.traverseBoard_fork(board, word, i-1, j, index) || // up
+                        this.traverseBoard_fork(board, word, i+1, j, index) || // down
+                        this.traverseBoard_fork(board, word, i, j-1, index) || // left
+                        this.traverseBoard_fork(board, word, i, j+1, index); // right
+
+        board[i][j] = tempChar; // backtracking, this undoes the change so the next call isn't using corrupted data
+        return found;
+    }
+
+    public boolean traverseBoard(char[][] board, int i, int j, String str, String word, int index, HashMap<String, Character> map) { // mostly correct solution
+        if (i < 0 || j < 0 || i >= board.length || j >= board[0].length || str.length() == word.length() || map.get(i + "," + j) != null) {
+            return str.equals(word);
+        }
+        else if (word.charAt(index) == board[i][j]) {
+            map.put(i + "," + j, word.charAt(index)); // save coordinates of visited node
+            str += word.charAt(index);
+            index++;
+
+            // issue with this solution is likely it's returning to early
+            return this.traverseBoard(board, i-1, j, str, word, index, map) || // up
+                   this.traverseBoard(board, i+1, j, str, word, index, map) || // down
+                   this.traverseBoard(board, i, j-1, str, word, index, map) || // left
+                   this.traverseBoard(board, i, j+1, str, word, index, map); // right
+        }
+
+        return false;
+
+    }
+
+    // 2022. Convert 1D Array Into 2D Array
+    // You are given a 0-indexed 1-dimensional (1D) integer array original, and two integers, m and n.
+    // You are tasked with creating a 2-dimensional (2D) array with  m rows and n columns using all the elements from original.
+    //
+    // The elements from indices 0 to n - 1 (inclusive) of original should form the first row of the constructed 2D array,
+    // the elements from indices n to 2 * n - 1 (inclusive) should form the second row of the constructed 2D array, and so on.
+    //
+    // Return an m x n 2D array constructed according to the above procedure, or an empty 2D array if it is impossible.
+    //
+    // Example 1:
+    //
+    // Input: original = [1,2,3,4], m = 2, n = 2
+    // Output: [[1,2],[3,4]]
+    // Explanation: The constructed 2D array should contain 2 rows and 2 columns.
+    // The first group of n=2 elements in original, [1,2], becomes the first row in the constructed 2D array.
+    // The second group of n=2 elements in original, [3,4], becomes the second row in the constructed 2D array.
+
+    // Example 2:
+    //
+    // Input: original = [1,2,3], m = 1, n = 3
+    // Output: [[1,2,3]]
+    // Explanation: The constructed 2D array should contain 1 row and 3 columns.
+    // Put all three elements in original into the first row of the constructed 2D array.
+
+    // Example 3:
+    //
+    // Input: original = [1,2], m = 1, n = 1
+    // Output: []
+    // Explanation: There are 2 elements in original.
+    // It is impossible to fit 2 elements in a 1x1 2D array, so return an empty 2D array.
+    public int[][] construct2DArray(int[] original, int m, int n) {
+        if (m * n != original.length) {
+            return new int[0][0];
+        }
+        int matrix[][] = new int[m][n];
+        int count = 0;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                matrix[i][j] = original[count++];
+            }
+        }
+
+        return matrix;
+    }
+
+
 
     // 283. Move Zeroes
     // Given an integer array nums, move all 0's to the end of it while maintaining the relative order of the non-zero elements.
@@ -628,50 +939,36 @@ public class ArrayChallenges {
     }
 
 
-    // 2022. Convert 1D Array Into 2D Array
-    // You are given a 0-indexed 1-dimensional (1D) integer array original, and two integers, m and n.
-    // You are tasked with creating a 2-dimensional (2D) array with  m rows and n columns using all the elements from original.
-    //
-    // The elements from indices 0 to n - 1 (inclusive) of original should form the first row of the constructed 2D array,
-    // the elements from indices n to 2 * n - 1 (inclusive) should form the second row of the constructed 2D array, and so on.
-    //
-    // Return an m x n 2D array constructed according to the above procedure, or an empty 2D array if it is impossible.
-    //
-    // Example 1:
-    //
-    // Input: original = [1,2,3,4], m = 2, n = 2
-    // Output: [[1,2],[3,4]]
-    // Explanation: The constructed 2D array should contain 2 rows and 2 columns.
-    // The first group of n=2 elements in original, [1,2], becomes the first row in the constructed 2D array.
-    // The second group of n=2 elements in original, [3,4], becomes the second row in the constructed 2D array.
 
-    // Example 2:
-    //
-    // Input: original = [1,2,3], m = 1, n = 3
-    // Output: [[1,2,3]]
-    // Explanation: The constructed 2D array should contain 1 row and 3 columns.
-    // Put all three elements in original into the first row of the constructed 2D array.
+    // Given a matrix of m x n elements (m rows, n columns), return all elements of the matrix in spiral order.
+    public void setZeros(int[][] matrix) {
+        HashMap<Integer, Integer> hashCols = new HashMap<>();
 
-    // Example 3:
-    //
-    // Input: original = [1,2], m = 1, n = 1
-    // Output: []
-    // Explanation: There are 2 elements in original.
-    // It is impossible to fit 2 elements in a 1x1 2D array, so return an empty 2D array.
-    public int[][] construct2DArray(int[] original, int m, int n) {
-        if (m * n != original.length) {
-            return new int[0][0];
-        }
-        int matrix[][] = new int[m][n];
-        int count = 0;
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                matrix[i][j] = original[count++];
+        boolean zeroFound;
+        for (int i = 0; i < matrix.length; i++) {
+            zeroFound = false;
+
+            for (int j = 0; j < matrix[i].length; j++) {
+                if (matrix[i][j] == 0) {
+                    hashCols.put(j, i); // keep track of j, the column value
+                    zeroFound = true;
+                }
+            }
+
+            if (zeroFound) {
+                Arrays.fill(matrix[i], 0);
             }
         }
 
-        return matrix;
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                if (hashCols.get(j) != null) {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
     }
+
 
 
 }

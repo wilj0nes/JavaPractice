@@ -164,7 +164,7 @@ public class CodeChallengeTests {
         matrix[0] = ar1;
         matrix[1] = ar2;
         matrix[2] = ar3;
-        c.setZeros(matrix);
+        a.setZeros(matrix);
 
         matrix = new int[3][];
         ar1 = new int[]{0, 1, 2, 0};
@@ -173,7 +173,7 @@ public class CodeChallengeTests {
         matrix[0] = ar1;
         matrix[1] = ar2;
         matrix[2] = ar3;
-        c.setZeros(matrix);
+        a.setZeros(matrix);
     }
 
 
@@ -353,10 +353,10 @@ public class CodeChallengeTests {
     }
 
     @Test
-    public static void callRearrangeWord() {
+    public static void testRearrangeWord() {
         System.out.println("abc --> " + o.rearrangeWord("abc")); // bcaa
-//        System.out.println("baca --> " + rearrangeWord("baca")); // bcaa
-//        System.out.println("hefg --> " + rearrangeWord("hefg")); // hegf
+        System.out.println("baca --> " + o.rearrangeWord("baca")); // bcaa
+        System.out.println("hefg --> " + o.rearrangeWord("hefg")); // hegf
     }
 
     public static void printMatrix(int[][] matrix) {

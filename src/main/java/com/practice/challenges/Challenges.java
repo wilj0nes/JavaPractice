@@ -63,36 +63,6 @@ public class Challenges {
 
 
 
-    // Given a matrix of m x n elements (m rows, n columns), return all elements of the matrix in spiral order.
-    public void setZeros(int[][] matrix) {
-        HashMap<Integer, Integer> hashCols = new HashMap<>();
-
-        boolean zeroFound;
-        for (int i = 0; i < matrix.length; i++) {
-            zeroFound = false;
-
-            for (int j = 0; j < matrix[i].length; j++) {
-                if (matrix[i][j] == 0) {
-                    hashCols.put(j, i); // keep track of j, the column value
-                    zeroFound = true;
-                }
-            }
-
-            if (zeroFound) {
-                Arrays.fill(matrix[i], 0);
-            }
-        }
-
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[i].length; j++) {
-                if (hashCols.get(j) != null) {
-                    matrix[i][j] = 0;
-                }
-            }
-        }
-    }
-
-
     // Given a string s, return the longest palindromic substring in s.
     // A string is palindromic if it reads the same forward and backward.
     //    Input: s = "babad"
