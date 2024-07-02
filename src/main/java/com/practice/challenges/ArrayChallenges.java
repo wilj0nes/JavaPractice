@@ -1,5 +1,6 @@
 package com.practice.challenges;
 
+import javax.print.DocFlavor;
 import java.util.*;
 
 public class ArrayChallenges {
@@ -192,6 +193,7 @@ public class ArrayChallenges {
 
 
 
+
     // 704. Binary Search
     // Given an array of integers nums which is sorted in ascending order, and an integer target,
     // write a function to search target in nums. If target exists, then return its index. Otherwise, return -1.
@@ -349,122 +351,6 @@ public class ArrayChallenges {
         return null;
     }
 
-
-    // 977. Squares of a Sorted Array
-    // Given an integer array nums sorted in non-decreasing order,
-    // return an array of the squares of each number sorted in non-decreasing order.
-    //
-    // Example 1:
-    //
-    // Input: nums = [-4,-1,0,3,10]
-    // Output: [0,1,9,16,100]
-    // Explanation: After squaring, the array becomes [16,1,0,9,100].
-    // After sorting, it becomes [0,1,9,16,100].
-
-    // Example 2:
-    //
-    // Input: nums = [-7,-3,2,3,11]
-    // Output: [4,9,9,49,121]
-
-    // Follow up: Squaring each element and sorting the new array is very trivial,
-    // could you find an O(n) solution using a different approach?
-    public int[] sortedSquares(int[] nums) {
-        for (int i = 0; i < nums.length; i++) { // O(n)
-            nums[i] = nums[i] * nums[i];
-        }
-        Arrays.sort(nums); // adds O(n logn) complexity
-        return nums;
-    }
-
-    // two pointers solution
-    public int[] sortedSquares_betterRuntime(int[] nums) { // not my solution
-        int n, m;
-        int[] result = new int[nums.length];
-
-        int i = 0;                  // points to beginning of arr
-        int j = nums.length - 1;    // points to end of arr
-
-        int e = nums.length - 1;
-
-        while (i < j) {
-            n = (int) Math.pow(nums[j], 2);
-            m = (int) Math.pow(nums[i], 2);
-
-            if (n > m) {
-                result[e] = n;
-                j--;
-            }
-            else {
-                result[e] = m;
-                i++;
-            }
-            e--;
-        }
-
-        result[e] = ((int) Math.pow(nums[i], 2));
-        return result;
-    }
-
-
-    // 643. Maximum Average Subarray I
-    // You are given an integer array nums consisting of n elements, and an integer k.
-    //
-    // Find a contiguous subarray whose length is equal to k that has the maximum average value and return this value.
-    // Any answer with a calculation error less than 10-5 will be accepted.
-    //
-    // Example 1:
-    //
-    // Input: nums = [1,12,-5,-6,50,3], k = 4
-    // Output: 12.75000
-    // Explanation: Maximum average is (12 - 5 - 6 + 50) / 4 = 51 / 4 = 12.75
-
-    // Example 2:
-    //
-    // Input: nums = [5], k = 1
-    // Output: 5.00000
-    public double findMaxAverage(int[] nums, int k) {
-        if (nums.length == 1) {
-            return nums[0];
-        }
-
-        int j = k-1;
-        double result = Double.MIN_VALUE;
-        Double tempVal = 0.0;
-        for (int i = 0; j < nums.length; i++) {
-            tempVal = tempVal != null ? tempVal + nums[i] : nums[i];
-
-            if (i == j) {
-                if (tempVal/k > result || result == Double.MIN_VALUE) {
-                    result = tempVal/k;
-                }
-                tempVal = null;
-
-                i = i - (k-1); // this puts runtime way above O(n)
-                j++;
-            }
-
-        }
-
-        return result;
-    }
-
-    public double findMaxAverage_improved(int[] nums, int k) { // not my solution todo learn this
-        int sum = 0;
-
-        for (int i = 0; i < k; i++) {
-            sum += nums[i];
-        }
-
-        int maxSum = sum;
-        for (int i = k; i < nums.length; i++) {
-            sum += nums[i] - nums[i - k];
-            maxSum = Math.max(maxSum, sum);
-        }
-
-        return (double) maxSum / k;
-    }
-
-
     // 238. Product of Array Except Self
     // Given an integer array nums, return an array answer such that answer[i]
     // is equal to the product of all the elements of nums except nums[i].
@@ -616,6 +502,7 @@ public class ArrayChallenges {
             treeMap.put(nums[i], i);
         }
 
+
         int count = 0;
         int maxCount = 0;
         int placeHolder = Integer.MIN_VALUE; // keeps track of the previous entry in the loop
@@ -633,28 +520,6 @@ public class ArrayChallenges {
         return Math.max(maxCount, count);
     }
 
-
-
-
-    public boolean traverseBoard(char[][] board, int i, int j, String str, String word, int index, HashMap<String, Character> map) { // mostly correct solution
-        if (i < 0 || j < 0 || i >= board.length || j >= board[0].length || str.length() == word.length() || map.get(i + "," + j) != null) {
-            return str.equals(word);
-        }
-        else if (word.charAt(index) == board[i][j]) {
-            map.put(i + "," + j, word.charAt(index)); // save coordinates of visited node
-            str += word.charAt(index);
-            index++;
-
-            // issue with this solution is likely it's returning to early
-            return this.traverseBoard(board, i-1, j, str, word, index, map) || // up
-                   this.traverseBoard(board, i+1, j, str, word, index, map) || // down
-                   this.traverseBoard(board, i, j-1, str, word, index, map) || // left
-                   this.traverseBoard(board, i, j+1, str, word, index, map); // right
-        }
-
-        return false;
-
-    }
 
     // 2022. Convert 1D Array Into 2D Array
     // You are given a 0-indexed 1-dimensional (1D) integer array original, and two integers, m and n.
@@ -700,84 +565,6 @@ public class ArrayChallenges {
 
         return matrix;
     }
-
-
-
-    // 283. Move Zeroes
-    // Given an integer array nums, move all 0's to the end of it while maintaining the relative order of the non-zero elements.
-    // Note that you must do this in-place without making a copy of the array.
-    //      In-place means we should not be allocating any space for extra array.
-
-    // Example 1:
-    //
-    // Input: nums = [0,1,0,3,12]
-    // Output: [1,3,12,0,0]
-    // Example 2:
-    //
-    // Input: nums = [0]
-    // Output: [0]
-    // Follow up: Could you minimize the total number of operations done?
-    public int[] moveZeros(int[] nums) {
-        if (nums == null || nums.length == 0) {
-            return nums;
-        }
-        for (int i = 0; i < nums.length; i++) {
-            for (int j = i+1; j < nums.length; j++) {
-                if (nums[i] == 0 && nums[j] != 0) {
-                    int temp = nums[i];
-                    nums[i] = nums[j];
-                    nums[j] = temp;
-                    i++;
-                }
-                else if (nums[i] != 0 && nums[j] == 0) {
-                    i = j;
-                }
-            }
-        }
-
-        return nums;
-    }
-    public int[] moveZeros_betterTimeComplexity(int[] nums) { // mostly my solution
-        if (nums == null || nums.length == 0) {
-            return nums;
-        }
-
-        int i, j;
-        for (i = 0, j = 0; j < nums.length;) {
-            if (nums[i] == 0 && nums[j] != 0) {
-                int temp = nums[i];
-                nums[i] = nums[j];
-                nums[j] = temp;
-                i++;
-                j++;
-            }
-            else if (nums[i] == 0 && nums[j] == 0) {
-                j++;
-            }
-            else if (nums[i] != 0 && nums[j] != 0) {
-                i++;
-                j++;
-            }
-        }
-
-        return nums;
-    }
-    public void moveZeros_betterTimeComplexity_simplified(int[] nums) { // not my solution
-        int i, j;
-        for (i = 0, j = 0; i < nums.length;) {
-            if (nums[i] == 0) {
-                i++;
-            }
-            else {
-                int temp = nums[i];
-                nums[i] = nums[j];
-                nums[j] = temp;
-                i++;
-                j++;
-            }
-        }
-    }
-
 
 
     // Given a matrix of m x n elements (m rows, n columns), return all elements of the matrix in spiral order.

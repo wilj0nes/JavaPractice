@@ -267,7 +267,6 @@ public class Challenges {
     // Say you have an array for which the ith element is the price of a given stock on day i.
     // If you were only permitted to complete at most one transaction (i.e., buy one and sell one share of the stock)
     // design an algorithm to find the maximum profit.
-
     public int betterMaxProfit(int[] prices) { // not my solution
         System.out.println("prices: " + Arrays.toString(prices));
         int lowest = Integer.MAX_VALUE;
@@ -327,7 +326,6 @@ public class Challenges {
     // return the indices of the two numbers such that they add up to target.
     // You may assume that each input would have exactly one solution, and you may not use the same element twice.
     // You can return the answer in any order.
-
     public int[] twoSumWithBetterRunTime(int[] nums, int target) {
         int[] result = new int[2];
         HashMap<Integer, Integer> hashMap = new HashMap<>();

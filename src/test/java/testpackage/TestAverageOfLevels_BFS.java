@@ -1,6 +1,7 @@
 package testpackage;
 
 import com.practice.challenges.TreeChallenges;
+import com.practice.challenges.singleChallengeClasses.AverageOfLevels;
 import com.practice.misc.TreeNode;
 import org.junit.Test;
 
@@ -12,7 +13,7 @@ import static org.junit.Assert.assertArrayEquals;
 
 public class TestAverageOfLevels_BFS {
 
-    public static final TreeChallenges t = new TreeChallenges();
+    public static final AverageOfLevels t = new AverageOfLevels();
 
     @Test
     public void testAverageOfLevels_BFS() {

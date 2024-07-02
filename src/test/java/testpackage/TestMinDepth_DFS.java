@@ -1,13 +1,14 @@
 package testpackage;
 
 import com.practice.challenges.TreeChallenges;
+import com.practice.challenges.singleChallengeClasses.MinDepth;
 import com.practice.misc.TreeNode;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 public class TestMinDepth_DFS {
-    public static final TreeChallenges t = new TreeChallenges();
+    public static final MinDepth t = new MinDepth();
 
     @Test
     public void testMinDepth() {

@@ -1,6 +1,6 @@
 package testpackage;
 
-import com.practice.challenges.ArrayChallenges;
+import com.practice.challenges.singleChallengeClasses.Subsets;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -10,8 +10,8 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class TestSubSets {
-    ArrayChallenges a = new ArrayChallenges();
+public class TestSubsets {
+    Subsets s = new Subsets();
 
     @Test
     public void testSubSets1() {
@@ -25,8 +25,9 @@ public class TestSubSets {
         results.add(new ArrayList<>(Arrays.asList(2,3)));
         results.add(new ArrayList<>(Arrays.asList(1,2,3)));
 
-        assertTrue(a.subSets(new int[]{1, 2, 3}).containsAll(results));
+        assertTrue(s.subSets(new int[]{1, 2, 3}).containsAll(results));
     }
+
     @Test
     public void testSubSets2() {
         List<List<Integer>> results = new ArrayList<>();
@@ -49,15 +50,16 @@ public class TestSubSets {
         results.add(new ArrayList<>(Arrays.asList(1,2,4)));
         results.add(new ArrayList<>(Arrays.asList(1,2,3,4)));
 
-        assertTrue(a.subSets(new int[]{1, 2, 3, 4}).containsAll(results));
+        assertTrue(s.subSets(new int[]{1, 2, 3, 4}).containsAll(results));
     }
+
     @Test
     public void testSubSets3() {
         List<List<Integer>> results = new ArrayList<>();
         results.add(new ArrayList<>(Arrays.asList()));
         results.add(new ArrayList<>(Arrays.asList(0)));
 
-        assertTrue(a.subSets(new int[]{0}).containsAll(results));
+        assertTrue(s.subSets(new int[]{0}).containsAll(results));
     }
 
     @Test
@@ -97,7 +99,7 @@ public class TestSubSets {
         answer.add(new ArrayList<>(Arrays.asList(2,3,4,5)));
         answer.add(new ArrayList<>(Arrays.asList(1,2,3,4,5)));
 
-        assertTrue(a.subSets(new int[]{1,2,3,4,5}).containsAll(answer));
+        assertTrue(s.subSets(new int[]{1,2,3,4,5}).containsAll(answer));
     }
 
 
